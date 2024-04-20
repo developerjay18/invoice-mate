@@ -10,6 +10,7 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, 'Username is required'],
+      unique: true,
     },
     password: {
       type: String,
@@ -18,10 +19,12 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: [true, 'Email is required'],
+      unique: true,
     },
     phoneNo: {
       type: String,
       required: [true, 'Phone number is required'],
+      unique: true,
     },
     companies: [
       {
