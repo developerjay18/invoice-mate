@@ -37,6 +37,10 @@ const billSchema = new Schema(
     total: {
       type: String,
     },
+    origin: {
+      type: Schema.Types.ObjectId,
+      ref: 'companies',
+    },
   },
   { timestamps: true }
 );

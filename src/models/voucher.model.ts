@@ -36,6 +36,10 @@ const voucherSchema = new Schema(
     chequeNum: {
       type: String,
     },
+    origin: {
+      type: Schema.Types.ObjectId,
+      ref: 'companies',
+    },
   },
   { timestamps: true }
 );

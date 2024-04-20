@@ -84,6 +84,10 @@ const lrSchema = new Schema(
     remarks: {
       type: String,
     },
+    origin: {
+      type: Schema.Types.ObjectId,
+      ref: 'companies',
+    },
   },
   { timestamps: true }
 );
