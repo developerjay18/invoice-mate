@@ -37,7 +37,7 @@ const billSchema = new Schema(
     total: {
       type: String,
     },
-    origin: {
+    company: {
       type: Schema.Types.ObjectId,
       ref: 'companies',
     },

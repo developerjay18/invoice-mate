@@ -5,13 +5,6 @@ import { getDataFromToken } from '@/helpers/getDataFromToken';
 
 connectDB();
 
-// take data and userId
-// check if empty
-// check duplicate
-// create company
-// save company
-// return response
-
 export async function POST(request: NextRequest) {
   try {
     const { name } = await request.json();
@@ -54,10 +47,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// take current token's userId
-// find userId matching companies
-// return them as response
-
 export async function GET(request: NextRequest) {
   try {
     const userId = await getDataFromToken(request);
@@ -78,7 +67,6 @@ export async function GET(request: NextRequest) {
       filteredCompanies,
     });
   } catch (error) {
-
     return NextResponse.json(
       { error: 'ERROR WHILE FECTHING ALL COMPANIES FROM BACKEND' },
       { status: 501 }

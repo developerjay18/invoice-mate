@@ -16,13 +16,13 @@ const voucherSchema = new Schema(
       type: String,
     },
     rupees: {
-      type: Number,
+      type: String,
     },
     paise: {
-      type: Number,
+      type: String,
     },
     total: {
-      type: Number,
+      type: String,
     },
     authorisedBy: {
       type: String,
@@ -36,7 +36,7 @@ const voucherSchema = new Schema(
     chequeNum: {
       type: String,
     },
-    origin: {
+    company: {
       type: Schema.Types.ObjectId,
       ref: 'companies',
     },

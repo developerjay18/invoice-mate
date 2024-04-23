@@ -3,9 +3,6 @@ import { NextResponse } from 'next/server';
 
 connectDB();
 
-// remove cookie
-// return response
-
 export async function GET() {
   try {
     const response = NextResponse.json({

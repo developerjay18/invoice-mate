@@ -84,7 +84,7 @@ const lrSchema = new Schema(
     remarks: {
       type: String,
     },
-    origin: {
+    company: {
       type: Schema.Types.ObjectId,
       ref: 'companies',
     },

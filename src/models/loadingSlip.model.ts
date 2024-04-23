@@ -30,7 +30,7 @@ const loadingSlipSchema = new Schema(
     balance: {
       type: String,
     },
-    origin: {
+    company: {
       type: Schema.Types.ObjectId,
       ref: 'companies',
     },
