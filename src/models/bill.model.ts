@@ -5,7 +5,6 @@ const billSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, 'Name is required'],
     },
     cnNum: {
       type: Number,
