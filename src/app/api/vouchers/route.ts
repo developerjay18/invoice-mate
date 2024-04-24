@@ -6,8 +6,6 @@ connectDB();
 
 // for creating voucher
 export async function POST(request: NextRequest) {
-  console.log('entred passed');
-
   try {
     const {
       company, // the objectId of the company
@@ -24,17 +22,12 @@ export async function POST(request: NextRequest) {
       chequeNum,
     } = await request.json();
 
-    console.log('data fetched passed');
-    console.log(company);
-
     if (!company) {
       return NextResponse.json({
         error: "COMPANY FIELD IS REQUIRED. YOU CAN'T PROCEED FURTHER",
         status: 401,
       });
     }
-
-    console.log('check 1 passed');
 
     const voucher = new Voucher({
       company,
@@ -51,20 +44,14 @@ export async function POST(request: NextRequest) {
       chequeNum,
     });
 
-    console.log('voucher created');
-
     if (!voucher) {
       return NextResponse.json(
-        { error: 'ERROR WHILE SAVING VOUCHER PLASE TRY AGAIN' },
+        { error: 'ERROR WHILE CREATING VOUCHER PLASE TRY AGAIN' },
         { status: 501 }
       );
     }
-    console.log('Voucher comed');
 
     const savedVoucher = await voucher.save();
-    console.log(savedVoucher);
-
-    console.log('voucher savced');
 
     return NextResponse.json({
       message: 'VOUCHER CREATED SUCCESSFULLY',
@@ -125,4 +112,3 @@ export async function DELETE(request: NextRequest) {
     );
   }
 }
-
