@@ -4,28 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // for creating challans
 export async function POST(request: NextRequest) {
   try {
-    const {
-      company,
-      from,
-      to,
-      vehicleNum,
-      ownersName,
-      driversName,
-      gcNoteNum,
-      pkgs,
-      description,
-      consignor,
-      consignee,
-      weight,
-      rate,
-      collection,
-      commission,
-      refund,
-      hamali,
-      other,
-      munsyanaAndPayment,
-      total,
-    } = await request.json();
+    const { company, ...data } = await request.json();
 
     if (!company) {
       return NextResponse.json({
@@ -36,25 +15,7 @@ export async function POST(request: NextRequest) {
 
     const challan = new Challan({
       company,
-      from,
-      to,
-      vehicleNum,
-      ownersName,
-      driversName,
-      gcNoteNum,
-      pkgs,
-      description,
-      consignor,
-      consignee,
-      weight,
-      rate,
-      collection,
-      commission,
-      refund,
-      hamali,
-      other,
-      munsyanaAndPayment,
-      total,
+      ...data,
     });
 
     const savedChallan = await challan.save();
@@ -83,8 +44,19 @@ export async function POST(request: NextRequest) {
 // for updating challans
 export async function PATCH(request: NextRequest) {
   try {
-    const {} = await request.json();
+    const { id, ...data } = await request.json();
+    const challan = await Challan.findOneAndUpdate(
+      { _id: id },
+      { ...data },
+      { new: true }
+    );
+    return NextResponse.json({
+      message: 'CHALLAN IS UPDATED',
+      success: true,
+      challan,
+    });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: 'ERROR WHILE UPDATING CHALLAN FROM BACKEND' },
       { status: 501 }

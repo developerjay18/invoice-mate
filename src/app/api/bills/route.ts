@@ -7,20 +7,7 @@ connectDB();
 // for creating bills
 export async function POST(request: NextRequest) {
   try {
-    const {
-      company,
-      name,
-      cnNum, // number only
-      from,
-      to,
-      particular,
-      weight,
-      rate,
-      amount,
-      advance,
-      balance,
-      total,
-    } = await request.json();
+    const { company, ...data } = await request.json();
 
     if (!company) {
       return NextResponse.json({
@@ -31,17 +18,7 @@ export async function POST(request: NextRequest) {
 
     const bill = new Bill({
       company,
-      name,
-      cnNum,
-      from,
-      to,
-      particular,
-      weight,
-      rate,
-      amount,
-      advance,
-      balance,
-      total,
+      ...data,
     });
 
     const savedBill = await bill.save();
@@ -70,8 +47,19 @@ export async function POST(request: NextRequest) {
 // I am little bit confused in this route 🔥🔥🔥🔥🔥
 export async function PATCH(request: NextRequest) {
   try {
-    const {} = await request.json(); // what to do here
+    const { id, ...data } = await request.json();
+    const bill = await Bill.findOneAndUpdate(
+      { _id: id },
+      { ...data },
+      { new: true }
+    );
+    return NextResponse.json({
+      message: 'BILL IS UPDATED',
+      success: true,
+      bill,
+    });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: 'ERROR WHILE UPDATING BILL FROM BACKEND' },
       { status: 501 }
@@ -82,19 +70,17 @@ export async function PATCH(request: NextRequest) {
 // for deleting bills
 export async function DELETE(request: NextRequest) {
   try {
-    const { billId, companyId } = await request.json();
+    const { billId } = await request.json();
 
-    if (!billId || !companyId) {
+    if (!billId) {
       return NextResponse.json({
-        error:
-          "COMPANY AND BILL-ID FIELD IS REQUIRED. YOU CAN'T PROCEED FURTHER",
+        error: "BILL-ID FIELD IS REQUIRED. YOU CAN'T PROCEED FURTHER",
         status: 401,
       });
     }
 
     const deletedBill = await Bill.deleteOne({
       _id: billId,
-      company: companyId,
     });
 
     if (!deletedBill) {

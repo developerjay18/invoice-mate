@@ -1,6 +1,6 @@
-import Voucher from "@/models/voucher.model";
-import { connectDB } from "@/dbConfig/dbConfig";
-import { NextRequest, NextResponse } from "next/server";
+import Voucher from '@/models/voucher.model';
+import { connectDB } from '@/dbConfig/dbConfig';
+import { NextRequest, NextResponse } from 'next/server';
 
 connectDB();
 
@@ -15,20 +15,7 @@ export async function GET() {
 // for creating voucher
 export async function POST(request: NextRequest) {
   try {
-    const {
-      company, // the objectId of the company
-      paidTo,
-      debit,
-      onAccountOf,
-      particular,
-      rupees,
-      paise,
-      total,
-      authorisedBy,
-      passedBy,
-      payment,
-      chequeNum,
-    } = await request.json();
+    const { company, ...data } = await request.json();
 
     if (!company) {
       return NextResponse.json({
@@ -39,22 +26,12 @@ export async function POST(request: NextRequest) {
 
     const voucher = new Voucher({
       company,
-      paidTo,
-      debit,
-      onAccountOf,
-      particular,
-      rupees,
-      paise,
-      total,
-      authorisedBy,
-      passedBy,
-      payment,
-      chequeNum,
+      ...data,
     });
 
     if (!voucher) {
       return NextResponse.json(
-        { error: "ERROR WHILE CREATING VOUCHER PLASE TRY AGAIN" },
+        { error: 'ERROR WHILE CREATING VOUCHER PLASE TRY AGAIN' },
         { status: 501 }
       );
     }
@@ -62,14 +39,14 @@ export async function POST(request: NextRequest) {
     const savedVoucher = await voucher.save();
 
     return NextResponse.json({
-      message: "VOUCHER CREATED SUCCESSFULLY",
+      message: 'VOUCHER CREATED SUCCESSFULLY',
       status: 200,
       success: true,
       savedVoucher,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "ERROR WHILE CREATING VOUCHER FROM BACKEND" },
+      { error: 'ERROR WHILE CREATING VOUCHER FROM BACKEND' },
       { status: 501 }
     );
   }
@@ -79,16 +56,20 @@ export async function POST(request: NextRequest) {
 export async function PATCH(request: NextRequest) {
   try {
     const { id, ...data } = await request.json();
-    const voucher = await Voucher.findOneAndUpdate({ _id: id }, { ...data }, { new: true });
+    const voucher = await Voucher.findOneAndUpdate(
+      { _id: id },
+      { ...data },
+      { new: true }
+    );
     return NextResponse.json({
-      message: "VOUCHER IS UPDATED",
+      message: 'VOUCHER IS UPDATED',
       success: true,
       voucher,
     });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "ERROR WHILE UPDATING VOUCHER FROM BACKEND" },
+      { error: 'ERROR WHILE UPDATING VOUCHER FROM BACKEND' },
       { status: 501 }
     );
   }
@@ -109,19 +90,21 @@ export async function DELETE(request: NextRequest) {
     const deletedVoucher = await Voucher.deleteOne({ _id: voucherId });
 
     if (!deletedVoucher) {
-      return NextResponse.json({ error: "ERROR WHILE DELETING VOUCHER" }, { status: 401 });
+      return NextResponse.json(
+        { error: 'ERROR WHILE DELETING VOUCHER' },
+        { status: 401 }
+      );
     }
 
     return NextResponse.json({
-      message: "VOUCHER DELETED SUCCESSFULLY",
+      message: 'VOUCHER DELETED SUCCESSFULLY',
       status: 200,
-      success: "true",
+      success: 'true',
     });
   } catch (error) {
     return NextResponse.json(
-      { error: "ERROR WHILE DELETING VOUCHER FROM BACKEND" },
+      { error: 'ERROR WHILE DELETING VOUCHER FROM BACKEND' },
       { status: 501 }
     );
   }
 }
-

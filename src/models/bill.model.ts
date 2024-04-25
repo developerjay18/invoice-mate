@@ -39,6 +39,7 @@ const billSchema = new Schema(
     company: {
       type: Schema.Types.ObjectId,
       ref: 'companies',
+      required: true,
     },
   },
   { timestamps: true }

@@ -3,18 +3,17 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const { voucherId, companyId } = await request.json();
+    const { voucherId } = await request.json();
 
-    if (!voucherId || !companyId) {
+    if (!voucherId) {
       return NextResponse.json({
-        error: 'BOTH FIELDS ARE REQUIRED FOR VOUCHER FETCHING',
+        error: 'VOUCHER ID IS REQUIRED FOR VOUCHER FETCHING',
         status: 401,
       });
     }
 
     const voucher = await Voucher.findOne({
       _id: voucherId,
-      company: companyId,
     });
 
     if (!voucher) {

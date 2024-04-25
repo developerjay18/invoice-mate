@@ -4,18 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // for creating loading-slips
 export async function POST(request: NextRequest) {
   try {
-    const {
-      company, // the objectId of the company
-      primaryTo,
-      truckNum,
-      from,
-      to,
-      rate,
-      gauranteeBy,
-      name,
-      advance,
-      balance,
-    } = await request.json();
+    const { company, ...data } = await request.json();
 
     if (!company) {
       return NextResponse.json({
@@ -26,18 +15,10 @@ export async function POST(request: NextRequest) {
 
     const loadingSlip = new LoadingSlip({
       company,
-      primaryTo,
-      truckNum,
-      from,
-      to,
-      rate,
-      gauranteeBy,
-      name,
-      advance,
-      balance,
+      ...data,
     });
 
-    const savedLoadingSlip = await loadingSlip.save();    
+    const savedLoadingSlip = await loadingSlip.save();
 
     if (!savedLoadingSlip) {
       return NextResponse.json(
@@ -63,8 +44,19 @@ export async function POST(request: NextRequest) {
 // for updating loading-slips
 export async function PATCH(request: NextRequest) {
   try {
-    const {} = await request.json();
+    const { id, ...data } = await request.json();
+    const loadingSlip = await LoadingSlip.findOneAndUpdate(
+      { _id: id },
+      { ...data },
+      { new: true }
+    );
+    return NextResponse.json({
+      message: 'LOADING-SLIP IS UPDATED',
+      success: true,
+      loadingSlip,
+    });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: 'ERROR WHILE UPDATING LOADING-SLIP FROM BACKEND' },
       { status: 501 }
@@ -75,19 +67,17 @@ export async function PATCH(request: NextRequest) {
 // for deleting loading-slips
 export async function DELETE(request: NextRequest) {
   try {
-    const { loadingSlipId, companyId } = await request.json();
+    const { loadingSlipId } = await request.json();
 
-    if (!loadingSlipId || !companyId) {
+    if (!loadingSlipId) {
       return NextResponse.json({
-        error:
-          "COMPANY AND SLIP-ID FIELD IS REQUIRED. YOU CAN'T PROCEED FURTHER",
+        error: "SLIP-ID FIELD IS REQUIRED. YOU CAN'T PROCEED FURTHER",
         status: 401,
       });
     }
 
     const deletedLoadingSlip = await LoadingSlip.deleteOne({
       _id: loadingSlipId,
-      company: companyId,
     });
 
     if (!deletedLoadingSlip) {

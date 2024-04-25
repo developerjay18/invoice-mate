@@ -6,9 +6,9 @@ connectDB();
 
 export async function POST(request: NextRequest) {
   try {
-    const { loadingSlipId, companyId } = await request.json();
+    const { loadingSlipId } = await request.json();
 
-    if (!loadingSlipId || !companyId) {
+    if (!loadingSlipId) {
       return NextResponse.json(
         { error: "ALL FIELDS ARE REQUIRED. YOU CAN'T PROCEED FURTHER" },
         { status: 401 }
@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
 
     const loadingSlip = await LoadingSlip.findOne({
       _id: loadingSlipId,
-      company: companyId,
     });
 
     if (!loadingSlip) {

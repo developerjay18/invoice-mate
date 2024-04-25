@@ -44,8 +44,19 @@ export async function POST(request: NextRequest) {
 // for updating lrs
 export async function PATCH(request: NextRequest) {
   try {
-    const {} = await request.json();
+    const { id, ...data } = await request.json();
+    const lr = await LR.findOneAndUpdate(
+      { _id: id },
+      { ...data },
+      { new: true }
+    );
+    return NextResponse.json({
+      message: 'LR IS UPDATED',
+      success: true,
+      lr,
+    });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { error: 'ERROR WHILE UPDATING LR FROM BACKEND' },
       { status: 501 }
