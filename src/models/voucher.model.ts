@@ -1,5 +1,5 @@
 // creating voucher schema
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const voucherSchema = new Schema(
   {
@@ -38,12 +38,26 @@ const voucherSchema = new Schema(
     },
     company: {
       type: Schema.Types.ObjectId,
-      ref: 'companies',
+      ref: "companies",
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const Voucher =
-  mongoose.models.vouchers || mongoose.model('vouchers', voucherSchema);
+voucherSchema.pre("save", async function (next) {
+  try {
+    const found = Voucher.findById(this.company);
+    if (!found) {
+      throw new Error(`Reference to the company ${this.company} is not available`);
+    }
+    next();
+  } catch (error) {
+    // @ts-ignore;
+    next(error);
+  }
+});
+
+const Voucher = mongoose.models.vouchers || mongoose.model("vouchers", voucherSchema);
 export default Voucher;
+
