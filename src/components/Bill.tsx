@@ -1,9 +1,259 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Label } from './ui/label';
+import { Input } from '@/components/ui/input';
+import { getDate } from '@/helpers/getDate';
+import { IoIosAddCircle } from 'react-icons/io';
+import { Button } from './ui/button';
+import Link from 'next/link';
 
+// total, company, number are still pending
 function Bill() {
-  return <div>Bill</div>;
+  const date = getDate();
+  const [fieldData, setFieldData] = useState([
+    {
+      sNumber: '',
+      date: `${date}`,
+      cnNum: '',
+      from: '',
+      to: '',
+      particular: '',
+      weight: '',
+      rate: '',
+      amount: '',
+      advance: '',
+      balance: '',
+    },
+  ]);
+  const [normalData, setNormalData] = useState({
+    name: '',
+  });
+
+  const addField = (e: any) => {
+    e.preventDefault();
+    setFieldData((prev): any => {
+      return [
+        ...prev,
+        {
+          sNumber: '',
+          date: `${date}`,
+          cnNum: '',
+          from: '',
+          to: '',
+          particular: '',
+          weight: '',
+          rate: '',
+          amount: '',
+          advance: '',
+          balance: '',
+        },
+      ];
+    });
+  };
+
+  const handleChange = (e: any, index: number) => {
+    const { name, value } = e.target;
+
+    setFieldData((prev): any => {
+      let item: any = prev[index];
+      item[name] = value;
+      return [...prev];
+    });
+  };
+
+  const handleNormalChange = (e: any) => {
+    const { value } = e.target;
+    setNormalData({ name: value });
+  };
+
+  return (
+    <div>
+      <form action="#" method="post" className="flex flex-col gap-y-4">
+        <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
+          Add New Bill details
+        </div>
+
+        <div className="grid grid-cols-3 gap-x-6">
+          <div className="">
+            <Label>M/S.</Label>
+            <Input
+              name="paidTo"
+              id="paidTo"
+              type="text"
+              value={normalData.name}
+              onChange={handleNormalChange}
+              placeholder="m/s"
+            />
+          </div>
+          <div className="">
+            <Label>BILL NO</Label>
+            <Input type="text" value={'118409'} readOnly />
+          </div>
+          <div className="">
+            <Label>DATE</Label>
+            <Input type="text" value={date} readOnly />
+          </div>
+        </div>
+
+        <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
+          Add Item details
+        </div>
+
+        {fieldData?.map((data, index) => (
+          <div className="flex flex-col gap-y-4" key={data.sNumber}>
+            <div className="grid grid-cols-3 gap-x-6 gap-y-4">
+              <div className="">
+                <Label>S.NO.</Label>
+                <Input
+                  name="sNumber"
+                  id="sNumber"
+                  type="text"
+                  value={index + 1}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="set particular"
+                />
+              </div>
+
+              <div className="">
+                <Label>DATE</Label>
+                <Input
+                  name="date"
+                  id="date"
+                  type="text"
+                  value={data.date}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="set date"
+                />
+              </div>
+
+              <div className="">
+                <Label>CN NUMBER</Label>
+                <Input
+                  name="cnNum"
+                  id="cnNum"
+                  type="text"
+                  value={data.cnNum}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter CN number"
+                />
+              </div>
+
+              <div className="">
+                <Label>FROM</Label>
+                <Input
+                  name="from"
+                  id="from"
+                  type="text"
+                  value={data.from}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter from"
+                />
+              </div>
+
+              <div className="">
+                <Label className="uppercase">To</Label>
+                <Input
+                  name="to"
+                  id="to"
+                  type="text"
+                  value={data.to}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter to"
+                />
+              </div>
+
+              <div className="">
+                <Label className="uppercase">particular</Label>
+                <Input
+                  name="particular"
+                  id="particular"
+                  type="text"
+                  value={data.particular}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter particular"
+                />
+              </div>
+
+              <div className="">
+                <Label className="uppercase">weight</Label>
+                <Input
+                  name="weight"
+                  id="weight"
+                  type="text"
+                  value={data.weight}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter weight"
+                />
+              </div>
+
+              <div className="">
+                <Label className="uppercase">rate</Label>
+                <Input
+                  name="rate"
+                  id="rate"
+                  type="text"
+                  value={data.rate}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter rate"
+                />
+              </div>
+
+              <div className="">
+                <Label className="uppercase">amount</Label>
+                <Input
+                  name="amount"
+                  id="amount"
+                  type="text"
+                  value={data.amount}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter amount"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between">
+              <div className="w-[43%]">
+                <Label className="uppercase">advance</Label>
+                <Input
+                  name="advance"
+                  id="advance"
+                  type="text"
+                  value={data.advance}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter advance"
+                />
+              </div>
+
+              <div className="w-[43%]">
+                <Label className="uppercase">balance</Label>
+                <Input
+                  name="balance"
+                  id="balance"
+                  type="text"
+                  value={data.balance}
+                  onChange={(e: any) => handleChange(e, index)}
+                  placeholder="enter balance"
+                />
+              </div>
+              <div className="text-5xl w-[4%] flex justify-end items-end cursor-pointer">
+                <IoIosAddCircle
+                  className="hover:text-black/85"
+                  onClick={addField}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <div className="flex justify-center pt-8">
+          <Link href={''}>
+            <Button>Submit</Button>
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default Bill;

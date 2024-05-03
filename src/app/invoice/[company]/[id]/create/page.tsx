@@ -11,7 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import Voucher from '@/components/Voucher/Voucher';
+import Voucher from '@/components/Voucher';
+import Bill from '@/components/Bill';
+import LoadingSlip from '@/components/LoadingSlip';
+import Challan from '@/components/Challan';
+import Lr from '@/components/Lr';
 
 function InvoicePage({ params }: any) {
   const company = params.company;
@@ -47,13 +51,17 @@ function InvoicePage({ params }: any) {
 
       {/* main section  */}
       <div className="flex flex-col gap-y-10">
-        <h2 className="text-center text-xl capitalize font-semibold">
+        <h2 className="text-center text-3xl capitalize font-bold">
           Create your {type}
         </h2>
 
         {/* form container  */}
         <div className="">
-          <Voucher />
+          {type === 'lr' ? <Lr /> : 'none'}
+          {type === 'bill' ? <Bill /> : 'none'}
+          {type === 'challan' ? <Challan /> : 'none'}
+          {type === 'voucher' ? <Voucher /> : 'none'}
+          {type === 'loading-slip' ? <LoadingSlip /> : 'none'}
         </div>
       </div>
     </main>

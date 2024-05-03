@@ -12,6 +12,9 @@ const challanSchema = new Schema(
     vehicleNum: {
       type: String,
     },
+    panNum: {
+      type: String,
+    },
     ownersName: {
       type: String,
     },
