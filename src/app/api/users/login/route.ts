@@ -7,20 +7,20 @@ connectDB();
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await request.json();
+    const { email, password } = await request.json();
 
-    if (!username || !password) {
+    if (!email || !password) {
       return NextResponse.json({
-        error: 'USERNAME AND PASSWORD BOTH FIELDS ARE REQUIRED',
+        error: 'EMAIL AND PASSWORD BOTH FIELDS ARE REQUIRED',
         status: 401,
       });
     }
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return NextResponse.json(
-        { error: "USER DOESN'T EXISTS WITH THIS USERNAME" },
+        { error: "USER DOESN'T EXISTS WITH THIS EMAIL" },
         { status: 401 }
       );
     }

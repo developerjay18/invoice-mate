@@ -11,8 +11,24 @@ import {
 } from '@/components/ui/navigation-menu';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { Button } from './ui/button';
+import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 function Navbar() {
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get('/api/users/logout');
+      toast.success(response.data.message);
+      router.push('/login');
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
+
   const listItems = [
     {
       href: '/maa-saraswati-road-carriers',
@@ -51,7 +67,7 @@ function Navbar() {
           </NavigationMenuItem>
 
           <NavigationMenuItem className="cursor-pointer px-3">
-            <Link href={'/logout'}>Logout</Link>
+            <Button onClick={handleLogout}>Logout</Button>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
