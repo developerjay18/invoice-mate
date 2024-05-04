@@ -81,7 +81,7 @@ export default function Home() {
         <div className="py-5 flex justify-between">
           {companies.map((company) => (
             <div
-              className="w-[30%] border h-[20vh] flex justify-center items-center text-xl hover:border-slate-500 cursor-pointer dark:hover:border-white rounded"
+              className="w-[30%] border h-[20vh] flex justify-center items-center text-xl hover:border-slate-500 cursor-pointer text-white dark:hover:border-white rounded card-bg"
               key={company.title}
             >
               <Link

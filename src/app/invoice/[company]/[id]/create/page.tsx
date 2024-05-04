@@ -18,8 +18,9 @@ import Challan from '@/components/Challan';
 import Lr from '@/components/Lr';
 
 function InvoicePage({ params }: any) {
-  const company = params.company;
   const id = params.id;
+  const company = params.company;
+  const companyName = company.split('-').join(' ');
   const [type, setType] = useState('');
 
   return (
@@ -43,8 +44,8 @@ function InvoicePage({ params }: any) {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex items-center text-2xl font-semibold">
-          {company} ({id})
+        <div className="flex items-center font-bold text-5xl uppercase">
+          {companyName}
         </div>
       </div>
       <hr />
@@ -57,11 +58,11 @@ function InvoicePage({ params }: any) {
 
         {/* form container  */}
         <div className="">
-          {type === 'lr' ? <Lr /> : 'none'}
-          {type === 'bill' ? <Bill /> : 'none'}
-          {type === 'challan' ? <Challan /> : 'none'}
-          {type === 'voucher' ? <Voucher /> : 'none'}
-          {type === 'loading-slip' ? <LoadingSlip /> : 'none'}
+          {type === 'lr' ? <Lr /> : ''}
+          {type === 'bill' ? <Bill /> : ''}
+          {type === 'challan' ? <Challan /> : ''}
+          {type === 'voucher' ? <Voucher /> : ''}
+          {type === 'loading-slip' ? <LoadingSlip /> : ''}
         </div>
       </div>
     </main>
