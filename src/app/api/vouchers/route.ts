@@ -4,14 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 connectDB();
 
-export async function GET() {
-  const vouchers = await Voucher.find();
-  return NextResponse.json({
-    success: true,
-    data: vouchers,
-  });
-}
-
 // for creating voucher
 export async function POST(request: NextRequest) {
   try {
