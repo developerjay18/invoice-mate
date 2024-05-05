@@ -1,8 +1,14 @@
 // creating challan schema
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const challanSchema = new Schema(
   {
+    challanNum: {
+      type: String,
+    },
+    mainChallanDate: {
+      type: String,
+    },
     from: {
       type: String,
     },
@@ -12,39 +18,46 @@ const challanSchema = new Schema(
     vehicleNum: {
       type: String,
     },
-    panNum: {
-      type: String,
-    },
     ownersName: {
       type: String,
     },
     driversName: {
       type: String,
     },
-    gcNoteNum: {
+    panNum: {
       type: String,
     },
-    pkgs: {
-      type: String,
-    },
-    description: {
-      type: String,
-    },
-    consignor: {
-      type: String,
-    },
-    consignee: {
-      type: String,
-    },
-    weight: {
-      type: String,
-    },
-    rate: {
-      type: String,
-    },
-    collection: {
-      type: String,
-    },
+    list: [
+      {
+        date: {
+          type: String,
+        },
+        gcNoteNum: {
+          type: String,
+        },
+        pkgs: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+        consignor: {
+          type: String,
+        },
+        consignee: {
+          type: String,
+        },
+        weight: {
+          type: String,
+        },
+        rate: {
+          type: String,
+        },
+        collection: {
+          type: String,
+        },
+      },
+    ],
     commission: {
       type: String,
     },
@@ -65,7 +78,7 @@ const challanSchema = new Schema(
     },
     company: {
       type: Schema.Types.ObjectId,
-      ref: 'companies',
+      ref: "companies",
       required: true,
     },
   },
@@ -73,5 +86,5 @@ const challanSchema = new Schema(
 );
 
 const Challan =
-  mongoose.models.challans || mongoose.model('challans', challanSchema);
+  mongoose.models.challans || mongoose.model("challans", challanSchema);
 export default Challan;

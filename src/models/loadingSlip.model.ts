@@ -1,8 +1,14 @@
 // creating loading slip schema
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const loadingSlipSchema = new Schema(
   {
+    loadingSlipNum: {
+      type: String,
+    },
+    date:{
+      type:String
+    },
     primaryTo: {
       type: String,
     },
@@ -32,7 +38,7 @@ const loadingSlipSchema = new Schema(
     },
     company: {
       type: Schema.Types.ObjectId,
-      ref: 'companies',
+      ref: "companies",
       required: true,
     },
   },
@@ -41,5 +47,5 @@ const loadingSlipSchema = new Schema(
 
 const LoadingSlip =
   mongoose.models.loadingslips ||
-  mongoose.model('loadingslips', loadingSlipSchema);
+  mongoose.model("loadingslips", loadingSlipSchema);
 export default LoadingSlip;

@@ -1,9 +1,15 @@
 // creating voucher schema
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const voucherSchema = new Schema(
   {
     paidTo: {
+      type: String,
+    },
+    voucherNum: {
+      type: String,
+    },
+    date: {
       type: String,
     },
     debit: {
@@ -12,15 +18,19 @@ const voucherSchema = new Schema(
     onAccountOf: {
       type: String,
     },
-    particular: {
-      type: String,
-    },
-    rupees: {
-      type: String,
-    },
-    paise: {
-      type: String,
-    },
+    list: [
+      {
+        particular: {
+          type: String,
+        },
+        rupees: {
+          type: String,
+        },
+        paise: {
+          type: String,
+        },
+      },
+    ],
     total: {
       type: String,
     },
@@ -38,14 +48,14 @@ const voucherSchema = new Schema(
     },
     company: {
       type: Schema.Types.ObjectId,
-      ref: 'companies',
+      ref: "companies",
       required: true,
     },
   },
   { timestamps: true }
 );
 
-voucherSchema.pre('save', async function (next) {
+voucherSchema.pre("save", async function (next) {
   try {
     const found = Voucher.findById(this.company);
     if (!found) {
@@ -61,5 +71,5 @@ voucherSchema.pre('save', async function (next) {
 });
 
 const Voucher =
-  mongoose.models.vouchers || mongoose.model('vouchers', voucherSchema);
+  mongoose.models.vouchers || mongoose.model("vouchers", voucherSchema);
 export default Voucher;
