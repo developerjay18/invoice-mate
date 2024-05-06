@@ -124,7 +124,7 @@ function CompanyPage({ params }: any) {
             className="col capitalize border rounded flex justify-center items-center w-full h-[20vh] flex-col text-lg cursor-pointer hover:border-slate-500 dark:hover:border-white"
             key={invoice.name}
           >
-            <Link
+            <Link 
               href={invoice.slug}
               className="border w-full h-full flex justify-center items-center flex-col"
             >

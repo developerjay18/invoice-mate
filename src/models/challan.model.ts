@@ -1,12 +1,16 @@
 // creating challan schema
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const challanSchema = new Schema(
   {
     challanNum: {
       type: String,
     },
+<<<<<<< HEAD
     mainBillDate: {
+=======
+    mainChallanDate: {
+>>>>>>> 6ec3d982b8fc368a4f604aa78acd25d38b73a202
       type: String,
     },
     from: {
@@ -27,7 +31,11 @@ const challanSchema = new Schema(
     panNum: {
       type: String,
     },
+<<<<<<< HEAD
     items: [
+=======
+    list: [
+>>>>>>> 6ec3d982b8fc368a4f604aa78acd25d38b73a202
       {
         date: {
           type: String,
@@ -78,7 +86,7 @@ const challanSchema = new Schema(
     },
     company: {
       type: Schema.Types.ObjectId,
-      ref: 'companies',
+      ref: "companies",
       required: true,
     },
   },
@@ -86,5 +94,5 @@ const challanSchema = new Schema(
 );
 
 const Challan =
-  mongoose.models.challans || mongoose.model('challans', challanSchema);
+  mongoose.models.challans || mongoose.model("challans", challanSchema);
 export default Challan;
