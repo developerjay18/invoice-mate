@@ -7,27 +7,27 @@ connectDB();
 
 export async function POST(request: NextRequest) {
   try {
-    const { name } = await request.json();
+    const { ...data } = await request.json();
     const userId = await getDataFromToken(request);
 
-    if (!name) {
-      return NextResponse.json({
-        error: 'ALL FIELDS ARE REQUIRED',
-        status: 401,
-      });
-    }
+    // if (!name){
+    //   return NextResponse.json({
+    //     error: 'ALL FIELDS ARE REQUIRED',
+    //     status: 401,
+    //   });
+    // }
 
-    const existedCompany = await Company.findOne({ name });
+    // const existedCompany = await Company.findOne({ name });
 
-    if (existedCompany) {
-      return NextResponse.json(
-        { error: 'COMPANY ALREADY EXISTS WITH SAME NAME' },
-        { status: 401 }
-      );
-    }
+    // if (existedCompany) {
+    //   return NextResponse.json(
+    //     { error: 'COMPANY ALREADY EXISTS WITH SAME NAME' },
+    //     { status: 401 }
+    //   );
+    // }
 
     const company = new Company({
-      name,
+      ...data,
       owner: userId,
     });
 

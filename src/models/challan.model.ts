@@ -3,6 +3,12 @@ import mongoose, { Schema } from 'mongoose';
 
 const challanSchema = new Schema(
   {
+    challanNum: {
+      type: String,
+    },
+    mainBillDate: {
+      type: String,
+    },
     from: {
       type: String,
     },
@@ -12,39 +18,46 @@ const challanSchema = new Schema(
     vehicleNum: {
       type: String,
     },
-    panNum: {
-      type: String,
-    },
     ownersName: {
       type: String,
     },
     driversName: {
       type: String,
     },
-    gcNoteNum: {
+    panNum: {
       type: String,
     },
-    pkgs: {
-      type: String,
-    },
-    description: {
-      type: String,
-    },
-    consignor: {
-      type: String,
-    },
-    consignee: {
-      type: String,
-    },
-    weight: {
-      type: String,
-    },
-    rate: {
-      type: String,
-    },
-    collection: {
-      type: String,
-    },
+    items: [
+      {
+        date: {
+          type: String,
+        },
+        gcNoteNum: {
+          type: String,
+        },
+        pkgs: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+        consignor: {
+          type: String,
+        },
+        consignee: {
+          type: String,
+        },
+        weight: {
+          type: String,
+        },
+        rate: {
+          type: String,
+        },
+        collection: {
+          type: String,
+        },
+      },
+    ],
     commission: {
       type: String,
     },

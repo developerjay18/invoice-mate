@@ -18,16 +18,21 @@ const dataEntries = [
 ];
 
 function ChallanPage({ params }: any) {
-  const company = params.company;
   const id = params.id;
+  const company = params.company;
+  const companyName = company.split('-').join(' ');
+
   return (
     <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
       <section className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
           <div>
-            <h2 className="text-xl font-semibold">Challans - (company name)</h2>
-            <p className="mt-1 text-sm dark:text-slate-300 text-gray-700">
-              All Challans of {params.id}
+            <h2 className="text-xl font-semibold">
+              Challans - <span className="uppercase">{companyName} </span>{' '}
+            </h2>
+            <p className="mt-1 flex gap-2 text-sm dark:text-slate-300 text-gray-700">
+              All Challans of
+              <span className="uppercase">{companyName}</span>
             </p>
           </div>
           <div className="flex gap-x-4">

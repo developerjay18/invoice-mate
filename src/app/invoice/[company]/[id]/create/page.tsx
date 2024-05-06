@@ -18,8 +18,8 @@ import Challan from '@/components/Challan';
 import Lr from '@/components/Lr';
 
 function InvoicePage({ params }: any) {
-  const id = params.id;
-  const company = params.company;
+  const id: any = params.id;
+  const company: any = params.company;
   const companyName = company.split('-').join(' ');
   const [type, setType] = useState('');
 
@@ -58,7 +58,7 @@ function InvoicePage({ params }: any) {
 
         {/* form container  */}
         <div className="">
-          {type === 'lr' ? <Lr /> : ''}
+          {type === 'lr' ? <Lr id={id} company={company} /> : ''}
           {type === 'bill' ? <Bill /> : ''}
           {type === 'challan' ? <Challan /> : ''}
           {type === 'voucher' ? <Voucher /> : ''}

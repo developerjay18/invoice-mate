@@ -8,6 +8,27 @@ const companySchema = new Schema(
       required: [true, 'Name is required'],
       unique: true,
     },
+    gstNum: {
+      type: String,
+      default: '',
+    },
+    panNum: {
+      type: String,
+      required: true,
+    },
+    msmeNum: {
+      type: String,
+      default: '',
+    },
+    mobileNum: [
+      {
+        type: String,
+      },
+    ],
+    address: {
+      type: String,
+      required: true,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'users',

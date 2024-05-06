@@ -24,17 +24,17 @@ export default function Home() {
 
   const companies = [
     {
-      href: '/companies/maa-saraswati-road-carriers/6623c95462058b998154a4e7',
+      href: '/companies/maa-saraswati-road-carriers/66376f17b752100159dc12d9',
       value: 'maa-saraswati-road-carriers',
       title: 'Maa Saraswati Road Carriers',
     },
     {
-      href: '/companies/rising-freight-carrier/6623c9cb62058b998154a4eb',
+      href: '/companies/rising-freight-carrier/663770b3b752100159dc12db',
       value: 'rising-freight-carrier',
       title: 'Rising Freight Carrier',
     },
     {
-      href: '/companies/sharma-transport/6623c9d162058b998154a4ee',
+      href: '/companies/sharma-transport/663771e7b752100159dc12dd',
       value: 'sharma-transport',
       title: 'Sharma Transport',
     },

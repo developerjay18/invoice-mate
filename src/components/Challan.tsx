@@ -7,9 +7,14 @@ import { getDate } from '@/helpers/getDate';
 import { IoIosAddCircle } from 'react-icons/io';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
-function Challan() {
+function Challan({ ...props }: any) {
   const date = getDate();
+  const challanNum = '19935';
+  const id = props.id;
+  const company = props.company;
 
   const [fieldData, setFieldData] = useState([
     {
@@ -27,7 +32,7 @@ function Challan() {
 
   const [normalData, setNormalData]: any = useState([
     {
-      date: `${date}`,
+      mainBillDate: `${date}`,
       from: '',
       to: '',
       vehicleNum: '',
@@ -76,20 +81,42 @@ function Challan() {
     const { name, value } = e.target;
 
     setNormalData((prev: any) => {
-      return { ...prev, [name]: [value] };
+      return { ...prev, [name]: value };
     });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log(fieldData);
+    console.log(normalData);
+    console.log(normalData.hamali);
+    try {
+      // const response = await axios.post('/api/challans', {
+      //   company: id,
+      //   challanNum: challanNum,
+      //   ...normalData,
+      //   items:[]
+      // });
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   return (
     <div>
-      <form action="#" method="post" className="flex flex-col gap-y-4">
+      <form
+        action="#"
+        method="post"
+        className="flex flex-col gap-y-4"
+        onSubmit={handleSubmit}
+      >
         <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
           Add New challan details
         </div>
         <div className="grid grid-cols-2 gap-x-6">
           <div className="">
             <Label className="uppercase">challan NO</Label>
-            <Input type="text" value={'118409'} readOnly />
+            <Input type="text" value={challanNum} readOnly />
           </div>
           <div className="">
             <Label>DATE</Label>
@@ -361,9 +388,7 @@ function Challan() {
         </div>
         {/* // link connection pending... */}
         <div className="flex justify-center pt-8">
-          <Link href={''}>
-            <Button>Submit</Button>
-          </Link>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>
