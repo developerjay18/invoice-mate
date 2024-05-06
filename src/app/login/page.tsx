@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 function LoginPage() {
   const router = useRouter();
   const [credentials, setCredentials] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -61,20 +61,20 @@ function LoginPage() {
               <div className="space-y-5">
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="text-base font-medium dark:text-slate-300 text-gray-900"
                   >
                     {' '}
-                    Email address{' '}
+                    Username{' '}
                   </label>
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      name="email"
-                      id="email"
-                      type="email"
-                      placeholder="example@example.com"
-                      value={credentials.email}
+                      name="username"
+                      id="username"
+                      type="text"
+                      placeholder="enter your username"
+                      value={credentials.username}
                       onChange={handleChange}
                     ></input>
                   </div>

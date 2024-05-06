@@ -58,10 +58,10 @@ function InvoicePage({ params }: any) {
 
         {/* form container  */}
         <div className="">
-          {type === 'lr' ? <Lr id={id} company={company} /> : ''}
+          {type === 'lr' ? <Lr /> : ''}
           {type === 'bill' ? <Bill /> : ''}
-          {type === 'challan' ? <Challan /> : ''}
-          {type === 'voucher' ? <Voucher /> : ''}
+          {type === 'challan' ? <Challan id={id} company={company} /> : ''}
+          {type === 'voucher' ? <Voucher id={id} company={company} /> : ''}
           {type === 'loading-slip' ? <LoadingSlip /> : ''}
         </div>
       </div>

@@ -31,15 +31,15 @@ function Navbar() {
 
   const listItems = [
     {
-      href: '/maa-saraswati-road-carriers',
+      href: '/companies/maa-saraswati-road-carriers/66376f17b752100159dc12d9',
       title: 'Maa Saraswati Road Carriers',
     },
     {
-      href: '/rising-freight-carrier',
+      href: '/companies/rising-freight-carrier/663770b3b752100159dc12db',
       title: 'Rising Freight Carrier',
     },
     {
-      href: '/sharma-transport',
+      href: '/companies/sharma-transport/663771e7b752100159dc12dd',
       title: 'Sharma Transport',
     },
   ];

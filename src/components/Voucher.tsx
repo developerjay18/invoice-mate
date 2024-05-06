@@ -9,7 +9,12 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 
 // total, company, number, date fields are still pending...
-function Voucher() {
+function Voucher({ ...props }) {
+  const date = getDate();
+  const voucherNum = '18835';
+  const id = props.id;
+  const company = props.company;
+
   const [fieldData, setFieldData] = useState([
     {
       particular: '',
@@ -26,8 +31,6 @@ function Voucher() {
     payment: '',
     chequeNum: '',
   });
-
-  const date = getDate();
 
   const addField = (e: any) => {
     e.preventDefault();

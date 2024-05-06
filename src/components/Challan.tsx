@@ -32,7 +32,6 @@ function Challan({ ...props }: any) {
 
   const [normalData, setNormalData]: any = useState([
     {
-      mainBillDate: `${date}`,
       from: '',
       to: '',
       vehicleNum: '',
@@ -87,16 +86,49 @@ function Challan({ ...props }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(fieldData);
-    console.log(normalData);
-    console.log(normalData.hamali);
     try {
-      // const response = await axios.post('/api/challans', {
-      //   company: id,
-      //   challanNum: challanNum,
-      //   ...normalData,
-      //   items:[]
-      // });
+      const response = await axios.post('/api/challans', {
+        company: id,
+        challanNum: challanNum,
+        mainBillDate: date,
+        ...normalData,
+        item: fieldData,
+      });
+
+      if (response.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.error);
+      }
+
+      setFieldData([
+        {
+          date: `${date}`,
+          gcNoteNum: '',
+          pkgs: '',
+          description: '',
+          consignor: '',
+          consignee: '',
+          weight: '',
+          rate: '',
+          collection: '',
+        },
+      ]);
+      setNormalData([
+        {
+          from: '',
+          to: '',
+          vehicleNum: '',
+          ownersName: '',
+          driversName: '',
+          panNum: '',
+          commission: '',
+          refund: '',
+          hamali: '',
+          other: '',
+          munsyanaAndPayment: '',
+        },
+      ]);
     } catch (error: any) {
       toast.error(error.message);
     }
