@@ -83,8 +83,8 @@ function Bill({ ...props }) {
       const response = await axios.post("/api/bills", {
         company: id,
         billNum: billNum,
-        date: date,
-        item: fieldData,
+        mainBillDate: date,
+        list: fieldData,
         ...normalData,
       });
 
