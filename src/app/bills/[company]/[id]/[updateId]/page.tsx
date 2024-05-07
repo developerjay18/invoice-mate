@@ -18,7 +18,9 @@ function BillUpdatePage({ params }: any) {
   const total = "yet to be coded";
   const router = useRouter();
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({
+    list: [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,12 +44,12 @@ function BillUpdatePage({ params }: any) {
 
   const handleChange = (e: any, index: any) => {
     const { name, value } = e.target;
-    const subItems = entry?.list;
-    const targetedItem = subItems[index];
+    const subItems = entry.list;
+    let targetedItem: any = subItems[index];
 
     targetedItem[name] = value;
 
-    entry?.list = subItems;
+    entry.list = subItems;
 
     setEntry({ ...entry });
   };
