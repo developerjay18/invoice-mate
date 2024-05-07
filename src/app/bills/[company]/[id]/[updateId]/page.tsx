@@ -19,7 +19,26 @@ function BillUpdatePage({ params }: any) {
   const router = useRouter();
 
   const [entry, setEntry] = useState({
-    list: [],
+    billNum: "",
+    mainBillDate: "",
+    name: "",
+    total: "",
+    company: "",
+    list: [
+      {
+        sNumber: "",
+        date: "",
+        cnNum: "",
+        from: "",
+        to: "",
+        particular: "",
+        weight: "",
+        rate: "",
+        amount: "",
+        advance: "",
+        balance: "",
+      },
+    ],
   });
 
   useEffect(() => {
