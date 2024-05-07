@@ -62,7 +62,11 @@ function InvoicePage({ params }: any) {
           {type === "bill" ? <Bill id={id} company={company} /> : ""}
           {type === "challan" ? <Challan id={id} company={company} /> : ""}
           {type === "voucher" ? <Voucher id={id} company={company} /> : ""}
-          {type === "loading-slip" ? <LoadingSlip /> : ""}
+          {type === "loading-slip" ? (
+            <LoadingSlip id={id} company={company} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </main>

@@ -1,34 +1,68 @@
-import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { Input } from '@/components/ui/input';
-import { getDate } from '@/helpers/getDate';
-import { Button } from './ui/button';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { Label } from "./ui/label";
+import { Input } from "@/components/ui/input";
+import { getDate } from "@/helpers/getDate";
+import { Button } from "./ui/button";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-function LoadingSlip() {
+function LoadingSlip({ ...props }) {
   const date = getDate();
+  const loadingSlipNum = "90909";
+  const id = props.id;
+  const company = props.company;
+  const router = useRouter();
+
   const [normalData, setNormalData] = useState({
-    primaryTo: '',
-    truckNum: '',
-    from: '',
-    to: '',
-    rate: '',
-    gauranteeBy: '',
-    name: '',
-    advance: '',
-    balance: '',
+    loadingSlipNum: loadingSlipNum,
+    date: `${date}`,
+    primaryTo: "",
+    truckNum: "",
+    from: "",
+    to: "",
+    rate: "",
+    gauranteeBy: "",
+    name: "",
+    advance: "",
+    balance: "",
   });
 
   const handleNormalChange = (e: any) => {
     const { name, value } = e.target;
 
     setNormalData((prev) => {
-      return { ...prev, [name]: [value] };
+      return { ...prev, [name]: value };
     });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/loading-slips", {
+        company: id,
+        ...normalData,
+      });
+
+      if (response.status === 200 && response.data.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.error);
+      }
+
+      router.push(`/loading-slips/${company}/${id}`);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
   return (
     <div>
-      <form action="#" method="post" className="flex flex-col gap-y-4">
+      <form
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-y-4"
+      >
         <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
           Add New Loading Slips details
         </div>
@@ -48,7 +82,7 @@ function LoadingSlip() {
 
           <div className="">
             <Label>NO</Label>
-            <Input type="text" value={'118409'} readOnly />
+            <Input type="text" value={"118409"} readOnly />
           </div>
 
           <div className="">
@@ -156,9 +190,7 @@ function LoadingSlip() {
         </div>
 
         <div className="flex justify-center pt-8">
-          <Link href={''}>
-            <Button>Submit</Button>
-          </Link>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>
