@@ -14,7 +14,7 @@ const billSchema = new Schema(
     },
     list: [
       {
-        serialNum: {
+        sNumber: {
           type: String,
         },
         date: {
