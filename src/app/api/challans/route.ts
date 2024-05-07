@@ -1,5 +1,8 @@
+import { connectDB } from '@/dbConfig/dbConfig';
 import Challan from '@/models/challan.model';
 import { NextRequest, NextResponse } from 'next/server';
+
+connectDB()
 
 // for creating challans
 export async function POST(request: NextRequest) {

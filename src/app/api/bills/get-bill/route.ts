@@ -1,5 +1,8 @@
-import Bill from '@/models/bill.model';
-import { NextRequest, NextResponse } from 'next/server';
+import { connectDB } from "@/dbConfig/dbConfig";
+import Bill from "@/models/bill.model";
+import { NextRequest, NextResponse } from "next/server";
+
+connectDB();
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,21 +20,21 @@ export async function POST(request: NextRequest) {
     if (!bill) {
       return NextResponse.json(
         {
-          error: 'ERROR OCCURED WHILE FETCHING BILL',
+          error: "ERROR OCCURED WHILE FETCHING BILL",
         },
         { status: 501 }
       );
     }
 
     return NextResponse.json({
-      message: 'BILL FETCHED SUCCESSFULLY',
+      message: "BILL FETCHED SUCCESSFULLY",
       status: 200,
       success: true,
       bill,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: 'ERROR WHILE FECTHING BILL FROM BACKEND' },
+      { error: "ERROR WHILE FECTHING BILL FROM BACKEND" },
       { status: 501 }
     );
   }

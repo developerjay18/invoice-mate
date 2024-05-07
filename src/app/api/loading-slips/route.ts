@@ -1,5 +1,8 @@
-import LoadingSlip from '@/models/loadingSlip.model';
-import { NextRequest, NextResponse } from 'next/server';
+import { connectDB } from "@/dbConfig/dbConfig";
+import LoadingSlip from "@/models/loadingSlip.model";
+import { NextRequest, NextResponse } from "next/server";
+
+connectDB();
 
 // for creating loading-slips
 export async function POST(request: NextRequest) {
@@ -22,20 +25,20 @@ export async function POST(request: NextRequest) {
 
     if (!savedLoadingSlip) {
       return NextResponse.json(
-        { error: 'ERROR WHILE CREATING LOADING-SLIP PLASE TRY AGAIN' },
+        { error: "ERROR WHILE CREATING LOADING-SLIP PLASE TRY AGAIN" },
         { status: 501 }
       );
     }
 
     return NextResponse.json({
-      message: 'LOADING SLIP CREATED SUCCESSFULLY',
+      message: "LOADING SLIP CREATED SUCCESSFULLY",
       status: 200,
       success: true,
       savedLoadingSlip,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: 'ERROR WHILE CREATING LOADING-SLIP FROM BACKEND' },
+      { error: "ERROR WHILE CREATING LOADING-SLIP FROM BACKEND" },
       { status: 501 }
     );
   }
@@ -51,14 +54,14 @@ export async function PATCH(request: NextRequest) {
       { new: true }
     );
     return NextResponse.json({
-      message: 'LOADING-SLIP IS UPDATED',
+      message: "LOADING-SLIP IS UPDATED",
       success: true,
       loadingSlip,
     });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: 'ERROR WHILE UPDATING LOADING-SLIP FROM BACKEND' },
+      { error: "ERROR WHILE UPDATING LOADING-SLIP FROM BACKEND" },
       { status: 501 }
     );
   }
@@ -82,19 +85,19 @@ export async function DELETE(request: NextRequest) {
 
     if (!deletedLoadingSlip) {
       return NextResponse.json(
-        { error: 'ERROR WHILE DELETING LOADING-SLIP PLASE TRY AGAIN' },
+        { error: "ERROR WHILE DELETING LOADING-SLIP PLASE TRY AGAIN" },
         { status: 501 }
       );
     }
 
     return NextResponse.json({
-      message: 'LOADING SLIP DELETED SUCCESSFULLY',
+      message: "LOADING SLIP DELETED SUCCESSFULLY",
       status: 200,
       success: true,
     });
   } catch (error) {
     return NextResponse.json(
-      { error: 'ERROR WHILE DELETING LOADING-SLIP FROM BACKEND' },
+      { error: "ERROR WHILE DELETING LOADING-SLIP FROM BACKEND" },
       { status: 501 }
     );
   }
