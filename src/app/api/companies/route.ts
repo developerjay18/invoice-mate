@@ -10,23 +10,6 @@ export async function POST(request: NextRequest) {
     const { ...data } = await request.json();
     const userId = await getDataFromToken(request);
 
-<<<<<<< HEAD
-    // if (!name){
-    //   return NextResponse.json({
-    //     error: 'ALL FIELDS ARE REQUIRED',
-    //     status: 401,
-    //   });
-    // }
-
-    // const existedCompany = await Company.findOne({ name });
-
-    // if (existedCompany) {
-    //   return NextResponse.json(
-    //     { error: 'COMPANY ALREADY EXISTS WITH SAME NAME' },
-    //     { status: 401 }
-    //   );
-    // }
-=======
     if (!data) {
       return NextResponse.json({
         error: "ALL FIELDS ARE REQUIRED",
@@ -42,7 +25,6 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
->>>>>>> 6ec3d982b8fc368a4f604aa78acd25d38b73a202
 
     const company = new Company({
       ...data,
