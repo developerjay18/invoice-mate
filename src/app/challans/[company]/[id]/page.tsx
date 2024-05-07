@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { RiArrowGoBackLine } from 'react-icons/ri';
-import toast from 'react-hot-toast';
-import axios from 'axios';
+import React, { useEffect, useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 function ChallanPage({ params }: any) {
   const id = params.id;
   const company = params.company;
-  const companyName = company.split('-').join(' ');
+  const companyName = company.split("-").join(" ");
 
   const [entries, setEntries] = useState([]);
 
@@ -33,7 +33,7 @@ function ChallanPage({ params }: any) {
   useEffect(() => {
     const fetchChallans = async () => {
       try {
-        const response = await axios.post('/api/challans/get-challans', {
+        const response = await axios.post("/api/challans/get-challans", {
           companyId: id,
         });
 
@@ -57,7 +57,7 @@ function ChallanPage({ params }: any) {
         <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
           <div>
             <h2 className="text-xl font-semibold">
-              Challans - <span className="uppercase">{companyName} </span>{' '}
+              Challans - <span className="uppercase">{companyName} </span>{" "}
             </h2>
             <p className="mt-1 flex gap-2 text-sm dark:text-slate-300 text-gray-700">
               All Challans of
@@ -165,9 +165,9 @@ function ChallanPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Link href={'/'} className="">
-                            <Button className="">View</Button>
-                          </Link>
+                          {/* <Link href={'/'} className="">  */}
+                          <Button className="">View</Button>
+                          {/* </Link> */}
                           <Link
                             href={`/challans/${company}/${id}/${entry._id}`}
                           >

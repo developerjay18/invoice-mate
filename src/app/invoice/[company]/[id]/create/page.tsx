@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Label } from '@/components/ui/label';
+import React, { useState } from "react";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -10,18 +10,18 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import Voucher from '@/components/Voucher';
-import Bill from '@/components/Bill';
-import LoadingSlip from '@/components/LoadingSlip';
-import Challan from '@/components/Challan';
-import Lr from '@/components/Lr';
+} from "@/components/ui/select";
+import Voucher from "@/components/Voucher";
+import Bill from "@/components/Bill";
+import LoadingSlip from "@/components/LoadingSlip";
+import Challan from "@/components/Challan";
+import Lr from "@/components/Lr";
 
 function InvoicePage({ params }: any) {
   const id: any = params.id;
   const company: any = params.company;
-  const companyName = company.split('-').join(' ');
-  const [type, setType] = useState('');
+  const companyName = company.split("-").join(" ");
+  const [type, setType] = useState("");
 
   return (
     <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
@@ -58,11 +58,11 @@ function InvoicePage({ params }: any) {
 
         {/* form container  */}
         <div className="">
-          {type === 'lr' ? <Lr /> : ''}
-          {type === 'bill' ? <Bill /> : ''}
-          {type === 'challan' ? <Challan id={id} company={company} /> : ''}
-          {type === 'voucher' ? <Voucher id={id} company={company} /> : ''}
-          {type === 'loading-slip' ? <LoadingSlip /> : ''}
+          {type === "lr" ? <Lr /> : ""}
+          {type === "bill" ? <Bill id={id} company={company} /> : ""}
+          {type === "challan" ? <Challan id={id} company={company} /> : ""}
+          {type === "voucher" ? <Voucher id={id} company={company} /> : ""}
+          {type === "loading-slip" ? <LoadingSlip /> : ""}
         </div>
       </div>
     </main>

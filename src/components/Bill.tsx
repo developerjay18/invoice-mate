@@ -1,33 +1,42 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { Input } from '@/components/ui/input';
-import { getDate } from '@/helpers/getDate';
-import { IoIosAddCircle } from 'react-icons/io';
-import { Button } from './ui/button';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { Label } from "./ui/label";
+import { Input } from "@/components/ui/input";
+import { getDate } from "@/helpers/getDate";
+import { IoIosAddCircle } from "react-icons/io";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // total, company, number are still pending
-function Bill() {
+function Bill({ ...props }) {
   const date = getDate();
+  const billNum = "10907";
+  const total = "yet to coded";
+  const id = props.id;
+  const company = props.company;
+  const router = useRouter();
   const [fieldData, setFieldData] = useState([
     {
-      sNumber: '',
+      sNumber: "",
       date: `${date}`,
-      cnNum: '',
-      from: '',
-      to: '',
-      particular: '',
-      weight: '',
-      rate: '',
-      amount: '',
-      advance: '',
-      balance: '',
+      cnNum: "",
+      from: "",
+      to: "",
+      particular: "",
+      weight: "",
+      rate: "",
+      amount: "",
+      advance: "",
+      balance: "",
     },
   ]);
   const [normalData, setNormalData] = useState({
-    name: '',
+    name: "",
+    total: `${total}`,
   });
 
   const addField = (e: any) => {
@@ -36,17 +45,17 @@ function Bill() {
       return [
         ...prev,
         {
-          sNumber: '',
+          sNumber: "",
           date: `${date}`,
-          cnNum: '',
-          from: '',
-          to: '',
-          particular: '',
-          weight: '',
-          rate: '',
-          amount: '',
-          advance: '',
-          balance: '',
+          cnNum: "",
+          from: "",
+          to: "",
+          particular: "",
+          weight: "",
+          rate: "",
+          amount: "",
+          advance: "",
+          balance: "",
         },
       ];
     });
@@ -63,13 +72,42 @@ function Bill() {
   };
 
   const handleNormalChange = (e: any) => {
-    const { value } = e.target;
-    setNormalData({ name: value });
+    const { name, value } = e.target;
+    setNormalData({ ...normalData, [name]: value });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/bills", {
+        company: id,
+        billNum: billNum,
+        date: date,
+        item: fieldData,
+        ...normalData,
+      });
+
+      if (response.status === 200 && response.data.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.error);
+      }
+
+      router.push(`/bills/${company}/${id}`);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   return (
     <div>
-      <form action="#" method="post" className="flex flex-col gap-y-4">
+      <form
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-y-4"
+      >
         <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
           Add New Bill details
         </div>
@@ -78,8 +116,8 @@ function Bill() {
           <div className="">
             <Label>M/S.</Label>
             <Input
-              name="paidTo"
-              id="paidTo"
+              name="name"
+              id="name"
               type="text"
               value={normalData.name}
               onChange={handleNormalChange}
@@ -88,7 +126,7 @@ function Bill() {
           </div>
           <div className="">
             <Label>BILL NO</Label>
-            <Input type="text" value={'118409'} readOnly />
+            <Input type="text" value={"118409"} readOnly />
           </div>
           <div className="">
             <Label>DATE</Label>
@@ -109,7 +147,7 @@ function Bill() {
                   name="sNumber"
                   id="sNumber"
                   type="text"
-                  value={index + 1}
+                  value={data.sNumber}
                   onChange={(e: any) => handleChange(e, index)}
                   placeholder="set particular"
                 />
@@ -246,10 +284,13 @@ function Bill() {
           </div>
         ))}
 
+        <div className="">
+          <Label>TOTAL</Label>
+          <Input name="total" id="total" type="text" value={total} readOnly />
+        </div>
+
         <div className="flex justify-center pt-8">
-          <Link href={''}>
-            <Button>Submit</Button>
-          </Link>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>

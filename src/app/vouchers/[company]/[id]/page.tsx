@@ -1,38 +1,74 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import React from 'react';
-import { RiArrowGoBackLine } from 'react-icons/ri';
-
-const dataEntries = [
-  {
-    type: 'challan',
-    invoiceNumber: '8989SD',
-    name: 'Ambani',
-    dateAndTime: '34:00 12-3-2343 00:00GMT',
-    viewSlug: '/view',
-    updateSlug: '/update',
-    deleteSlug: '/delete',
-  },
-];
+import React, { useState, useEffect, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function VoucherPage({ params }: any) {
-  const company = params.company;
   const id = params.id;
+  const company = params.company;
+  const companyName = company.split("-").join(" ");
+
+  const [entries, setEntries] = useState([]);
+
+  const handleDelete = useCallback(async (id: string) => {
+    try {
+      const response = await axios.delete(`/api/vouchers`, {
+        data: { voucherId: id },
+      });
+
+      if (response.status === 200 && response.data.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.error);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      try {
+        const response = await axios.post("/api/vouchers/get-vouchers", {
+          companyId: id,
+        });
+
+        console.log(response.data);
+        if (response.status === 200 && response.data.status === 200) {
+          await setEntries(response.data.vouchers);
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.error);
+        }
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchVouchers();
+  }, [id, handleDelete]);
+
   return (
     <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
       <section className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
           <div>
-            <h2 className="text-xl font-semibold">Challans - (company name)</h2>
+            <h2 className="text-xl font-semibold">
+              Vouchers - <span className="uppercase">{companyName} </span>{" "}
+            </h2>
             <p className="mt-1 text-sm dark:text-slate-300 text-gray-700">
-              All Challans of {params.id}
+              All Vouchers of {params.id}
             </p>
           </div>
           <div className="flex gap-x-4">
             <Button className="capitalize">
-              <Link href={'/create-challan'}>Add New challan</Link>
+              <Link href={`/invoice/${company}/${id}/create`}>
+                Add New Voucher
+              </Link>
             </Button>
             <Button className="capitalize">
               <Link
@@ -67,14 +103,14 @@ function VoucherPage({ params }: any) {
                         scope="col"
                         className="px-12 py-3.5 text-left text-md font-semibold dark:text-white text-gray-700"
                       >
-                        Invoice Number
+                        Voucher Number
                       </th>
 
                       <th
                         scope="col"
                         className="px-4 py-3.5 text-left text-md font-semibold dark:text-white text-gray-700"
                       >
-                        Name
+                        Paid To
                       </th>
 
                       <th
@@ -82,6 +118,12 @@ function VoucherPage({ params }: any) {
                         className="px-4 py-3.5 text-left text-md font-semibold dark:text-white text-gray-700"
                       >
                         Date and Time
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-md font-semibold dark:text-white text-gray-700"
+                      >
+                        Voucher ID
                       </th>
                       <th
                         scope="col"
@@ -94,41 +136,47 @@ function VoucherPage({ params }: any) {
 
                   {/* body  */}
                   <tbody className="divide-y dark:divide-gray-700 divide-gray-200 dark:bg-[#020817] bg-white">
-                    {dataEntries.map((entry) => (
+                    {entries?.map((entry: any) => (
                       <tr key={entry.name}>
                         <td className="whitespace-nowrap px-4 py-4">
                           <div className="flex items-center">
                             <div className="ml-0">
                               <div className="text-sm font-normal dark:text-white text-gray-900">
-                                {entry.type}
+                                voucher
                               </div>
                             </div>
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-12 py-4">
                           <div className="text-sm dark:text-white text-gray-900 ">
-                            {entry.invoiceNumber}
+                            {entry.voucherNum}
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-4 py-4">
                           <div className="text-sm dark:text-white text-gray-900 ">
-                            {entry.name}
+                            {entry.paidTo}
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm dark:text-white text-gray-700">
-                          {entry.dateAndTime}
+                          {entry.updatedAt}
+                        </td>
+                        <td className="whitespace-nowrap px-4 py-4 text-sm dark:text-white text-gray-700">
+                          {entry._id}
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Link href={entry.viewSlug} className="">
-                            <Button className="">View</Button>
-                          </Link>
-                          <Link href={entry.updateSlug}>
+                          <Button className="">View</Button>
+                          <Link
+                            href={`/vouchers/${company}/${id}/${entry._id}`}
+                          >
                             <Button className="">Update</Button>
                           </Link>
-                          <Link href={entry.deleteSlug}>
-                            <Button className="">Delete</Button>
-                          </Link>
+                          <Button
+                            className=""
+                            onClick={() => handleDelete(entry._id)}
+                          >
+                            Delete
+                          </Button>
                         </td>
                       </tr>
                     ))}

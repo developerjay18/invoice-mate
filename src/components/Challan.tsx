@@ -1,48 +1,49 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { Input } from '@/components/ui/input';
-import { getDate } from '@/helpers/getDate';
-import { IoIosAddCircle } from 'react-icons/io';
-import { Button } from './ui/button';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Label } from "./ui/label";
+import { Input } from "@/components/ui/input";
+import { getDate } from "@/helpers/getDate";
+import { IoIosAddCircle } from "react-icons/io";
+import { Button } from "./ui/button";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function Challan({ ...props }: any) {
   const date = getDate();
-  const challanNum = '19935';
+  const challanNum = "19935";
   const id = props.id;
   const company = props.company;
+  const router = useRouter();
 
   const [fieldData, setFieldData] = useState([
     {
       date: `${date}`,
-      gcNoteNum: '',
-      pkgs: '',
-      description: '',
-      consignor: '',
-      consignee: '',
-      weight: '',
-      rate: '',
-      collection: '',
+      gcNoteNum: "",
+      pkgs: "",
+      description: "",
+      consignor: "",
+      consignee: "",
+      weight: "",
+      rate: "",
+      collection: "",
     },
   ]);
 
   const [normalData, setNormalData]: any = useState([
     {
-      from: '',
-      to: '',
-      vehicleNum: '',
-      ownersName: '',
-      driversName: '',
-      panNum: '',
-      commission: '',
-      refund: '',
-      hamali: '',
-      other: '',
-      munsyanaAndPayment: '',
+      from: "",
+      to: "",
+      vehicleNum: "",
+      ownersName: "",
+      driversName: "",
+      panNum: "",
+      commission: "",
+      refund: "",
+      hamali: "",
+      other: "",
+      munsyanaAndPayment: "",
     },
   ]);
 
@@ -53,14 +54,14 @@ function Challan({ ...props }: any) {
         ...prev,
         {
           date: `${date}`,
-          gcNoteNum: '',
-          pkgs: '',
-          description: '',
-          consignor: '',
-          consignee: '',
-          weight: '',
-          rate: '',
-          collection: '',
+          gcNoteNum: "",
+          pkgs: "",
+          description: "",
+          consignor: "",
+          consignee: "",
+          weight: "",
+          rate: "",
+          collection: "",
         },
       ];
     });
@@ -87,7 +88,7 @@ function Challan({ ...props }: any) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/challans', {
+      const response = await axios.post("/api/challans", {
         company: id,
         challanNum: challanNum,
         mainBillDate: date,
@@ -104,31 +105,33 @@ function Challan({ ...props }: any) {
       setFieldData([
         {
           date: `${date}`,
-          gcNoteNum: '',
-          pkgs: '',
-          description: '',
-          consignor: '',
-          consignee: '',
-          weight: '',
-          rate: '',
-          collection: '',
+          gcNoteNum: "",
+          pkgs: "",
+          description: "",
+          consignor: "",
+          consignee: "",
+          weight: "",
+          rate: "",
+          collection: "",
         },
       ]);
       setNormalData([
         {
-          from: '',
-          to: '',
-          vehicleNum: '',
-          ownersName: '',
-          driversName: '',
-          panNum: '',
-          commission: '',
-          refund: '',
-          hamali: '',
-          other: '',
-          munsyanaAndPayment: '',
+          from: "",
+          to: "",
+          vehicleNum: "",
+          ownersName: "",
+          driversName: "",
+          panNum: "",
+          commission: "",
+          refund: "",
+          hamali: "",
+          other: "",
+          munsyanaAndPayment: "",
         },
       ]);
+
+      router.push(`/challans/${company}/${id}`);
     } catch (error: any) {
       toast.error(error.message);
     }
