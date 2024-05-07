@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
+// logic to total is still pending here
 function Challan({ ...props }: any) {
   const date = getDate();
   const challanNum = "19935";

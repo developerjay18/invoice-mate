@@ -1,48 +1,54 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { Input } from '@/components/ui/input';
-import { getDate } from '@/helpers/getDate';
-import { IoIosAddCircle } from 'react-icons/io';
-import { Button } from './ui/button';
-import Link from 'next/link';
+import React, { useState } from "react";
+import { Label } from "./ui/label";
+import { Input } from "@/components/ui/input";
+import { getDate } from "@/helpers/getDate";
+import { IoIosAddCircle } from "react-icons/io";
+import { Button } from "./ui/button";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-function Lr() {
+function Lr({ ...props }) {
   const date = getDate();
+  const lrNum = "989809";
+  const id = props.id;
+  const company = props.company;
+  const router = useRouter();
 
   const [fieldData, setFieldData] = useState([
     {
-      package: '',
-      content: '',
-      actualWeight: '',
-      chargeWeight: '',
-      value: '',
-      firstFreightPaid: '',
-      firstFreightToBePaid: '',
-      serviceTax: '',
-      tdsPaid: '',
-      tdsToBePaid: '',
-      hemaliPaid: '',
-      hemaliToBePaid: '',
-      advancePaid: '',
-      advanceToBePaid: '',
-      stataricalPaid: '',
-      stataricalToBePaid: '',
-      odChargePaid: '',
-      odChargeToBePaid: '',
-      grTotalPaid: '',
-      grTotalToBePaid: '',
-      remarks: '',
+      package: "",
+      content: "",
+      actualWeight: "",
+      chargeWeight: "",
+      value: "",
+      firstFreightPaid: "",
+      firstFreightToBePaid: "",
+      serviceTax: "",
+      tdsPaid: "",
+      tdsToBePaid: "",
+      hemaliPaid: "",
+      hemaliToBePaid: "",
+      advancePaid: "",
+      advanceToBePaid: "",
+      stataricalPaid: "",
+      stataricalToBePaid: "",
+      odChargePaid: "",
+      odChargeToBePaid: "",
+      grTotalPaid: "",
+      grTotalToBePaid: "",
+      remarks: "",
     },
   ]);
   const [normalData, setNormalData] = useState({
-    deliveryAt: '',
-    truckNum: '',
-    consignorsName: '',
-    consigneesName: '',
-    from: '',
-    to: '',
+    deliveryAt: "",
+    truckNum: "",
+    consignorsName: "",
+    consigneesName: "",
+    from: "",
+    to: "",
   });
 
   const addField = (e: any) => {
@@ -51,27 +57,27 @@ function Lr() {
       return [
         ...prev,
         {
-          package: '',
-          content: '',
-          actualWeight: '',
-          chargeWeight: '',
-          value: '',
-          firstFreightPaid: '',
-          firstFreightToBePaid: '',
-          serviceTax: '',
-          tdsPaid: '',
-          tdsToBePaid: '',
-          hemaliPaid: '',
-          hemaliToBePaid: '',
-          advancePaid: '',
-          advanceToBePaid: '',
-          stataricalPaid: '',
-          stataricalToBePaid: '',
-          odChargePaid: '',
-          odChargeToBePaid: '',
-          grTotalPaid: '',
-          grTotalToBePaid: '',
-          remarks: '',
+          package: "",
+          content: "",
+          actualWeight: "",
+          chargeWeight: "",
+          value: "",
+          firstFreightPaid: "",
+          firstFreightToBePaid: "",
+          serviceTax: "",
+          tdsPaid: "",
+          tdsToBePaid: "",
+          hemaliPaid: "",
+          hemaliToBePaid: "",
+          advancePaid: "",
+          advanceToBePaid: "",
+          stataricalPaid: "",
+          stataricalToBePaid: "",
+          odChargePaid: "",
+          odChargeToBePaid: "",
+          grTotalPaid: "",
+          grTotalToBePaid: "",
+          remarks: "",
         },
       ];
     });
@@ -91,12 +97,43 @@ function Lr() {
     const { name, value } = e.target;
 
     setNormalData((prev) => {
-      return { ...prev, [name]: [value] };
+      return { ...prev, [name]: value };
     });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log(fieldData);
+    console.log(normalData);
+
+    try {
+      const response = await axios.post("/api/lrs", {
+        company: id,
+        lrNum: lrNum,
+        date: date,
+        ...normalData,
+        list: fieldData,
+      });
+
+      if (response.status === 200 && response.data.status === 200) {
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.error);
+      }
+
+      router.push(`/lrs/${company}/${id}`);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
   return (
     <div>
-      <form action="#" method="post" className="flex flex-col gap-y-4">
+      <form
+        action="#"
+        method="post"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-y-4"
+      >
         <div className="border bg-black dark:bg-white/90 dark:text-black text-white rounded p-2 font-semibold capitalize">
           Add New LR details
         </div>
@@ -104,7 +141,7 @@ function Lr() {
         <div className="grid grid-cols-2 gap-x-6">
           <div className="">
             <Label className="uppercase">c/n/ NO</Label>
-            <Input type="text" value={'118409'} readOnly />
+            <Input type="text" value={lrNum} readOnly />
           </div>
 
           <div className="">
@@ -461,9 +498,7 @@ function Lr() {
         ))}
 
         <div className="flex justify-center pt-8">
-          <Link href={''}>
-            <Button>Submit</Button>
-          </Link>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>

@@ -1,73 +1,80 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import React, { useState } from "react";
+import Link from "next/link";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { FaDownload } from 'react-icons/fa';
+} from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { FaDownload } from "react-icons/fa";
+import formatDate from "@/helpers/formatDate";
 
 export default function Home() {
   const [fromDate, setFromDate] = useState<Date>();
   const [toDate, setToDate] = useState<Date>();
-  const [invoiceType, setInvoiceType] = useState('');
-  const [company, setCompany] = useState('');
+  const [invoiceType, setInvoiceType] = useState("");
+  const [company, setCompany] = useState("");
 
   const companies = [
     {
-      href: '/companies/maa-saraswati-road-carriers/66376f17b752100159dc12d9',
-      value: 'maa-saraswati-road-carriers',
-      title: 'Maa Saraswati Road Carriers',
+      href: "/companies/maa-saraswati-road-carriers/66376f17b752100159dc12d9",
+      value: "maa-saraswati-road-carriers",
+      title: "Maa Saraswati Road Carriers",
     },
     {
-      href: '/companies/rising-freight-carrier/663770b3b752100159dc12db',
-      value: 'rising-freight-carrier',
-      title: 'Rising Freight Carrier',
+      href: "/companies/rising-freight-carrier/663770b3b752100159dc12db",
+      value: "rising-freight-carrier",
+      title: "Rising Freight Carrier",
     },
     {
-      href: '/companies/sharma-transport/663771e7b752100159dc12dd',
-      value: 'sharma-transport',
-      title: 'Sharma Transport',
+      href: "/companies/sharma-transport/663771e7b752100159dc12dd",
+      value: "sharma-transport",
+      title: "Sharma Transport",
     },
   ];
 
   const invoices = [
     {
-      name: 'Challan',
-      value: 'challans',
+      name: "Challan",
+      value: "challans",
     },
     {
-      name: 'Bill',
-      value: 'bills',
+      name: "Bill",
+      value: "bills",
     },
     {
-      name: 'Loading Slip',
-      value: 'loading-slips',
+      name: "Loading Slip",
+      value: "loading-slips",
     },
     {
-      name: 'Voucher',
-      value: 'vouchers',
+      name: "Voucher",
+      value: "vouchers",
     },
     {
-      name: 'Lr',
-      value: 'lrs',
+      name: "Lr",
+      value: "lrs",
     },
   ];
 
   const handleExport = () => {
-    alert(fromDate);
-    alert(toDate);
-    alert(invoiceType);
-    alert(company);
+    console.log(fromDate);
+    console.log(toDate);
+    console.log(invoiceType);
+    console.log(company);
+
+    const fromD = formatDate(fromDate);
+    const toD = formatDate(toDate);
+
+    console.log(fromD);
+    console.log(toD);
   };
 
   return (
@@ -111,15 +118,15 @@ export default function Home() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant={'outline'}
+                    variant={"outline"}
                     className={cn(
-                      'w-[280px] justify-start text-left font-normal',
-                      !fromDate && 'text-muted-foreground'
+                      "w-[280px] justify-start text-left font-normal",
+                      !fromDate && "text-muted-foreground"
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {fromDate ? (
-                      format(fromDate, 'PPP')
+                      format(fromDate, "PPP")
                     ) : (
                       <span>Pick a From Date</span>
                     )}
@@ -141,15 +148,15 @@ export default function Home() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant={'outline'}
+                    variant={"outline"}
                     className={cn(
-                      'w-[280px] justify-start text-left font-normal',
-                      !toDate && 'text-muted-foreground'
+                      "w-[280px] justify-start text-left font-normal",
+                      !toDate && "text-muted-foreground"
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {toDate ? (
-                      format(toDate, 'PPP')
+                      format(toDate, "PPP")
                     ) : (
                       <span>Pick a To Date</span>
                     )}
@@ -176,7 +183,9 @@ export default function Home() {
                   <RadioGroupItem
                     value={invoice.value}
                     id={invoice.value}
-                    onClick={() => setInvoiceType(invoice.value)}
+                    onClick={() => {
+                      setInvoiceType(invoice.value);
+                    }}
                   />
                   <Label htmlFor={invoice.value}>{invoice.name}</Label>
                 </div>
