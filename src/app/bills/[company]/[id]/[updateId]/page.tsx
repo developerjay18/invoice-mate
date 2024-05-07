@@ -42,12 +42,12 @@ function BillUpdatePage({ params }: any) {
 
   const handleChange = (e: any, index: any) => {
     const { name, value } = e.target;
-    const subItems = entry.list;
+    const subItems = entry?.list;
     const targetedItem = subItems[index];
 
     targetedItem[name] = value;
 
-    entry.list = subItems;
+    entry?.list = subItems;
 
     setEntry({ ...entry });
   };
