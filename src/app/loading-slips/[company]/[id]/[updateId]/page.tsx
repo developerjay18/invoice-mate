@@ -16,7 +16,20 @@ function LoadingSlipUpdatePage({ params }: any) {
   const updateId = params.updateId;
   const router = useRouter();
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({
+    loadingSlipNum: "",
+    date: "",
+    primaryTo: "",
+    truckNum: "",
+    from: "",
+    to: "",
+    rate: "",
+    gauranteeBy: "",
+    name: "",
+    advance: "",
+    balance: "",
+    company: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,27 +1,57 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { RiArrowGoBackLine } from 'react-icons/ri';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useEffect, useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 function ChallanUpdatePage({ params }: any) {
   const id = params.id;
   const company = params.company;
-  const companyName = company.split('-').join(' ');
+  const companyName = company.split("-").join(" ");
   const updateId = params.updateId;
   const router = useRouter();
+  const total = "yet to be coded";
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({
+    challanNum: "",
+    mainBillDate: "",
+    from: "",
+    to: "",
+    vehicleNum: "",
+    ownersName: "",
+    driversName: "",
+    panNum: "",
+    item: [
+      {
+        date: "",
+        gcNoteNum: "",
+        pkgs: "",
+        description: "",
+        consignor: "",
+        consignee: "",
+        weight: "",
+        rate: "",
+        collection: "",
+      },
+    ],
+    commission: "",
+    refund: "",
+    hamali: "",
+    other: "",
+    munsyanaAndPayment: "",
+    company: "",
+    total: `${total}`,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('/api/challans/get-challan', {
+        const response = await axios.post("/api/challans/get-challan", {
           challanId: updateId,
         });
 
@@ -41,7 +71,7 @@ function ChallanUpdatePage({ params }: any) {
   const handleChange = (e: any, index: any) => {
     const { name, value } = e.target;
     const subItems = entry.item;
-    const targetedItem = subItems[index];
+    const targetedItem: any = subItems[index];
 
     targetedItem[name] = value;
 
@@ -59,7 +89,7 @@ function ChallanUpdatePage({ params }: any) {
     e.preventDefault();
     try {
       console.log(entry);
-      const response = await axios.patch('/api/challans', {
+      const response = await axios.patch("/api/challans", {
         id: updateId, // ye bhul raha tha baar baar
         ...entry,
       });
@@ -68,7 +98,7 @@ function ChallanUpdatePage({ params }: any) {
         toast.success(response.data.message);
         router.push(`/challans/${company}/${id}`);
       } else {
-        toast.error('ERROR WHILE UPDATING CHALLAN');
+        toast.error("ERROR WHILE UPDATING CHALLAN");
       }
     } catch (error: any) {
       toast.error(error.message);
@@ -81,7 +111,7 @@ function ChallanUpdatePage({ params }: any) {
         <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
           <div>
             <h2 className="text-xl font-semibold uppercase">
-              update challan - <span className="uppercase">{companyName} </span>{' '}
+              update challan - <span className="uppercase">{companyName} </span>{" "}
             </h2>
             <p className="mt-1 flex gap-2 text-sm dark:text-slate-300 text-gray-700">
               Challan ID
@@ -379,8 +409,17 @@ function ChallanUpdatePage({ params }: any) {
                 placeholder="enter munsyana and Payment"
               />
             </div>
+            <div className="pt-4">
+              <Label className="uppercase">total</Label>
+              <Input
+                name="total"
+                id="total"
+                type="text"
+                value={total}
+                placeholder="enter munsyana and Payment"
+              />
+            </div>
           </div>
-          {/* // link connection pending... */}
           <div className="flex justify-center pt-8">
             <Button type="submit">Update</Button>
           </div>

@@ -17,7 +17,42 @@ function LrUpdatePage({ params }: any) {
   const updateId = params.updateId;
   const router = useRouter();
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({
+    deliveryAt: "",
+    lrNum: "",
+    date: "",
+    truckNum: "",
+    consignorsName: "",
+    consigneesName: "",
+    from: "",
+    to: "",
+    list: [
+      {
+        package: "",
+        content: "",
+        actualWeight: "",
+        chargeWeight: "",
+        value: "",
+        firstFreightPaid: "",
+        firstFreightToBePaid: "",
+        serviceTax: "",
+        tdsPaid: "",
+        tdsToBePaid: "",
+        hemaliPaid: "",
+        hemaliToBePaid: "",
+        advancePaid: "",
+        advanceToBePaid: "",
+        stataricalPaid: "",
+        stataricalToBePaid: "",
+        odChargePaid: "",
+        odChargeToBePaid: "",
+        grTotalPaid: "",
+        grTotalToBePaid: "",
+        remarks: "",
+      },
+    ],
+    company: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +77,7 @@ function LrUpdatePage({ params }: any) {
   const handleChange = (e: any, index: any) => {
     const { name, value } = e.target;
     const subItems = entry.list;
-    const targetedItem = subItems[index];
+    const targetedItem: any = subItems[index];
 
     targetedItem[name] = value;
 

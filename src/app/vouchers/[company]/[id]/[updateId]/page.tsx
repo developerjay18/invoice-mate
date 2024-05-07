@@ -18,7 +18,26 @@ function VoucherUpdatePage({ params }: any) {
   const total = "yet to be coded";
   const router = useRouter();
 
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState({
+    paidTo: "",
+    voucherNum: "",
+    date: "",
+    debit: "",
+    onAccountOf: "",
+    list: [
+      {
+        particular: "",
+        rupees: "",
+        paise: "",
+      },
+    ],
+    total: "",
+    authorisedBy: "",
+    passedBy: "",
+    payment: "",
+    chequeNum: "",
+    company: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +62,7 @@ function VoucherUpdatePage({ params }: any) {
   const handleChange = (e: any, index: any) => {
     const { name, value } = e.target;
     const subItems = entry.list;
-    const targetedItem = subItems[index];
+    const targetedItem: any = subItems[index];
 
     targetedItem[name] = value;
 
