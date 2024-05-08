@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { getDate } from "@/helpers/getDate";
@@ -12,11 +12,42 @@ import { useRouter } from "next/navigation";
 
 function Voucher({ ...props }) {
   const date = getDate();
-  const voucherNum = "18835";
   const id = props.id;
   const company = props.company;
   const router = useRouter();
-  const total = "yet to be fixed";
+  const [voucherNum, setVoucherNum] = useState("");
+
+  useEffect(() => {
+    const fetchInvoiceNum = async () => {
+      try {
+        const response = await axios.post("/api/vouchers/get-last-voucher", {
+          companyId: id,
+        });
+
+        if (response.data.status === 200) {
+          setVoucherNum(
+            String(Number(response.data.lastVoucher.voucherNum) + 1)
+          );
+        } else {
+          if (company === "maa-saraswati-road-carriers") {
+            setVoucherNum("1");
+          } else if (company === "rising-freight-carrier") {
+            setVoucherNum("1");
+          } else if (company === "sharma-transport") {
+            setVoucherNum("1");
+          } else {
+            setVoucherNum("Invalid company");
+          }
+        }
+
+        console.log("voucher num", voucherNum);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchInvoiceNum();
+  }, []);
 
   const [fieldData, setFieldData] = useState([
     {
@@ -33,7 +64,7 @@ function Voucher({ ...props }) {
     passedBy: "",
     payment: "",
     chequeNum: "",
-    total: `${total}`,
+    total: "",
   });
 
   const addField = (e: any) => {
@@ -110,7 +141,7 @@ function Voucher({ ...props }) {
           </div>
           <div className="">
             <Label>NO</Label>
-            <Input type="text" value={"118409"} readOnly />
+            <Input type="text" value={voucherNum} readOnly />
           </div>
           <div className="">
             <Label>DATE</Label>
@@ -248,7 +279,14 @@ function Voucher({ ...props }) {
           </div>
           <div className="">
             <Label>TOTAL</Label>
-            <Input type="text" value={total} />
+            <Input
+              type="text"
+              name="total"
+              id="total"
+              value={normalData.total}
+              onChange={handleNormalChange}
+              placeholder="Enter total"
+            />
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { getDate } from "@/helpers/getDate";
@@ -9,14 +9,46 @@ import { useRouter } from "next/navigation";
 
 function LoadingSlip({ ...props }) {
   const date = getDate();
-  const loadingSlipNum = "90909";
   const id = props.id;
   const company = props.company;
   const router = useRouter();
 
+  const [loadingSlipNum, setLoadingSlipNum] = useState("");
+
+  useEffect(() => {
+    const fetchInvoiceNum = async () => {
+      try {
+        const response = await axios.post(
+          "/api/loading-slips/get-last-loading-slip",
+          {
+            companyId: id,
+          }
+        );
+
+        if (response.data.status === 200) {
+          setLoadingSlipNum(
+            String(Number(response.data.lastLoadingSlip.loadingSlipNum) + 1)
+          );
+        } else {
+          if (company === "maa-saraswati-road-carriers") {
+            setLoadingSlipNum("1");
+          } else if (company === "rising-freight-carrier") {
+            setLoadingSlipNum("205");
+          } else if (company === "sharma-transport") {
+            setLoadingSlipNum("301");
+          } else {
+            setLoadingSlipNum("Invalid company");
+          }
+        }
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchInvoiceNum();
+  }, []);
+
   const [normalData, setNormalData] = useState({
-    loadingSlipNum: loadingSlipNum,
-    date: `${date}`,
     primaryTo: "",
     truckNum: "",
     from: "",
@@ -41,6 +73,8 @@ function LoadingSlip({ ...props }) {
     try {
       const response = await axios.post("/api/loading-slips", {
         company: id,
+        loadingSlipNum: loadingSlipNum,
+        date: `${date}`,
         ...normalData,
       });
 
@@ -82,7 +116,7 @@ function LoadingSlip({ ...props }) {
 
           <div className="">
             <Label>NO</Label>
-            <Input type="text" value={"118409"} readOnly />
+            <Input type="text" value={loadingSlipNum} readOnly />
           </div>
 
           <div className="">

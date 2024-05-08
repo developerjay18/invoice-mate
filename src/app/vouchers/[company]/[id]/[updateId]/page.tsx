@@ -15,7 +15,6 @@ function VoucherUpdatePage({ params }: any) {
   const company = params.company;
   const companyName = company.split("-").join(" ");
   const updateId = params.updateId;
-  const total = "yet to be coded";
   const router = useRouter();
 
   const [entry, setEntry] = useState({
@@ -281,7 +280,13 @@ function VoucherUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>TOTAL</Label>
-              <Input type="text" value={total} />
+              <Input
+                type="text"
+                name="total"
+                id="total"
+                value={entry?.total}
+                onChange={handleNormalChange}
+              />
             </div>
           </div>
 

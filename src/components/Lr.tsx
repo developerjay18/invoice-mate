@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { getDate } from "@/helpers/getDate";
@@ -12,10 +12,39 @@ import { useRouter } from "next/navigation";
 
 function Lr({ ...props }) {
   const date = getDate();
-  const lrNum = "989809";
   const id = props.id;
   const company = props.company;
   const router = useRouter();
+
+  const [lrNum, setLrNum] = useState("");
+
+  useEffect(() => {
+    const fetchInvoiceNum = async () => {
+      try {
+        const response = await axios.post("/api/lrs/get-last-lr", {
+          companyId: id,
+        });
+
+        if (response.data.status === 200) {
+          setLrNum(String(Number(response.data.lastLr.lrNum) + 1));
+        } else {
+          if (company === "maa-saraswati-road-carriers") {
+            setLrNum("12001"); //012001
+          } else if (company === "rising-freight-carrier") {
+            setLrNum("151");
+          } else if (company === "sharma-transport") {
+            setLrNum("151");
+          } else {
+            setLrNum("Invalid company");
+          }
+        }
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchInvoiceNum();
+  }, []);
 
   const [fieldData, setFieldData] = useState([
     {
