@@ -6,11 +6,13 @@ import Link from "next/link";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function VoucherPage({ params }: any) {
   const id = params.id;
   const company = params.company;
   const companyName = company.split("-").join(" ");
+  const router = useRouter();
 
   const [entries, setEntries] = useState([]);
 
@@ -165,7 +167,7 @@ function VoucherPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Button className="">View</Button>
+                          <Button className="" onClick={() => {router.push(`/pdf/vouchers/${company}/${id}/${entry._id}`)}}>View</Button>
                           <Link
                             href={`/vouchers/${company}/${id}/${entry._id}`}
                           >
