@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { getDate } from "@/helpers/getDate";
@@ -13,10 +13,41 @@ import { useRouter } from "next/navigation";
 // logic to total is still pending here
 function Challan({ ...props }: any) {
   const date = getDate();
-  const challanNum = "19935";
   const id = props.id;
   const company = props.company;
   const router = useRouter();
+
+  const [challanNum, setChallanNum] = useState("");
+
+  useEffect(() => {
+    const fetchInvoiceNum = async () => {
+      try {
+        const response = await axios.post("/api/challans/get-last-challan", {
+          companyId: id,
+        });
+
+        if (response.data.status === 200) {
+          setChallanNum(
+            String(Number(response.data.lastChallan.challanNum) + 1)
+          );
+        } else {
+          if (company === "maa-saraswati-road-carriers") {
+            setChallanNum("19935");
+          } else if (company === "rising-freight-carrier") {
+            setChallanNum("201");
+          } else if (company === "sharma-transport") {
+            setChallanNum("30");
+          } else {
+            setChallanNum("Invalid company");
+          }
+        }
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchInvoiceNum();
+  }, []);
 
   const [fieldData, setFieldData] = useState([
     {
@@ -45,6 +76,7 @@ function Challan({ ...props }: any) {
       hamali: "",
       other: "",
       munsyanaAndPayment: "",
+      total: "",
     },
   ]);
 
@@ -419,6 +451,17 @@ function Challan({ ...props }: any) {
               value={normalData.munsyanaAndPayment}
               onChange={handleNormalChange}
               placeholder="enter munsyana and Payment"
+            />
+          </div>
+          <div className="">
+            <Label className="uppercase">total</Label>
+            <Input
+              name="total"
+              id="total"
+              type="text"
+              value={normalData.total}
+              onChange={handleNormalChange}
+              placeholder="enter total"
             />
           </div>
         </div>

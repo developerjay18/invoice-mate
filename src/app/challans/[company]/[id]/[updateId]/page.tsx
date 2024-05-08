@@ -15,7 +15,6 @@ function ChallanUpdatePage({ params }: any) {
   const companyName = company.split("-").join(" ");
   const updateId = params.updateId;
   const router = useRouter();
-  const total = "yet to be coded";
 
   const [entry, setEntry] = useState({
     challanNum: "",
@@ -45,7 +44,7 @@ function ChallanUpdatePage({ params }: any) {
     other: "",
     munsyanaAndPayment: "",
     company: "",
-    total: `${total}`,
+    total: "",
   });
 
   useEffect(() => {
@@ -415,8 +414,9 @@ function ChallanUpdatePage({ params }: any) {
                 name="total"
                 id="total"
                 type="text"
-                value={total}
-                placeholder="enter munsyana and Payment"
+                value={entry?.total}
+                onChange={handleNormalChange}
+                placeholder="enter total"
               />
             </div>
           </div>

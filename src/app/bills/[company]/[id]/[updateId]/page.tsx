@@ -313,7 +313,7 @@ function BillUpdatePage({ params }: any) {
               id="total"
               type="text"
               value={entry?.total}
-              readOnly
+              onChange={handleNormalChange}
             />
           </div>
 
