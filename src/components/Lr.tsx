@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { syncIndexes } from "mongoose";
 
 function Lr({ ...props }) {
   const date = getDate();
@@ -266,7 +267,7 @@ function Lr({ ...props }) {
         </div>
 
         {fieldData?.map((data, index) => (
-          <div className="flex flex-col justify-between" key={data.content}>
+          <div className="flex flex-col justify-between" key={index}>
             <div className="grid grid-cols-3 gap-x-6 gap-y-4">
               <div className="">
                 <Label className="uppercase">package</Label>

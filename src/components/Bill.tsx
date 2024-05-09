@@ -175,7 +175,7 @@ function Bill({ ...props }) {
         </div>
 
         {fieldData?.map((data, index) => (
-          <div className="flex flex-col gap-y-4" key={data.sNumber}>
+          <div className="flex flex-col gap-y-4" key={index}>
             <div className="grid grid-cols-3 gap-x-6 gap-y-4">
               <div className="">
                 <Label>S.NO.</Label>

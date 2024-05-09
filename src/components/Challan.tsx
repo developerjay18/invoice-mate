@@ -285,7 +285,7 @@ function Challan({ ...props }: any) {
           Add Item details
         </div>
         {fieldData?.map((data, index) => (
-          <div className="flex flex-col gap-y-4" key={data.ccollection}>
+          <div className="flex flex-col gap-y-4" key={index}>
             <div className="grid grid-cols-3 gap-x-6 gap-y-4">
               <div className="">
                 <Label className="uppercase">date</Label>
@@ -386,13 +386,14 @@ function Challan({ ...props }: any) {
               </div>
 
               <div className="w-[32%]">
-                <Label className="uppercase">collection</Label>
+                <Label className="uppercase">ccollection</Label>
                 <Input
                   name="ccollection"
                   id="ccollection"
                   type="text"
                   value={data.ccollection}
                   onChange={(e: any) => handleChange(e, index)}
+                  className="border bg-pink-600"
                   placeholder="set collection"
                 />
               </div>
