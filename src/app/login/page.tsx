@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 function LoginPage() {
   const router = useRouter();

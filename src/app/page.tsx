@@ -31,8 +31,8 @@ export default function Home() {
     },
     {
       href: "/companies/the-rising-freight-carriers/663770b3b752100159dc12db",
-      value: "rising-freight-carrier",
-      title: "Rising Freight Carrier",
+      value: "the-rising-freight-carriers",
+      title: "The Rising Freight Carriers",
     },
     {
       href: "/companies/sharma-transport/663771e7b752100159dc12dd",
