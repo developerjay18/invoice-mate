@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Label } from "./ui/label";
-import { Input } from "@/components/ui/input";
-import { getDate } from "@/helpers/getDate";
-import { IoIosAddCircle } from "react-icons/io";
-import { Button } from "./ui/button";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from 'react';
+import { Label } from './ui/label';
+import { Input } from '@/components/ui/input';
+import { getDate } from '@/helpers/getDate';
+import { IoIosAddCircle } from 'react-icons/io';
+import { Button } from './ui/button';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 // logic to total is still pending here
 function Challan({ ...props }: any) {
@@ -17,28 +17,31 @@ function Challan({ ...props }: any) {
   const company = props.company;
   const router = useRouter();
 
-  const [challanNum, setChallanNum] = useState("");
+  const [challanNum, setChallanNum] = useState('');
 
   useEffect(() => {
+    console.log(company);
     const fetchInvoiceNum = async () => {
       try {
-        const response = await axios.post("/api/challans/get-last-challan", {
+        const response = await axios.post('/api/challans/get-last-challan', {
           companyId: id,
         });
 
+        console.log(response);
+        
         if (response.data.status === 200) {
           setChallanNum(
             String(Number(response.data.lastChallan.challanNum) + 1)
           );
         } else {
-          if (company === "maa-saraswati-road-carriers") {
-            setChallanNum("19935");
-          } else if (company === "the-rising-freight-carriers") {
-            setChallanNum("201");
-          } else if (company === "sharma-transport") {
-            setChallanNum("301");
+          if (company === 'maa-saraswati-road-carriers') {
+            setChallanNum('19935');
+          } else if (company === 'the-rising-freight-carriers') {
+            setChallanNum('201');
+          } else if (company === 'sharma-transport') {
+            setChallanNum('301');
           } else {
-            setChallanNum("Invalid company");
+            setChallanNum('Invalid company');
           }
         }
       } catch (error: any) {
@@ -52,31 +55,31 @@ function Challan({ ...props }: any) {
   const [fieldData, setFieldData] = useState([
     {
       date: `${date}`,
-      gcNoteNum: "",
-      pkgs: "",
-      description: "",
-      consignor: "",
-      consignee: "",
-      weight: "",
-      rate: "",
-      collection: "",
+      gcNoteNum: '',
+      pkgs: '',
+      description: '',
+      consignor: '',
+      consignee: '',
+      weight: '',
+      rate: '',
+      collection: '',
     },
   ]);
 
   const [normalData, setNormalData]: any = useState([
     {
-      from: "",
-      to: "",
-      vehicleNum: "",
-      ownersName: "",
-      driversName: "",
-      panNum: "",
-      commission: "",
-      refund: "",
-      hamali: "",
-      other: "",
-      munsyanaAndPayment: "",
-      total: "",
+      from: '',
+      to: '',
+      vehicleNum: '',
+      ownersName: '',
+      driversName: '',
+      panNum: '',
+      commission: '',
+      refund: '',
+      hamali: '',
+      other: '',
+      munsyanaAndPayment: '',
+      total: '',
     },
   ]);
 
@@ -87,14 +90,14 @@ function Challan({ ...props }: any) {
         ...prev,
         {
           date: `${date}`,
-          gcNoteNum: "",
-          pkgs: "",
-          description: "",
-          consignor: "",
-          consignee: "",
-          weight: "",
-          rate: "",
-          collection: "",
+          gcNoteNum: '',
+          pkgs: '',
+          description: '',
+          consignor: '',
+          consignee: '',
+          weight: '',
+          rate: '',
+          collection: '',
         },
       ];
     });
@@ -121,7 +124,7 @@ function Challan({ ...props }: any) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/challans", {
+      const response = await axios.post('/api/challans', {
         company: id,
         challanNum: challanNum,
         mainBillDate: date,
@@ -138,29 +141,29 @@ function Challan({ ...props }: any) {
       setFieldData([
         {
           date: `${date}`,
-          gcNoteNum: "",
-          pkgs: "",
-          description: "",
-          consignor: "",
-          consignee: "",
-          weight: "",
-          rate: "",
-          collection: "",
+          gcNoteNum: '',
+          pkgs: '',
+          description: '',
+          consignor: '',
+          consignee: '',
+          weight: '',
+          rate: '',
+          collection: '',
         },
       ]);
       setNormalData([
         {
-          from: "",
-          to: "",
-          vehicleNum: "",
-          ownersName: "",
-          driversName: "",
-          panNum: "",
-          commission: "",
-          refund: "",
-          hamali: "",
-          other: "",
-          munsyanaAndPayment: "",
+          from: '',
+          to: '',
+          vehicleNum: '',
+          ownersName: '',
+          driversName: '',
+          panNum: '',
+          commission: '',
+          refund: '',
+          hamali: '',
+          other: '',
+          munsyanaAndPayment: '',
         },
       ]);
 

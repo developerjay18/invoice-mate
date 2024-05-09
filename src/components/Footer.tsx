@@ -9,15 +9,7 @@ function Footer() {
       <div className="left">
         &copy; 2024 | INVOICEMATE - All Rights reserved
       </div>
-      <div className="right">
-        Developed by{' '}
-        <Link
-          href={'https://www.jayraiweb.com'}
-          className="hover:text-blue-400"
-        >
-          Jay Rai Web
-        </Link>
-      </div>
+      <div className="right">Developed by Akshar Patel</div>
     </footer>
   );
 }
