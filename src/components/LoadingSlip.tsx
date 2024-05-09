@@ -49,6 +49,7 @@ function LoadingSlip({ ...props }) {
   }, []);
 
   const [normalData, setNormalData] = useState({
+    date: "",
     primaryTo: "",
     truckNum: "",
     from: "",
@@ -74,7 +75,7 @@ function LoadingSlip({ ...props }) {
       const response = await axios.post("/api/loading-slips", {
         company: id,
         loadingSlipNum: loadingSlipNum,
-        date: `${date}`,
+        // date: `${date}`,
         ...normalData,
       });
 
@@ -121,7 +122,14 @@ function LoadingSlip({ ...props }) {
 
           <div className="">
             <Label>DATE</Label>
-            <Input type="text" value={date} readOnly />
+            <Input
+              type="text"
+              name="date"
+              id="date"
+              value={normalData.date}
+              onChange={handleNormalChange}
+              placeholder={`${date}`}
+            />
           </div>
 
           <div className="">

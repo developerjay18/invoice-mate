@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Label } from './ui/label';
-import { Input } from '@/components/ui/input';
-import { getDate } from '@/helpers/getDate';
-import { IoIosAddCircle } from 'react-icons/io';
-import { Button } from './ui/button';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from "react";
+import { Label } from "./ui/label";
+import { Input } from "@/components/ui/input";
+import { getDate } from "@/helpers/getDate";
+import { IoIosAddCircle } from "react-icons/io";
+import { Button } from "./ui/button";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // logic to total is still pending here
 function Challan({ ...props }: any) {
@@ -17,31 +17,30 @@ function Challan({ ...props }: any) {
   const company = props.company;
   const router = useRouter();
 
-  const [challanNum, setChallanNum] = useState('');
+  const [challanNum, setChallanNum] = useState("");
 
   useEffect(() => {
-    console.log(company);
     const fetchInvoiceNum = async () => {
       try {
-        const response = await axios.post('/api/challans/get-last-challan', {
+        const response = await axios.post("/api/challans/get-last-challan", {
           companyId: id,
         });
 
         console.log(response);
-        
+
         if (response.data.status === 200) {
           setChallanNum(
             String(Number(response.data.lastChallan.challanNum) + 1)
           );
         } else {
-          if (company === 'maa-saraswati-road-carriers') {
-            setChallanNum('19935');
-          } else if (company === 'the-rising-freight-carriers') {
-            setChallanNum('201');
-          } else if (company === 'sharma-transport') {
-            setChallanNum('301');
+          if (company === "maa-saraswati-road-carriers") {
+            setChallanNum("19935");
+          } else if (company === "the-rising-freight-carriers") {
+            setChallanNum("201");
+          } else if (company === "sharma-transport") {
+            setChallanNum("301");
           } else {
-            setChallanNum('Invalid company');
+            setChallanNum("Invalid company");
           }
         }
       } catch (error: any) {
@@ -54,32 +53,34 @@ function Challan({ ...props }: any) {
 
   const [fieldData, setFieldData] = useState([
     {
-      date: `${date}`,
-      gcNoteNum: '',
-      pkgs: '',
-      description: '',
-      consignor: '',
-      consignee: '',
-      weight: '',
-      rate: '',
-      collection: '',
+      date: ``,
+      gcNoteNum: "",
+      pkgs: "",
+      description: "",
+      consignor: "",
+      consignee: "",
+      weight: "",
+      rate: "",
+      ccollection: "",
     },
   ]);
 
   const [normalData, setNormalData]: any = useState([
     {
-      from: '',
-      to: '',
-      vehicleNum: '',
-      ownersName: '',
-      driversName: '',
-      panNum: '',
-      commission: '',
-      refund: '',
-      hamali: '',
-      other: '',
-      munsyanaAndPayment: '',
-      total: '',
+      mainBillDate: "",
+      from: "",
+      to: "",
+      vehicleNum: "",
+      ownersName: "",
+      driversName: "",
+      panNum: "",
+      commission: "",
+      refund: "",
+      hamali: "",
+      other: "",
+      munsyanaAndPayment: "",
+      textAreaCalc: "",
+      total: "",
     },
   ]);
 
@@ -89,15 +90,15 @@ function Challan({ ...props }: any) {
       return [
         ...prev,
         {
-          date: `${date}`,
-          gcNoteNum: '',
-          pkgs: '',
-          description: '',
-          consignor: '',
-          consignee: '',
-          weight: '',
-          rate: '',
-          collection: '',
+          date: ``,
+          gcNoteNum: "",
+          pkgs: "",
+          description: "",
+          consignor: "",
+          consignee: "",
+          weight: "",
+          rate: "",
+          ccollection: "",
         },
       ];
     });
@@ -119,19 +120,22 @@ function Challan({ ...props }: any) {
     setNormalData((prev: any) => {
       return { ...prev, [name]: value };
     });
+    console.log(normalData.textAreaCalc);
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    console.log("final stage - " + normalData.textAreaCalc);
     try {
-      const response = await axios.post('/api/challans', {
+      const response = await axios.post("/api/challans", {
         company: id,
         challanNum: challanNum,
-        mainBillDate: date,
         ...normalData,
         item: fieldData,
       });
 
+      console.log(response.data);
+      console.log(response.data);
       if (response.status === 200) {
         toast.success(response.data.message);
       } else {
@@ -140,30 +144,32 @@ function Challan({ ...props }: any) {
 
       setFieldData([
         {
-          date: `${date}`,
-          gcNoteNum: '',
-          pkgs: '',
-          description: '',
-          consignor: '',
-          consignee: '',
-          weight: '',
-          rate: '',
-          collection: '',
+          date: ``,
+          gcNoteNum: "",
+          pkgs: "",
+          description: "",
+          consignor: "",
+          consignee: "",
+          weight: "",
+          ccollection: "",
+          rate: "",
         },
       ]);
       setNormalData([
         {
-          from: '',
-          to: '',
-          vehicleNum: '',
-          ownersName: '',
-          driversName: '',
-          panNum: '',
-          commission: '',
-          refund: '',
-          hamali: '',
-          other: '',
-          munsyanaAndPayment: '',
+          mainBillDate: ``,
+          from: "",
+          to: "",
+          vehicleNum: "",
+          ownersName: "",
+          driversName: "",
+          panNum: "",
+          commission: "",
+          refund: "",
+          hamali: "",
+          other: "",
+          munsyanaAndPayment: "",
+          textAreaCalc: "",
         },
       ]);
 
@@ -191,7 +197,14 @@ function Challan({ ...props }: any) {
           </div>
           <div className="">
             <Label>DATE</Label>
-            <Input type="text" value={date} readOnly />
+            <Input
+              type="text"
+              name="mainBillDate"
+              id="mainBillDate"
+              value={normalData.mainBillDate}
+              onChange={handleNormalChange}
+              placeholder={`${date}`}
+            />
           </div>
         </div>
         <div className="grid grid-cols-3 gap-x-6">
@@ -282,7 +295,7 @@ function Challan({ ...props }: any) {
                   type="text"
                   value={data.date}
                   onChange={(e: any) => handleChange(e, index)}
-                  placeholder="set date"
+                  placeholder={`${date}`}
                 />
               </div>
 
@@ -375,10 +388,10 @@ function Challan({ ...props }: any) {
               <div className="w-[32%]">
                 <Label className="uppercase">collection</Label>
                 <Input
-                  name="collection"
-                  id="collection"
+                  name="ccollection"
+                  id="ccollection"
                   type="text"
-                  value={data.collection}
+                  value={data.ccollection}
                   onChange={(e: any) => handleChange(e, index)}
                   placeholder="set collection"
                 />
@@ -456,7 +469,7 @@ function Challan({ ...props }: any) {
               placeholder="enter munsyana and Payment"
             />
           </div>
-          <div className="">
+          <div className="pt-4">
             <Label className="uppercase">total</Label>
             <Input
               name="total"
@@ -466,6 +479,18 @@ function Challan({ ...props }: any) {
               onChange={handleNormalChange}
               placeholder="enter total"
             />
+          </div>
+          <div className="flex flex-col pt-4">
+            <Label className="uppercase">Rough Calculation</Label>
+            <textarea
+              name="textAreaCalc"
+              id="textAreaCalc"
+              className="bg-transparent border rounded mt-2 p-2"
+              value={normalData.textAreaCalc}
+              rows={5}
+              onChange={handleNormalChange}
+              placeholder="do your calculations here..."
+            ></textarea>
           </div>
         </div>
         {/* // link connection pending... */}

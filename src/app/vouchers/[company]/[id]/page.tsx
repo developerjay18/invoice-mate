@@ -158,7 +158,7 @@ function VoucherPage({ params }: any) {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm dark:text-white text-gray-700">
-                          {entry.updatedAt}
+                          {entry.date}
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm dark:text-white text-gray-700">
                           {entry._id}

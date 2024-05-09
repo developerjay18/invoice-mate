@@ -158,7 +158,13 @@ function BillUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>DATE</Label>
-              <Input type="text" value={entry?.mainBillDate} readOnly />
+              <Input
+                type="text"
+                name="mainBillDate"
+                id="mainBillDate"
+                value={entry?.mainBillDate}
+                onChange={handleNormalChange}
+              />
             </div>
           </div>
 

@@ -72,6 +72,7 @@ function Lr({ ...props }) {
     },
   ]);
   const [normalData, setNormalData] = useState({
+    date: "",
     deliveryAt: "",
     truckNum: "",
     consignorsName: "",
@@ -139,7 +140,7 @@ function Lr({ ...props }) {
       const response = await axios.post("/api/lrs", {
         company: id,
         lrNum: lrNum,
-        date: date,
+        // date: date,
         ...normalData,
         list: fieldData,
       });
@@ -175,7 +176,14 @@ function Lr({ ...props }) {
 
           <div className="">
             <Label>DATE</Label>
-            <Input type="text" value={date} readOnly />
+            <Input
+              type="text"
+              name="date"
+              id="date"
+              value={normalData.date}
+              onChange={handleNormalChange}
+              placeholder={`${date}`}
+            />
           </div>
         </div>
 

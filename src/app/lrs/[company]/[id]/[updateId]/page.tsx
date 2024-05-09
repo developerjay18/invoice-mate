@@ -159,7 +159,13 @@ function LrUpdatePage({ params }: any) {
 
             <div className="">
               <Label>DATE</Label>
-              <Input type="text" value={entry?.date} readOnly />
+              <Input
+                type="text"
+                name="date"
+                id="date"
+                value={entry?.date}
+                onChange={handleNormalChange}
+              />
             </div>
           </div>
 

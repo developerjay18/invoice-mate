@@ -50,7 +50,7 @@ function Bill({ ...props }) {
   const [fieldData, setFieldData] = useState([
     {
       sNumber: "",
-      date: `${date}`,
+      date: ``,
       cnNum: "",
       from: "",
       to: "",
@@ -65,6 +65,7 @@ function Bill({ ...props }) {
   const [normalData, setNormalData] = useState({
     name: "",
     total: "",
+    mainBillDate: "",
   });
 
   const addField = (e: any) => {
@@ -74,7 +75,7 @@ function Bill({ ...props }) {
         ...prev,
         {
           sNumber: "",
-          date: `${date}`,
+          date: ``,
           cnNum: "",
           from: "",
           to: "",
@@ -111,7 +112,7 @@ function Bill({ ...props }) {
       const response = await axios.post("/api/bills", {
         company: id,
         billNum: billNum,
-        mainBillDate: date,
+        // mainBillDate: date,
         list: fieldData,
         ...normalData,
       });
@@ -158,7 +159,14 @@ function Bill({ ...props }) {
           </div>
           <div className="">
             <Label>DATE</Label>
-            <Input type="text" value={date} readOnly />
+            <Input
+              type="text"
+              name="mainBillDate"
+              id="mainBillDate"
+              value={normalData.mainBillDate}
+              onChange={handleNormalChange}
+              placeholder={`${date}`}
+            />
           </div>
         </div>
 
@@ -189,7 +197,7 @@ function Bill({ ...props }) {
                   type="text"
                   value={data.date}
                   onChange={(e: any) => handleChange(e, index)}
-                  placeholder="set date"
+                  placeholder={`${date}`}
                 />
               </div>
 

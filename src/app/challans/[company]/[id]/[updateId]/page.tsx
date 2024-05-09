@@ -35,7 +35,7 @@ function ChallanUpdatePage({ params }: any) {
         consignee: "",
         weight: "",
         rate: "",
-        collection: "",
+        ccollection: "",
       },
     ],
     commission: "",
@@ -44,6 +44,7 @@ function ChallanUpdatePage({ params }: any) {
     other: "",
     munsyanaAndPayment: "",
     company: "",
+    textAreaCalc: "",
     total: "",
   });
 
@@ -53,6 +54,8 @@ function ChallanUpdatePage({ params }: any) {
         const response = await axios.post("/api/challans/get-challan", {
           challanId: updateId,
         });
+
+        console.log(response.data);
 
         if (response.status === 200 && response.data.status === 200) {
           await setEntry(response.data.challan);
@@ -150,7 +153,13 @@ function ChallanUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>DATE</Label>
-              <Input type="text" value={entry?.mainBillDate} readOnly />
+              <Input
+                type="text"
+                name="mainBillDate"
+                id="mainBillDate"
+                value={entry?.mainBillDate}
+                onChange={handleNormalChange}
+              />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-x-6">
@@ -337,7 +346,7 @@ function ChallanUpdatePage({ params }: any) {
                     name="collection"
                     id="collection"
                     type="text"
-                    value={item?.collection}
+                    value={item?.ccollection}
                     onChange={(e: any) => handleChange(e, index)}
                     placeholder="set collection"
                   />
@@ -418,6 +427,18 @@ function ChallanUpdatePage({ params }: any) {
                 onChange={handleNormalChange}
                 placeholder="enter total"
               />
+            </div>
+            <div className="flex flex-col pt-4">
+              <Label className="uppercase">Rough Calculation</Label>
+              <textarea
+                name="textAreaCalc"
+                id="textAreaCalc"
+                className="bg-transparent border rounded mt-2 p-2"
+                value={entry?.textAreaCalc}
+                rows={5}
+                onChange={handleNormalChange}
+                placeholder="do your calculations here..."
+              ></textarea>
             </div>
           </div>
           <div className="flex justify-center pt-8">
