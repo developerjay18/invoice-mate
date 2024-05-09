@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import { toast } from "react-hot-toast";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 function LoginPage() {
   const router = useRouter();
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const handleChange = (e: any) => {
@@ -22,10 +22,10 @@ function LoginPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/login", credentials);
+      const response = await axios.post('/api/users/login', credentials);
       if (response.data.status === 200) {
         toast.success(response.data.message);
-        router.push("/");
+        router.push('/');
       } else {
         toast.error(response.data.error);
       }
@@ -44,7 +44,7 @@ function LoginPage() {
                 Login
               </h2>
               <p className="mt-2 hidden text-sm text-gray-600">
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?{' '}
                 <a
                   href="#"
                   title=""
@@ -65,8 +65,8 @@ function LoginPage() {
                       htmlFor="username"
                       className="text-base font-medium dark:text-slate-300 text-gray-900"
                     >
-                      {" "}
-                      Username{" "}
+                      {' '}
+                      Username{' '}
                     </label>
                     <div className="mt-2">
                       <input
@@ -86,8 +86,8 @@ function LoginPage() {
                         htmlFor="password"
                         className="text-base font-medium dark:text-slate-300 text-gray-900"
                       >
-                        {" "}
-                        Password{" "}
+                        {' '}
+                        Password{' '}
                       </label>
                     </div>
                     <div className="mt-2">
@@ -118,7 +118,7 @@ function LoginPage() {
             <Image
               className="mx-auto h-full w-full rounded-md object-cover"
               src={
-                "https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                'https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
               }
               alt="login-image"
               width={2000}

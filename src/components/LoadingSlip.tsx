@@ -32,7 +32,7 @@ function LoadingSlip({ ...props }) {
         } else {
           if (company === "maa-saraswati-road-carriers") {
             setLoadingSlipNum("1");
-          } else if (company === "rising-freight-carrier") {
+          } else if (company === "the-rising-freight-carriers") {
             setLoadingSlipNum("205");
           } else if (company === "sharma-transport") {
             setLoadingSlipNum("301");

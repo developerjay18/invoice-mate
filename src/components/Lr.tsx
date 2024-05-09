@@ -30,7 +30,7 @@ function Lr({ ...props }) {
         } else {
           if (company === "maa-saraswati-road-carriers") {
             setLrNum("12001"); //012001
-          } else if (company === "rising-freight-carrier") {
+          } else if (company === "the-rising-freight-carriers") {
             setLrNum("151");
           } else if (company === "sharma-transport") {
             setLrNum("151");

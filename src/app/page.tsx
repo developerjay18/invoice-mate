@@ -30,7 +30,7 @@ export default function Home() {
       title: "Maa Saraswati Road Carriers",
     },
     {
-      href: "/companies/rising-freight-carrier/663770b3b752100159dc12db",
+      href: "/companies/the-rising-freight-carriers/663770b3b752100159dc12db",
       value: "rising-freight-carrier",
       title: "Rising Freight Carrier",
     },

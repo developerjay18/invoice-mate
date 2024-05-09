@@ -33,10 +33,10 @@ function Challan({ ...props }: any) {
         } else {
           if (company === "maa-saraswati-road-carriers") {
             setChallanNum("19935");
-          } else if (company === "rising-freight-carrier") {
+          } else if (company === "the-rising-freight-carriers") {
             setChallanNum("201");
           } else if (company === "sharma-transport") {
-            setChallanNum("30");
+            setChallanNum("301");
           } else {
             setChallanNum("Invalid company");
           }

@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Label } from "./ui/label";
-import { Input } from "@/components/ui/input";
-import { getDate } from "@/helpers/getDate";
-import { IoIosAddCircle } from "react-icons/io";
-import { Button } from "./ui/button";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect } from 'react';
+import { Label } from './ui/label';
+import { Input } from '@/components/ui/input';
+import { getDate } from '@/helpers/getDate';
+import { IoIosAddCircle } from 'react-icons/io';
+import { Button } from './ui/button';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 function Voucher({ ...props }) {
   const date = getDate();
   const id = props.id;
   const company = props.company;
   const router = useRouter();
-  const [voucherNum, setVoucherNum] = useState("");
+  const [voucherNum, setVoucherNum] = useState('');
 
   useEffect(() => {
     const fetchInvoiceNum = async () => {
       try {
-        const response = await axios.post("/api/vouchers/get-last-voucher", {
+        const response = await axios.post('/api/vouchers/get-last-voucher', {
           companyId: id,
         });
 
@@ -29,18 +29,18 @@ function Voucher({ ...props }) {
             String(Number(response.data.lastVoucher.voucherNum) + 1)
           );
         } else {
-          if (company === "maa-saraswati-road-carriers") {
-            setVoucherNum("1");
-          } else if (company === "rising-freight-carrier") {
-            setVoucherNum("1");
-          } else if (company === "sharma-transport") {
-            setVoucherNum("1");
+          if (company === 'maa-saraswati-road-carriers') {
+            setVoucherNum('1');
+          } else if (company === 'the-rising-freight-carriers') {
+            setVoucherNum('1');
+          } else if (company === 'sharma-transport') {
+            setVoucherNum('1');
           } else {
-            setVoucherNum("Invalid company");
+            setVoucherNum('Invalid company');
           }
         }
 
-        console.log("voucher num", voucherNum);
+        console.log('voucher num', voucherNum);
       } catch (error: any) {
         toast.error(error.message);
       }
@@ -51,26 +51,26 @@ function Voucher({ ...props }) {
 
   const [fieldData, setFieldData] = useState([
     {
-      particular: "",
-      rupees: "",
-      paise: "",
+      particular: '',
+      rupees: '',
+      paise: '',
     },
   ]);
   const [normalData, setNormalData] = useState({
-    paidTo: "",
-    debit: "",
-    onAccountOf: "",
-    authorisedBy: "",
-    passedBy: "",
-    payment: "",
-    chequeNum: "",
-    total: "",
+    paidTo: '',
+    debit: '',
+    onAccountOf: '',
+    authorisedBy: '',
+    passedBy: '',
+    payment: '',
+    chequeNum: '',
+    total: '',
   });
 
   const addField = (e: any) => {
     e.preventDefault();
     setFieldData((prev): any => {
-      return [...prev, { particular: "", rupees: "", paise: "" }];
+      return [...prev, { particular: '', rupees: '', paise: '' }];
     });
   };
 
@@ -96,7 +96,7 @@ function Voucher({ ...props }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/vouchers", {
+      const response = await axios.post('/api/vouchers', {
         company: id,
         voucherNum: voucherNum,
         date: date,
