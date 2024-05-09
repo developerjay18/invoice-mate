@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label } from "./ui/label";
 import { Input } from "@/components/ui/input";
 import { getDate } from "@/helpers/getDate";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "./ui/button";
-import Link from "next/link";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -14,11 +13,40 @@ import { useRouter } from "next/navigation";
 // total, company, number are still pending
 function Bill({ ...props }) {
   const date = getDate();
-  const billNum = "10907";
-  const total = "yet to coded";
   const id = props.id;
   const company = props.company;
   const router = useRouter();
+
+  const [billNum, setBillNum] = useState("");
+
+  useEffect(() => {
+    const fetchInvoiceNum = async () => {
+      try {
+        const response = await axios.post("/api/bills/get-last-bill", {
+          companyId: id,
+        });
+
+        if (response.data.status === 200) {
+          setBillNum(String(Number(response.data.lastBill.billNum) + 1));
+        } else {
+          if (company === "maa-saraswati-road-carriers") {
+            setBillNum("601");
+          } else if (company === "the-rising-freight-carriers") {
+            setBillNum("21");
+          } else if (company === "sharma-transport") {
+            setBillNum("51");
+          } else {
+            setBillNum("Invalid company");
+          }
+        }
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchInvoiceNum();
+  }, []);
+
   const [fieldData, setFieldData] = useState([
     {
       sNumber: "",
@@ -36,7 +64,7 @@ function Bill({ ...props }) {
   ]);
   const [normalData, setNormalData] = useState({
     name: "",
-    total: `${total}`,
+    total: "",
   });
 
   const addField = (e: any) => {
@@ -126,7 +154,7 @@ function Bill({ ...props }) {
           </div>
           <div className="">
             <Label>BILL NO</Label>
-            <Input type="text" value={"118409"} readOnly />
+            <Input type="text" value={billNum} readOnly />
           </div>
           <div className="">
             <Label>DATE</Label>
@@ -286,7 +314,13 @@ function Bill({ ...props }) {
 
         <div className="">
           <Label>TOTAL</Label>
-          <Input name="total" id="total" type="text" value={total} readOnly />
+          <Input
+            name="total"
+            id="total"
+            type="text"
+            value={normalData.total}
+            onChange={handleNormalChange}
+          />
         </div>
 
         <div className="flex justify-center pt-8">

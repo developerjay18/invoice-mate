@@ -7,7 +7,6 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import { IoIosAddCircle } from "react-icons/io";
 import { useRouter } from "next/navigation";
 
 function VoucherUpdatePage({ params }: any) {
@@ -15,7 +14,6 @@ function VoucherUpdatePage({ params }: any) {
   const company = params.company;
   const companyName = company.split("-").join(" ");
   const updateId = params.updateId;
-  const total = "yet to be coded";
   const router = useRouter();
 
   const [entry, setEntry] = useState({
@@ -281,7 +279,13 @@ function VoucherUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>TOTAL</Label>
-              <Input type="text" value={total} />
+              <Input
+                type="text"
+                name="total"
+                id="total"
+                value={entry?.total}
+                onChange={handleNormalChange}
+              />
             </div>
           </div>
 
