@@ -165,7 +165,11 @@ function VoucherPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Button className="">View</Button>
+                          <Link
+                            href={`/pdf/vouchers/${company}/${id}/${entry._id}`}
+                          >
+                            <Button className="">View</Button>
+                          </Link>
                           <Link
                             href={`/vouchers/${company}/${id}/${entry._id}`}
                           >
