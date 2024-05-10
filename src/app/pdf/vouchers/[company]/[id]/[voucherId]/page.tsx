@@ -190,6 +190,7 @@ const MyDocument = ({ image, ...props }: any) => (
               width: "100%",
               minHeight: "250px",
             }}
+            key={index}
           >
             <Text
               style={{
@@ -351,7 +352,7 @@ const MyDocument = ({ image, ...props }: any) => (
             padding: "2px 7px",
           }}
         >
-          <Text style={{ textTransform: "capitalize" }}>Receiver's sign</Text>
+          <Text style={{ textTransform: "capitalize" }}>Receiver&apos;s sign</Text>
         </View>
       </View>
     </Page>
@@ -417,12 +418,6 @@ function VoucherPrintingPage({ params }: any) {
     };
     fetchData();
   }, []);
-
-  const [contyu, setContyu] = useState();
-
-  const handleGeneratePdf = () => {
-    return setContyu;
-  };
 
   return (
     <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
