@@ -282,7 +282,7 @@ function VoucherUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>DATE</Label>
-              <Input type="text" value={entry?.date} />
+              <Input type="text" name="date" id="date" value={entry?.date} />
             </div>
             <div className="">
               <Label>TOTAL</Label>

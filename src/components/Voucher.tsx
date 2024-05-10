@@ -283,7 +283,13 @@ function Voucher({ ...props }) {
           </div>
           <div className="">
             <Label>DATE</Label>
-            <Input type="text" value={date} />
+            <Input
+              type="text"
+              name="date"
+              id="date"
+              value={normalData.date}
+              onChange={handleNormalChange}
+            />
           </div>
           <div className="">
             <Label>TOTAL</Label>

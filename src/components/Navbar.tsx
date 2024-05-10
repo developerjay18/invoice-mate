@@ -46,7 +46,7 @@ function Navbar() {
 
   return (
     <div className="px-20 py-5 flex items-center justify-between">
-      <div className="logo text-2xl font-bold">Invoice Mate</div>
+      <div className="logo text-4xl font-bold">Invoice Mate</div>
       <NavigationMenu>
         <NavigationMenuList className="px-0">
           <NavigationMenuItem>
