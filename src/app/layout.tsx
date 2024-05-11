@@ -1,18 +1,18 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { ThemeProvider } from '@/components/theme-provider';
-import { ModeToggle } from '@/components/Toggler';
-import { Toaster } from 'react-hot-toast';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/Toggler";
+import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Invoice Mate',
+  title: "Invoice Mate",
   description:
-    'A web app which keep your all invoices at one place in a digital format',
+    "A web app which keep your all invoices at one place in a digital format",
 };
 
 export default function RootLayout({

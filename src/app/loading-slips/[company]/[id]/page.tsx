@@ -168,7 +168,11 @@ function LoadingSlipPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Button className="">View</Button>
+                          <Link
+                            href={`/pdf/loading-slips/${company}/${id}/${entry._id}`}
+                          >
+                            <Button className="">View</Button>
+                          </Link>
                           <Link
                             href={`/loading-slips/${company}/${id}/${entry._id}`}
                           >
