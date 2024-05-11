@@ -352,7 +352,9 @@ const MyDocument = ({ image, ...props }: any) => (
             padding: "2px 7px",
           }}
         >
-          <Text style={{ textTransform: "capitalize" }}>Receiver&apos;s sign</Text>
+          <Text style={{ textTransform: "capitalize" }}>
+            Receiver&apos;s sign
+          </Text>
         </View>
       </View>
     </Page>
@@ -370,10 +372,10 @@ function VoucherPrintingPage({ params }: any) {
       "https://res.cloudinary.com/remind-cents-cloud/image/upload/v1715336031/lagf7vogijll9l40pnrp.png";
   } else if (company === "the-rising-freight-carriers") {
     imageUrl =
-      "https://res.cloudinary.com/remind-cents-cloud/image/upload/v1715337529/yfasfqzl6aweymkw4cdz.png";
+      "https://res.cloudinary.com/remind-cents-cloud/image/upload/v1715337704/qheie9v0zm0izmy3jyhq.png";
   } else if (company === "sharma-transport") {
     imageUrl =
-      "https://res.cloudinary.com/remind-cents-cloud/image/upload/v1715337704/qheie9v0zm0izmy3jyhq.png";
+      "https://res.cloudinary.com/remind-cents-cloud/image/upload/v1715337529/yfasfqzl6aweymkw4cdz.png";
   } else {
     imageUrl = "Invalid company";
   }
