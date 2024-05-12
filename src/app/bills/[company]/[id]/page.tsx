@@ -175,7 +175,11 @@ function BillPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Button className="">View</Button>
+                          <Link
+                            href={`/pdf/bills/${company}/${id}/${entry._id}`}
+                          >
+                            <Button className="">View</Button>
+                          </Link>
                           <Link href={`/bills/${company}/${id}/${entry._id}`}>
                             <Button className="">Update</Button>
                           </Link>

@@ -31,7 +31,7 @@ function Bill({ ...props }) {
         } else {
           if (company === "maa-saraswati-road-carriers") {
             setBillNum("601");
-          } else if (company === "rising-freight-carrier") {
+          } else if (company === "the-rising-freight-carriers") {
             setBillNum("21");
           } else if (company === "sharma-transport") {
             setBillNum("51");
