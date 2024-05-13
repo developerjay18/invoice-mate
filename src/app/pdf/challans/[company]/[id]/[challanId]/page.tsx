@@ -453,7 +453,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
 
           <Text style={{ fontSize: "10px" }}>
             After office hours, Sundays, and any holiday, it is not our
-            company's responsibility if the goods are left unattended.
+            company&apos;s responsibility if the goods are left unattended.
           </Text>
 
           <View
@@ -583,7 +583,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             marginTop: "13px",
           }}
         >
-          <Text>Sign. of Receiver's Owner</Text>
+          <Text>Sign. of Receiver&apos;s Owner</Text>
           <Text>Agent</Text>
           <Text style={{ textTransform: "uppercase" }}>For, {companyName}</Text>
         </View>
