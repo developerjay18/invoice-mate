@@ -165,9 +165,12 @@ function ChallanPage({ params }: any) {
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          {/* <Link href={'/'} className="">  */}
-                          <Button className="">View</Button>
-                          {/* </Link> */}
+                          <Link
+                            href={`/pdf/challans/${company}/${id}/${entry._id}`}
+                            className=""
+                          >
+                            <Button className="">View</Button>
+                          </Link>
                           <Link
                             href={`/challans/${company}/${id}/${entry._id}`}
                           >
