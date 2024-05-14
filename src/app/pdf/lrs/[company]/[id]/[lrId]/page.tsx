@@ -6,7 +6,13 @@ import { PDFViewer } from "@react-pdf/renderer";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
+const MyDocument = ({
+  type,
+  companyData,
+  companyName,
+  image,
+  ...props
+}: any) => (
   <Document>
     <Page
       size={"A4"}
@@ -68,7 +74,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
           >
             <Text
               style={{
-                fontSize: "30px",
+                fontSize: "25px",
                 textTransform: "uppercase",
                 textAlign: "center",
                 margin: "0 auto",
@@ -91,6 +97,16 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
               }}
             >
               {companyData.address}
+            </Text>
+            <Text
+              style={{
+                textAlign: "center",
+                margin: "0 auto",
+                padding: "0 7px",
+                width: "100%",
+              }}
+            >
+              {type} Copy
             </Text>
           </View>
         </View>
@@ -833,6 +849,25 @@ function LrPrintingPage({ params }: any) {
           image={imageUrl}
           companyName={companyName}
           companyData={companyData}
+          type={"Original"}
+        />
+      </PDFViewer>
+      <PDFViewer className="min-h-[165vh] flex justify-center items-center">
+        <MyDocument
+          {...entry}
+          image={imageUrl}
+          companyName={companyName}
+          companyData={companyData}
+          type={"Duplicate"}
+        />
+      </PDFViewer>
+      <PDFViewer className="min-h-[165vh] flex justify-center items-center">
+        <MyDocument
+          {...entry}
+          image={imageUrl}
+          companyName={companyName}
+          companyData={companyData}
+          type={"Triplicate"}
         />
       </PDFViewer>
     </main>
