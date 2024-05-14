@@ -162,10 +162,10 @@ function LrPage({ params }: any) {
                           {entry._id}
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">
-                          <Button className="">View</Button>
-                          <Link
-                            href={`/lrs/${company}/${id}/${entry._id}`}
-                          >
+                          <Link href={`/pdf/lrs/${company}/${id}/${entry._id}`}>
+                            <Button className="">View</Button>
+                          </Link>
+                          <Link href={`/lrs/${company}/${id}/${entry._id}`}>
                             <Button className="">Update</Button>
                           </Link>
                           <Button
