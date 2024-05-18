@@ -6,6 +6,18 @@ const lrSchema = new Schema(
     deliveryAt: {
       type: String,
     },
+    policeNo: {
+      type: String,
+    },
+    iDate: {
+      type: String,
+    },
+    amount: {
+      type: String,
+    },
+    risk: {
+      type: String,
+    },
     lrNum: {
       type: String,
     },
@@ -18,7 +30,13 @@ const lrSchema = new Schema(
     consignorsName: {
       type: String,
     },
+    consignorsGstNum: {
+      type: String,
+    },
     consigneesName: {
+      type: String,
+    },
+    consigneesGstNum: {
       type: String,
     },
     from: {

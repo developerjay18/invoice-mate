@@ -120,8 +120,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
               padding: "5px",
             }}
           >
-            <Text>Bill No: {props.billNum}</Text>
-            <Text>Date : {props.mainBillDate}</Text>
+            <Text>
+              Bill No: <Text style={{ color: "black" }}> {props.billNum}</Text>
+            </Text>
+            <Text>
+              Date :{" "}
+              <Text style={{ color: "black" }}> {props.mainBillDate}</Text>
+            </Text>
           </View>
           <View
             style={{
@@ -141,7 +146,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
                 gap: "35px",
               }}
             >
-              <Text style={{ borderBottom: "1px solid red" }}>
+              <Text style={{ borderBottom: "1px solid red", color:"black" }}>
                 {props.name}
               </Text>
               <Text style={{ borderBottom: "1px solid red" }}></Text>
@@ -281,6 +286,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             borderRadius: "4px",
             borderTop: "none",
             minHeight: "40%",
+            color:"black"
           }}
         >
           {props.list?.map((item: any, index: any) => (
@@ -406,6 +412,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             border: "1px solid red",
             borderRadius: "4px",
             marginTop: "5px",
+            color:"black"
           }}
         >
           <Text style={{ padding: "5px" }}>Total {props.total}</Text>

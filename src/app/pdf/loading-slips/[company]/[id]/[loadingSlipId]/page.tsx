@@ -120,11 +120,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
       >
         <View>
           <Text>
-            No. <Text style={{ color: "red" }}>{props.loadingSlipNum}</Text>
+            No. <Text style={{ color: "black" }}>{props.loadingSlipNum}</Text>
           </Text>
         </View>
         <View>
-          <Text>Date {props.date}</Text>
+          <Text>
+            Date <Text style={{ color: "black" }}>{props.date}</Text>{" "}
+          </Text>
         </View>
       </View>
 
@@ -142,7 +144,9 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
           <Text>To,</Text>
         </View>
         <View style={{ width: "95%", color: "red" }}>
-          <Text style={{ borderBottom: "1px", borderColor: "red" }}>
+          <Text
+            style={{ borderBottom: "1px", borderColor: "red", color: "black" }}
+          >
             {props.primaryTo}
           </Text>
           <Text
@@ -179,7 +183,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
         >
           <Text style={{ width: "13%" }}>Truck No. </Text>
           <Text
-            style={{ borderBottom: "1px", borderColor: "red", width: "87%" }}
+            style={{
+              borderBottom: "1px",
+              borderColor: "red",
+              width: "87%",
+              color: "black",
+            }}
           >
             {props.truckNum}
           </Text>
@@ -197,7 +206,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
           >
             <Text style={{ width: "16%" }}>From </Text>
             <Text
-              style={{ borderBottom: "1px", borderColor: "red", width: "84%" }}
+              style={{
+                borderBottom: "1px",
+                borderColor: "red",
+                width: "84%",
+                color: "black",
+              }}
             >
               {props.from}
             </Text>
@@ -219,6 +233,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
                 borderColor: "red",
                 width: "86%",
                 marginLeft: "3px",
+                color: "black",
               }}
             >
               {props.to}
@@ -238,7 +253,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
           >
             <Text style={{ width: "14%" }}>Rate </Text>
             <Text
-              style={{ borderBottom: "1px", borderColor: "red", width: "86%" }}
+              style={{
+                borderBottom: "1px",
+                borderColor: "red",
+                width: "86%",
+                color: "black",
+              }}
             >
               {props.rate}
             </Text>
@@ -263,6 +283,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
                 width: "40%",
                 marginLeft: "3px",
                 fontSize: "13px",
+                color: "black",
               }}
             >
               {props.gauranteeBy}
@@ -280,7 +301,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
         >
           <Text style={{ width: "35%" }}>Confirmed by M/s. / Shree</Text>
           <Text
-            style={{ borderBottom: "1px", borderColor: "red", width: "65%" }}
+            style={{
+              borderBottom: "1px",
+              borderColor: "red",
+              width: "65%",
+              color: "black",
+            }}
           >
             {props.name}
           </Text>
@@ -309,7 +335,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
         >
           <Text style={{ width: "37%" }}>Advance Rs</Text>
           <Text
-            style={{ borderBottom: "1px", borderColor: "red", width: "63%" }}
+            style={{
+              borderBottom: "1px",
+              borderColor: "red",
+              width: "63%",
+              color: "black",
+            }}
           >
             {props.advance}
           </Text>
@@ -338,7 +369,12 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
         >
           <Text style={{ width: "37%" }}>Balance Rs.</Text>
           <Text
-            style={{ borderBottom: "1px", borderColor: "red", width: "63%" }}
+            style={{
+              borderBottom: "1px",
+              borderColor: "red",
+              width: "63%",
+              color: "black",
+            }}
           >
             {props.balance}
           </Text>

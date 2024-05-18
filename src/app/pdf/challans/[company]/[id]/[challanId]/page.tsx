@@ -113,8 +113,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             justifyContent: "space-between",
           }}
         >
-          <Text>Challan No: {props.challanNum}</Text>
-          <Text>Date: {props.mainBillDate}</Text>
+          <Text>
+            Challan No:{" "}
+            <Text style={{ color: "black" }}>{props.challanNum}</Text>
+          </Text>
+          <Text>
+            Date: <Text style={{ color: "black" }}>{props.mainBillDate}</Text>
+          </Text>
         </View>
 
         <View
@@ -133,7 +138,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text style={{ width: "20%" }}>From</Text>
-            <Text style={{ width: "80%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "80%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.from}
             </Text>
           </View>
@@ -145,7 +156,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text style={{ width: "20%" }}>To,</Text>
-            <Text style={{ width: "80%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "80%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.to}
             </Text>
           </View>
@@ -157,7 +174,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text style={{ width: "40%" }}>Vehicle No.</Text>
-            <Text style={{ width: "60%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "60%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.vehicleNum}
             </Text>
           </View>
@@ -188,7 +211,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             <Text style={{ width: "40%", fontSize: "12px" }}>
               Owner’s Name & Address
             </Text>
-            <Text style={{ width: "60%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "60%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.ownersName}
             </Text>
           </View>
@@ -200,7 +229,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text style={{ width: "40%" }}>Driver&apos;s Name</Text>
-            <Text style={{ width: "60%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "60%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.driversName}
             </Text>
           </View>
@@ -212,7 +247,13 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text style={{ width: "40%" }}>PAN No.</Text>
-            <Text style={{ width: "60%", borderBottom: "1px dotted red" }}>
+            <Text
+              style={{
+                width: "60%",
+                borderBottom: "1px dotted red",
+                color: "black",
+              }}
+            >
               {props.panNum}
             </Text>
           </View>
@@ -322,6 +363,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             border: "1px solid red",
             borderTop: "none",
             fontSize: "10px",
+            color: "black",
           }}
         >
           {props.item?.map((item: any, index: any) => (
@@ -425,7 +467,9 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
           }}
         >
           <Text>Caluclation area</Text>
-          <Text>{props.textAreaCalc} </Text>
+          <Text style={{ fontSize: "7px", color: "black" }}>
+            {props.textAreaCalc}{" "}
+          </Text>
         </View>
       </View>
 
@@ -464,7 +508,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text>GST Paid by Party</Text>
-            <Text>PAN No.: {props.panNum}</Text>
+            <Text>PAN No.: <Text style={{color:"black"}}>{props.panNum}</Text> </Text>
           </View>
         </View>
 
@@ -491,6 +535,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             border: "1px solid red",
             borderLeft: "none",
             gap: "3px",
+            color:"black"
           }}
         >
           <Text

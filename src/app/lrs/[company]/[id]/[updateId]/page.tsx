@@ -19,11 +19,17 @@ function LrUpdatePage({ params }: any) {
 
   const [entry, setEntry] = useState({
     deliveryAt: "",
+    policeNo: "",
+    iDate: "",
+    amount: "",
+    risk: "",
     lrNum: "",
     date: "",
     truckNum: "",
     consignorsName: "",
+    consignorsGstNum: "",
     consigneesName: "",
+    consigneesGstNum: "",
     from: "",
     to: "",
     list: [
@@ -169,6 +175,56 @@ function LrUpdatePage({ params }: any) {
             </div>
           </div>
 
+          <div className="grid grid-cols-4 gap-x-6 gap-y-4">
+            <div className="">
+              <Label className="uppercase">police no</Label>
+              <Input
+                name="policeNo"
+                id="policeNo"
+                type="text"
+                value={entry?.policeNo}
+                onChange={handleNormalChange}
+                placeholder="enter police number"
+              />
+            </div>
+
+            <div className="">
+              <Label className="uppercase">Insurance Date</Label>
+              <Input
+                name="iDate"
+                id="iDate"
+                type="text"
+                value={entry?.iDate}
+                onChange={handleNormalChange}
+                placeholder="enter insurance date"
+              />
+            </div>
+
+            <div className="">
+              <Label className="uppercase">Insurance Amount</Label>
+              <Input
+                name="amount"
+                id="amount"
+                type="text"
+                value={entry?.amount}
+                onChange={handleNormalChange}
+                placeholder="enter insurance amount"
+              />
+            </div>
+
+            <div className="">
+              <Label className="uppercase">Insurance Risk</Label>
+              <Input
+                name="risk"
+                id="risk"
+                type="text"
+                value={entry?.risk}
+                onChange={handleNormalChange}
+                placeholder="enter insurance risk"
+              />
+            </div>
+          </div>
+
           <div className="grid grid-cols-3 gap-x-6 gap-y-4">
             <div className="">
               <Label className="uppercase">truck num</Label>
@@ -231,6 +287,18 @@ function LrUpdatePage({ params }: any) {
             </div>
 
             <div className="">
+              <Label className="uppercase">consignors GST Number</Label>
+              <Input
+                name="consignorsGstNum"
+                id="consignorsGstNum"
+                type="text"
+                value={entry?.consignorsGstNum}
+                onChange={handleNormalChange}
+                placeholder="enter consignors GST Number"
+              />
+            </div>
+
+            <div className="">
               <Label className="uppercase">consignee Name & address</Label>
               <Input
                 name="consigneesName"
@@ -239,6 +307,18 @@ function LrUpdatePage({ params }: any) {
                 value={entry?.consigneesName}
                 onChange={handleNormalChange}
                 placeholder="enter consignee Name & address"
+              />
+            </div>
+
+            <div className="">
+              <Label className="uppercase">consignee GST Number</Label>
+              <Input
+                name="consigneesGstNum"
+                id="consigneesGstNum"
+                type="text"
+                value={entry?.consigneesGstNum}
+                onChange={handleNormalChange}
+                placeholder="enter consignee GST Number"
               />
             </div>
           </div>
