@@ -18,13 +18,14 @@ import { FaDownload } from "react-icons/fa";
 import formatDate from "@/helpers/formatDate";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
+// import { Page, Text, View, Document } from "@react-pdf/renderer";
+// import { PDFViewer } from "@react-pdf/renderer";
 import DLoadingSlips from "@/components/DLoadingSlips";
 import DBills from "@/components/DBills";
 import DVouchers from "@/components/DVouchers";
 import DChallans from "@/components/DChallans";
 import DLrs from "@/components/DLrs";
+
 
 export default function Home() {
   const [fromDate, setFromDate] = useState<Date>();
