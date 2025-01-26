@@ -21,6 +21,15 @@ function convertDateFormat(dateString: any) {
   return `${month}/${day}/${year}`;
 }
 
+// Define the models as a mapped type
+const models: Record<string, any> = {
+  "loading-slips": LoadingSlip,
+  challans: Challan,
+  bills: Bill,
+  vouchers: Voucher,
+  lrs: LR,
+};
+
 export async function POST(request: NextRequest) {
   try {
     const { startDate, endDate, invoiceType, company } = await request.json();
@@ -32,32 +41,24 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const start = new Date(convertDateFormat(startDate));
-    const end = new Date(convertDateFormat(endDate));
-
-    const companyIds = {
+    const companyIds: Record<string, string> = {
       "the-rising-freight-carriers": "663770b3b752100159dc12db",
       "maa-saraswati-road-carriers": "66376f17b752100159dc12d9",
       "sharma-transport": "663771e7b752100159dc12dd",
     };
 
-    const companyId = companyIds[company];
-    if (!companyId) {
+    if (!(company in companyIds)) {
       return NextResponse.json({
         message: "INVALID COMPANY NAME.",
         status: 401,
       });
     }
 
-    const models = {
-      "loading-slips": LoadingSlip,
-      challans: Challan,
-      bills: Bill,
-      vouchers: Voucher,
-      lrs: LR,
-    };
+    const companyId = companyIds[company];
 
-    const Model = models[invoiceType];
+    // Type-safe way to access the model based on invoiceType
+    const Model = models[invoiceType as keyof typeof models];
+
     if (!Model) {
       return NextResponse.json({
         message: "INVALID INVOICE TYPE.",
@@ -65,11 +66,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Optimized query with date range
-    const transactions = await Model.find({
-      company: companyId,
-      date: { $gte: start, $lte: end },
-    });
+    // Proceed with using the `Model` for database queries
+    const transactions = await Model.find({ company: companyId });
 
     return NextResponse.json({
       message: `${invoiceType.toUpperCase()} EXTRACTED SUCCESSFULLY.`,
