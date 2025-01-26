@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -20,14 +19,7 @@ import formatDate from "@/helpers/formatDate";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
-// import dynamic from "next/dynamic";
-import { PDFViewer } from "@react-pdf/renderer";
-
-// // Dynamically import PDFViewer to ensure client-side rendering
-// const PDFViewer = dynamic(
-//   async () => (await import("@react-pdf/renderer")).PDFViewer,
-//   { ssr: false } // Disable SSR
-// );
+import { PDFViewer as PDFViewerBase } from "@react-pdf/renderer";
 
 export default function Home() {
   const [fromDate, setFromDate] = useState<Date>();
@@ -250,952 +242,276 @@ export default function Home() {
       </div>
 
       <div className={`${pdfState === "loading-slips" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              <View
+        {typeof window !== "undefined" && (
+          <PDFViewerBase className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  fontSize: "13px",
-                  marginTop: "20px",
-                  border: "2px",
-                  padding: "2px 0",
-                  textTransform: "capitalize",
-                  fontWeight: "bold",
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
                 }}
               >
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  loading slip no.
-                </Text>
-                <Text style={{ width: "5%", borderRight: "1px" }}>date</Text>
-                <Text style={{ width: "11%", borderRight: "1px" }}>
-                  main to
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  truck number
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>from</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>to</Text>
-                <Text style={{ width: "5%", borderRight: "1px" }}>rate</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  gaurantee by
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>name</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>advance</Text>
-                <Text style={{ width: "7%" }}>balance</Text>
-              </View>
-
-              {exData?.map((item: any, index) => (
                 <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     fontSize: "13px",
+                    marginTop: "20px",
                     border: "2px",
-                    borderTop: "0px",
                     padding: "2px 0",
                     textTransform: "capitalize",
+                    fontWeight: "bold",
                   }}
-                  key={index}
                 >
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.loadingSlipNum}
+                    loading slip no.
                   </Text>
-                  <Text style={{ width: "5%", borderRight: "1px" }}>
-                    {item?.date}
-                  </Text>
+                  <Text style={{ width: "5%", borderRight: "1px" }}>date</Text>
                   <Text style={{ width: "11%", borderRight: "1px" }}>
-                    {item?.primaryTo}
+                    main to
                   </Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.truckNum}
+                    truck number
                   </Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>from</Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>to</Text>
+                  <Text style={{ width: "5%", borderRight: "1px" }}>rate</Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.from}
+                    gaurantee by
                   </Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>name</Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.to}
+                    advance
                   </Text>
-                  <Text style={{ width: "5%", borderRight: "1px" }}>
-                    {item?.rate}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.gauranteeBy}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.name}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.advance}
-                  </Text>
-                  <Text style={{ width: "7%" }}>{item?.balance}</Text>
+                  <Text style={{ width: "7%" }}>balance</Text>
                 </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
+
+                {exData?.map((item: any, index) => (
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      fontSize: "13px",
+                      border: "2px",
+                      borderTop: "0px",
+                      padding: "2px 0",
+                      textTransform: "capitalize",
+                    }}
+                    key={index}
+                  >
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.loadingSlipNum}
+                    </Text>
+                    <Text style={{ width: "5%", borderRight: "1px" }}>
+                      {item?.date}
+                    </Text>
+                    <Text style={{ width: "11%", borderRight: "1px" }}>
+                      {item?.primaryTo}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.truckNum}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.from}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.to}
+                    </Text>
+                    <Text style={{ width: "5%", borderRight: "1px" }}>
+                      {item?.rate}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.gauranteeBy}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.name}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.advance}
+                    </Text>
+                    <Text style={{ width: "7%" }}>{item?.balance}</Text>
+                  </View>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewerBase>
+        )}
       </div>
 
       <div className={`${pdfState === "bills" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              <View
+        {typeof window !== "undefined" && (
+          <PDFViewerBase className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  fontSize: "12px",
-                  marginTop: "20px",
-                  border: "2px",
-                  padding: "2px 0",
-                  textTransform: "capitalize",
-                  fontWeight: "bold",
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
                 }}
               >
-                <Text
+                <View
                   style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    fontSize: "12px",
+                    marginTop: "20px",
+                    border: "2px",
+                    padding: "2px 0",
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
                   }}
                 >
-                  Bill no.
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  bill date
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  name
-                </Text>
-                <Text
-                  style={{
-                    width: "14%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  total
-                </Text>
-
-                {/* loops */}
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  s no.
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  date
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  cn no.
-                </Text>
-                <Text
-                  style={{
-                    width: "8%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  from
-                </Text>
-                <Text
-                  style={{
-                    width: "8%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  to
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  particular
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  weight
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  rate
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  amount
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  advance
-                </Text>
-                <Text style={{ width: "5%", paddingLeft: "4px" }}>balance</Text>
-              </View>
-
-              {/* loooped */}
-
-              {exData?.map((item: any, index: number) => (
-                <View key={index} style={{ margin: "4px 0" }}>
-                  <View
+                  <Text
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      fontSize: "12px",
-                      border: "2px",
-                      padding: "2px 0",
-                      textTransform: "capitalize",
-                      fontWeight: "bold",
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
                     }}
                   >
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.billNum}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.mainBillDate}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.name}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "14%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.total}
-                    </Text>
-
-                    {/* loops */}
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "8%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "8%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text style={{ width: "5%", paddingLeft: "4px" }}></Text>
-                  </View>
-
-                  {item?.list?.map((innerItem: any, innerIndex: number) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        border: "2px",
-                        padding: "2px 0",
-                        borderTop: "0px",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                      key={innerIndex}
-                    >
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "14%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-
-                      {/* loops */}
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.sNumber}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.date}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.cnNum}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "8%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.from}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "8%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.to}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.particular}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.weight}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.rate}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.amount}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.advance}
-                      </Text>
-                      <Text style={{ width: "5%", paddingLeft: "4px" }}>
-                        {innerItem?.balance}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
-      </div>
-
-      <div className={`${pdfState === "vouchers" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  fontSize: "12px",
-                  marginTop: "20px",
-                  border: "2px",
-                  padding: "2px 0",
-                  textTransform: "capitalize",
-                  fontWeight: "bold",
-                }}
-              >
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  paid to
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  voucher no.
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  date
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  debit
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  on account of
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  total
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  authorised by
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  passed by
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  payment
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  check no.
-                </Text>
-                <Text
-                  style={{
-                    width: "10%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  particular
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-                    borderRight: "1px",
-                    paddingLeft: "2px",
-                  }}
-                >
-                  rupees
-                </Text>
-                <Text
-                  style={{
-                    width: "5%",
-
-                    paddingLeft: "2px",
-                  }}
-                >
-                  paise
-                </Text>
-              </View>
-
-              {/* looped one */}
-              {exData?.map((item: any, index: number) => (
-                <View style={{ margin: "4px 0" }} key={index}>
-                  <View
+                    Bill no.
+                  </Text>
+                  <Text
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      fontSize: "12px",
-                      borderTop: "0px",
-                      border: "2px",
-                      padding: "2px 0",
-                      textTransform: "capitalize",
-                      fontWeight: "bold",
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
                     }}
                   >
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.paidTo}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.voucherNum}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.date}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.debit}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.onAccountOf}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.total}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.authorisedBy}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.passedBy}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.payment}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {item?.chequeNum}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "10%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                    <Text
-                      style={{
-                        width: "5%",
+                    bill date
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    name
+                  </Text>
+                  <Text
+                    style={{
+                      width: "14%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    total
+                  </Text>
 
-                        paddingLeft: "2px",
-                      }}
-                    ></Text>
-                  </View>
-
-                  {item?.list?.map((innerItem: any, innerIndex: number) => (
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        border: "2px",
-                        borderTop: "0px",
-                        padding: "2px 0",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                      key={innerIndex}
-                    >
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      ></Text>
-                      <Text
-                        style={{
-                          width: "10%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.particular}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.rupees}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "5%",
-
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {innerItem?.paise}
-                      </Text>
-                    </View>
-                  ))}
+                  {/* loops */}
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    s no.
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    date
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    cn no.
+                  </Text>
+                  <Text
+                    style={{
+                      width: "8%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    from
+                  </Text>
+                  <Text
+                    style={{
+                      width: "8%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    to
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    particular
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    weight
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    rate
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    amount
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    advance
+                  </Text>
+                  <Text style={{ width: "5%", paddingLeft: "4px" }}>
+                    balance
+                  </Text>
                 </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
-      </div>
 
-      <div className={`${pdfState === "challans" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              {/* main looper */}
+                {/* loooped */}
 
-              {exData?.map((item: any, index: number) => (
-                <View style={{ margin: "4px 0" }} key={index}>
-                  {/* sub top looper */}
-                  <View>
+                {exData?.map((item: any, index: number) => (
+                  <View key={index} style={{ margin: "4px 0" }}>
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
                         fontSize: "12px",
-                        marginTop: "20px",
                         border: "2px",
                         padding: "2px 0",
                         textTransform: "capitalize",
@@ -1204,166 +520,16 @@ export default function Home() {
                     >
                       <Text
                         style={{
-                          width: "6%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        challan no.
+                        {item?.billNum}
                       </Text>
                       <Text
                         style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        main date
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        from
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        to
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        vehicle no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        owners name
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        drivers name
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        pan no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        commission
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        refund
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        hamali
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        other
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        munsyana and payment
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        total
-                      </Text>
-                      <Text
-                        style={{
-                          width: "16%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        text area calculation
-                      </Text>
-                    </View>
-
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        border: "2px",
-                        borderTop: "0px",
-                        padding: "2px 0",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.challanNum}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
@@ -1372,223 +538,98 @@ export default function Home() {
                       </Text>
                       <Text
                         style={{
-                          width: "6%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.from}
+                        {item?.name}
                       </Text>
                       <Text
                         style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.to}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.vehicleNum}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.ownersName}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.driversName}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.panNum}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.commission}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.refund}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.hamali}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.other}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.munsyanaAndPayment}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
+                          width: "14%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
                         {item?.total}
                       </Text>
-                      <Text
-                        style={{
-                          width: "16%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.textAreaCalc}
-                      </Text>
-                    </View>
-                  </View>
 
-                  {/* sub bottom looper */}
-                  <View>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        border: "2px",
-                        borderTop: "0px",
-                        padding: "2px 0",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                    >
+                      {/* loops */}
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        date
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        GC note no.
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        pkgs
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "12%",
+                          width: "8%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        description
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "8%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        consignor
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        consignee
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        weight
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        rate
-                      </Text>
+                      ></Text>
                       <Text
                         style={{
-                          width: "11%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        ccollection
-                      </Text>
+                      ></Text>
+                      <Text
+                        style={{
+                          width: "5%",
+                          borderRight: "1px",
+                          paddingLeft: "2px",
+                        }}
+                      ></Text>
+                      <Text style={{ width: "5%", paddingLeft: "4px" }}></Text>
                     </View>
 
-                    {item?.item?.map((innerItem: any, innerIndex: number) => (
+                    {item?.list?.map((innerItem: any, innerIndex: number) => (
                       <View
                         style={{
                           display: "flex",
@@ -1596,8 +637,8 @@ export default function Home() {
                           justifyContent: "space-between",
                           fontSize: "12px",
                           border: "2px",
-                          borderTop: "0px",
                           padding: "2px 0",
+                          borderTop: "0px",
                           textTransform: "capitalize",
                           fontWeight: "bold",
                         }}
@@ -1605,7 +646,46 @@ export default function Home() {
                       >
                         <Text
                           style={{
-                            width: "11%",
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "14%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+
+                        {/* loops */}
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {innerItem?.sNumber}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
@@ -1614,52 +694,43 @@ export default function Home() {
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.gcNoteNum}
+                          {innerItem?.cnNum}
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
+                            width: "8%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.pkgs}
+                          {innerItem?.from}
                         </Text>
                         <Text
                           style={{
-                            width: "12%",
+                            width: "8%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.description}
+                          {innerItem?.to}
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
+                            width: "10%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.consignor}
+                          {innerItem?.particular}
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.consignee}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "11%",
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
@@ -1668,7 +739,7 @@ export default function Home() {
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
@@ -1677,189 +748,191 @@ export default function Home() {
                         </Text>
                         <Text
                           style={{
-                            width: "11%",
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.ccollection}
+                          {innerItem?.amount}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {innerItem?.advance}
+                        </Text>
+                        <Text style={{ width: "5%", paddingLeft: "4px" }}>
+                          {innerItem?.balance}
                         </Text>
                       </View>
                     ))}
                   </View>
-                </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewerBase>
+        )}
       </div>
 
-      <div className={`${pdfState === "lrs" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              {/* main looper */}
-              {exData?.map((item: any, index: number) => (
-                <View style={{ margin: "4px 0" }} key={index}>
-                  {/* outsider looper */}
-                  <View>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        marginTop: "20px",
-                        border: "2px",
-                        padding: "2px 0",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        delivery at
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        polic no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        i date
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        amount
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        risk
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        LR no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        date
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        truck no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        consignors name
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        consignors GST no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        consignees name
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        consignees GST no.
-                      </Text>
-                      <Text
-                        style={{
-                          width: "8%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        from
-                      </Text>
-                      <Text
-                        style={{
-                          width: "8%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        to
-                      </Text>
-                    </View>
+      <div className={`${pdfState === "vouchers" ? "block" : "hidden"}`}>
+        {typeof window !== "undefined" && (
+          <PDFViewerBase className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
+                style={{
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
+                }}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    fontSize: "12px",
+                    marginTop: "20px",
+                    border: "2px",
+                    padding: "2px 0",
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    paid to
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    voucher no.
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    date
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    debit
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    on account of
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    total
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    authorised by
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    passed by
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    payment
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    check no.
+                  </Text>
+                  <Text
+                    style={{
+                      width: "10%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    particular
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
+                      borderRight: "1px",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    rupees
+                  </Text>
+                  <Text
+                    style={{
+                      width: "5%",
 
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    paise
+                  </Text>
+                </View>
+
+                {/* looped one */}
+                {exData?.map((item: any, index: number) => (
+                  <View style={{ margin: "4px 0" }} key={index}>
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
                         fontSize: "12px",
-                        border: "2px",
                         borderTop: "0px",
+                        border: "2px",
                         padding: "2px 0",
                         textTransform: "capitalize",
                         fontWeight: "bold",
@@ -1867,61 +940,25 @@ export default function Home() {
                     >
                       <Text
                         style={{
-                          width: "7%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.deliveryAt}
+                        {item?.paidTo}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.policeNo}
+                        {item?.voucherNum}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.iDate}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.amount}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.risk}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        {item?.lrNum}
-                      </Text>
-                      <Text
-                        style={{
-                          width: "7%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
@@ -1930,274 +967,88 @@ export default function Home() {
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.truckNum}
+                        {item?.debit}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.consignorsName}
+                        {item?.onAccountOf}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.consignorsGstNum}
+                        {item?.total}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.consigneesName}
+                        {item?.authorisedBy}
                       </Text>
                       <Text
                         style={{
-                          width: "7%",
+                          width: "10%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.consigneesGstNum}
+                        {item?.passedBy}
                       </Text>
                       <Text
                         style={{
-                          width: "8%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.from}
+                        {item?.payment}
                       </Text>
                       <Text
                         style={{
-                          width: "8%",
+                          width: "5%",
                           borderRight: "1px",
                           paddingLeft: "2px",
                         }}
                       >
-                        {item?.to}
+                        {item?.chequeNum}
                       </Text>
-                    </View>
-                  </View>
+                      <Text
+                        style={{
+                          width: "10%",
+                          borderRight: "1px",
+                          paddingLeft: "2px",
+                        }}
+                      ></Text>
+                      <Text
+                        style={{
+                          width: "5%",
+                          borderRight: "1px",
+                          paddingLeft: "2px",
+                        }}
+                      ></Text>
+                      <Text
+                        style={{
+                          width: "5%",
 
-                  {/* insider looper */}
-                  <View>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        fontSize: "12px",
-                        border: "2px",
-                        borderTop: "0px",
-                        padding: "2px 0",
-                        textTransform: "capitalize",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
                           paddingLeft: "2px",
                         }}
-                      >
-                        package
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        content
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        actual Weight
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        charge Weight
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        value
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        first Freight Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        first Freight To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        service Tax
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        TDS Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        TDS to be paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        hemali Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        hemali To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        advance Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        advance To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        statarical Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        statarical To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        odCharge Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        odCharge To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        gr Total Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "4.7%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        gr Total To Be Paid
-                      </Text>
-                      <Text
-                        style={{
-                          width: "6%",
-                          borderRight: "1px",
-                          paddingLeft: "2px",
-                        }}
-                      >
-                        remarks
-                      </Text>
+                      ></Text>
                     </View>
 
                     {item?.list?.map((innerItem: any, innerIndex: number) => (
@@ -2217,183 +1068,151 @@ export default function Home() {
                       >
                         <Text
                           style={{
-                            width: "4.7%",
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "5%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        ></Text>
+                        <Text
+                          style={{
+                            width: "10%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.package}
+                          {innerItem?.particular}
                         </Text>
                         <Text
                           style={{
-                            width: "4.7%",
+                            width: "5%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.content}
+                          {innerItem?.rupees}
                         </Text>
                         <Text
                           style={{
-                            width: "4.7%",
-                            borderRight: "1px",
+                            width: "5%",
+
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.actualWeight}
+                          {innerItem?.paise}
                         </Text>
+                      </View>
+                    ))}
+                  </View>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewerBase>
+        )}
+      </div>
+
+      <div className={`${pdfState === "challans" ? "block" : "hidden"}`}>
+        {typeof window !== "undefined" && (
+          <PDFViewerBase className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
+                style={{
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
+                }}
+              >
+                {/* main looper */}
+
+                {exData?.map((item: any, index: number) => (
+                  <View style={{ margin: "4px 0" }} key={index}>
+                    {/* sub top looper */}
+                    <View>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          marginTop: "20px",
+                          border: "2px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
                         <Text
                           style={{
-                            width: "4.7%",
+                            width: "6%",
                             borderRight: "1px",
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.chargeWeight}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.value}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.firstFreightPaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.firstFreightToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.serviceTax}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.tdsPaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.tdsToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.hemaliPaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.hemaliToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.advancePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.advanceToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.stataricalPaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.stataricalToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.odChargePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.odChargeToBePaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.grTotalPaid}
-                        </Text>
-                        <Text
-                          style={{
-                            width: "4.7%",
-                            borderRight: "1px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          {innerItem?.grTotalToBePaid}
+                          challan no.
                         </Text>
                         <Text
                           style={{
@@ -2402,16 +1221,1203 @@ export default function Home() {
                             paddingLeft: "2px",
                           }}
                         >
-                          {innerItem?.remarks}
+                          main date
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          from
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          to
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          vehicle no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          owners name
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          drivers name
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          pan no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          commission
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          refund
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          hamali
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          other
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          munsyana and payment
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          total
+                        </Text>
+                        <Text
+                          style={{
+                            width: "16%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          text area calculation
                         </Text>
                       </View>
-                    ))}
+
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          border: "2px",
+                          borderTop: "0px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.challanNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.mainBillDate}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.from}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.to}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.vehicleNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.ownersName}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.driversName}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.panNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.commission}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.refund}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.hamali}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.other}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.munsyanaAndPayment}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.total}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "16%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.textAreaCalc}
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* sub bottom looper */}
+                    <View>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          border: "2px",
+                          borderTop: "0px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          date
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          GC note no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          pkgs
+                        </Text>
+                        <Text
+                          style={{
+                            width: "12%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          description
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignor
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignee
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          weight
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          rate
+                        </Text>
+                        <Text
+                          style={{
+                            width: "11%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          ccollection
+                        </Text>
+                      </View>
+
+                      {item?.item?.map((innerItem: any, innerIndex: number) => (
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            fontSize: "12px",
+                            border: "2px",
+                            borderTop: "0px",
+                            padding: "2px 0",
+                            textTransform: "capitalize",
+                            fontWeight: "bold",
+                          }}
+                          key={innerIndex}
+                        >
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.date}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.gcNoteNum}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.pkgs}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "12%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.description}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.consignor}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.consignee}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.weight}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.rate}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "11%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.ccollection}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
                   </View>
-                </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewerBase>
+        )}
+      </div>
+
+      <div className={`${pdfState === "lrs" ? "block" : "hidden"}`}>
+        {typeof window !== "undefined" && (
+          <PDFViewerBase className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
+                style={{
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
+                }}
+              >
+                {/* main looper */}
+                {exData?.map((item: any, index: number) => (
+                  <View style={{ margin: "4px 0" }} key={index}>
+                    {/* outsider looper */}
+                    <View>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          marginTop: "20px",
+                          border: "2px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          delivery at
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          polic no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          i date
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          amount
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          risk
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          LR no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          date
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          truck no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignors name
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignors GST no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignees name
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          consignees GST no.
+                        </Text>
+                        <Text
+                          style={{
+                            width: "8%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          from
+                        </Text>
+                        <Text
+                          style={{
+                            width: "8%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          to
+                        </Text>
+                      </View>
+
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          border: "2px",
+                          borderTop: "0px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.deliveryAt}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.policeNo}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.iDate}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.amount}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.risk}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.lrNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.date}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.truckNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.consignorsName}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.consignorsGstNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.consigneesName}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.consigneesGstNum}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "8%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.from}
+                        </Text>
+                        <Text
+                          style={{
+                            width: "8%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          {item?.to}
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* insider looper */}
+                    <View>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          fontSize: "12px",
+                          border: "2px",
+                          borderTop: "0px",
+                          padding: "2px 0",
+                          textTransform: "capitalize",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          package
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          content
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          actual Weight
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          charge Weight
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          value
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          first Freight Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          first Freight To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          service Tax
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          TDS Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          TDS to be paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          hemali Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          hemali To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          advance Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          advance To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          statarical Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          statarical To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          odCharge Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          odCharge To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          gr Total Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "4.7%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          gr Total To Be Paid
+                        </Text>
+                        <Text
+                          style={{
+                            width: "6%",
+                            borderRight: "1px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          remarks
+                        </Text>
+                      </View>
+
+                      {item?.list?.map((innerItem: any, innerIndex: number) => (
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            fontSize: "12px",
+                            border: "2px",
+                            borderTop: "0px",
+                            padding: "2px 0",
+                            textTransform: "capitalize",
+                            fontWeight: "bold",
+                          }}
+                          key={innerIndex}
+                        >
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.package}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.content}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.actualWeight}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.chargeWeight}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.value}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.firstFreightPaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.firstFreightToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.serviceTax}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.tdsPaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.tdsToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.hemaliPaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.hemaliToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.advancePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.advanceToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.stataricalPaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.stataricalToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.odChargePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.odChargeToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.grTotalPaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "4.7%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.grTotalToBePaid}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "6%",
+                              borderRight: "1px",
+                              paddingLeft: "2px",
+                            }}
+                          >
+                            {innerItem?.remarks}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  </View>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewerBase>
+        )}
       </div>
     </main>
   );
