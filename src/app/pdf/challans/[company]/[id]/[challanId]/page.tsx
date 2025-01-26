@@ -42,6 +42,25 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            fontSize: "10px",
+            paddingTop:"2px"
+          }}
+        >
+          <Text style={{ fontSize: "10px" }}>
+            {companyData.gstNum ? "GSTIN: " : "MSME: "}{" "}
+            {companyData.gstNum ? companyData.gstNum : companyData.msmeNum}
+          </Text>
+          <Text style={{ fontSize: "10px" }}>
+            {companyData.msmeNum ? " MSME: " : "GSTIN: "}{" "}
+            {companyData.msmeNum ? companyData.msmeNum : companyData.gstNum}
+          </Text>
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
             alignItems: "center",
             marginTop: "10px",
           }}
@@ -508,7 +527,9 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             }}
           >
             <Text>GST Paid by Party</Text>
-            <Text>PAN No.: <Text style={{color:"black"}}>{props.panNum}</Text> </Text>
+            <Text>
+              PAN No.: <Text style={{ color: "black" }}>{props.panNum}</Text>{" "}
+            </Text>
           </View>
         </View>
 
@@ -535,7 +556,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             border: "1px solid red",
             borderLeft: "none",
             gap: "3px",
-            color:"black"
+            color: "black",
           }}
         >
           <Text

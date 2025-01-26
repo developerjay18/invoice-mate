@@ -49,14 +49,18 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
               display: "flex",
               flexDirection: "row",
               justifyContent: "space-between",
-              fontSize: "13px",
+              fontSize: "10px",
             }}
           >
             <Text>Subject to Ahmedabad Jurisdiction</Text>
-            <Text style={{ fontSize: "10px" }}>||shree ganeshaya namah||</Text>
-            <Text>
+            <Text style={{ fontSize: "8px" }}>||shree ganeshaya namah||</Text>
+            <Text style={{ fontSize: "10px" }}>
               {companyData.gstNum ? "GSTIN: " : "MSME: "}{" "}
               {companyData.gstNum ? companyData.gstNum : companyData.msmeNum}
+            </Text>
+            <Text style={{ fontSize: "10px" }}>
+              {companyData.msmeNum ? " MSME: " : "GSTIN: "}{" "}
+              {companyData.msmeNum ? companyData.msmeNum : companyData.gstNum}
             </Text>
           </View>
           <View
@@ -146,7 +150,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
                 gap: "35px",
               }}
             >
-              <Text style={{ borderBottom: "1px solid red", color:"black" }}>
+              <Text style={{ borderBottom: "1px solid red", color: "black" }}>
                 {props.name}
               </Text>
               <Text style={{ borderBottom: "1px solid red" }}></Text>
@@ -286,7 +290,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             borderRadius: "4px",
             borderTop: "none",
             minHeight: "40%",
-            color:"black"
+            color: "black",
           }}
         >
           {props.list?.map((item: any, index: any) => (
@@ -412,7 +416,7 @@ const MyDocument = ({ companyData, companyName, image, ...props }: any) => (
             border: "1px solid red",
             borderRadius: "4px",
             marginTop: "5px",
-            color:"black"
+            color: "black",
           }}
         >
           <Text style={{ padding: "5px" }}>Total {props.total}</Text>

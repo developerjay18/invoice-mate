@@ -42,6 +42,10 @@ const MyDocument = ({
               <Text>
                 M: {companyData.mobileNum[0]}, {companyData.mobileNum[1]}
               </Text>
+              <Text style={{ fontSize: "10px" }}>
+                {companyData.gstNum ? "GSTIN: " : "MSME: "}{" "}
+                {companyData.gstNum ? companyData.gstNum : companyData.msmeNum}
+              </Text>
             </View>
 
             <View
@@ -849,7 +853,7 @@ const MyDocument = ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                fontSize: "14px",
+                fontSize: "10px",
                 gap: "5px",
                 border: "1px solid red",
                 borderTop: "none",
@@ -857,6 +861,7 @@ const MyDocument = ({
               }}
             >
               <Text>GSTIN: {companyData.gstNum}</Text>
+              <Text>MSME: {companyData.msmeNum}</Text>
               <Text>PAN No.: {companyData.panNum}</Text>
             </View>
 
@@ -1726,7 +1731,7 @@ const MyDocument = ({
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                fontSize: "14px",
+                fontSize: "10px",
                 gap: "5px",
                 border: "1px solid red",
                 borderTop: "none",
@@ -1734,6 +1739,9 @@ const MyDocument = ({
               }}
             >
               <Text>GSTIN: {companyData.gstNum}</Text>
+              <Text>
+                {companyData.msmeNum ? `MSME: ${companyData.msmeNum}` : ``}
+              </Text>
               <Text>PAN No.: {companyData.panNum}</Text>
             </View>
 

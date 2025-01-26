@@ -37,6 +37,7 @@ function ChallanPage({ params }: any) {
           companyId: id,
         });
 
+        console.log(response.data)
         if (response.status === 200 && response.data.status === 200) {
           await setEntries(response.data.challans);
           toast.success(response.data.message);
@@ -123,7 +124,7 @@ function ChallanPage({ params }: any) {
                         scope="col"
                         className="px-4 py-3.5 text-left text-md font-semibold dark:text-white text-gray-700"
                       >
-                        Challan ID
+                        Vehicle Number
                       </th>
                       <th
                         scope="col"
@@ -161,7 +162,7 @@ function ChallanPage({ params }: any) {
                           {entry.mainBillDate}
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm dark:text-white text-gray-700">
-                          {entry._id}
+                          {entry.vehicleNum}
                         </td>
 
                         <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-lg flex gap-3 justify-end w-auto">

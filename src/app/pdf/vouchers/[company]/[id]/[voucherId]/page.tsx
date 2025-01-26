@@ -7,7 +7,7 @@ import { PDFViewer } from "@react-pdf/renderer";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const MyDocument = ({ image, ...props }: any) => (
+const MyDocument = ({ image, afterVCN, beforeVCN, ...props }: any) => (
   <Document>
     <Page
       size="A4"
@@ -139,9 +139,24 @@ const MyDocument = ({ image, ...props }: any) => (
         >
           <Text style={{ fontWeight: "extrabold" }}>on A/C of:</Text>
           <Text
-            style={{ borderBottom: "1px", width: "90%", marginLeft: "5px" }}
+            style={{ borderBottom: "1px", width: "70%", marginLeft: "5px" }}
           >
-            {props.onAccountOf}
+            {beforeVCN}
+          </Text>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "5px",
+            width: "100%",
+          }}
+        >
+          <Text style={{ fontWeight: "extrabold" }}>Vehicle No:</Text>
+          <Text
+            style={{ borderBottom: "1px", width: "70%", marginLeft: "5px" }}
+          >
+            {afterVCN}
           </Text>
         </View>
       </View>
@@ -361,8 +376,25 @@ const MyDocument = ({ image, ...props }: any) => (
   </Document>
 );
 
+function splitStringFromVCN(inputString: string) {
+  const vcnIndex = inputString.indexOf("VCN");
+
+  // If "VCN" is not found, return the full string as the only part
+  if (vcnIndex === -1) {
+    return [inputString];
+  }
+
+  // Split the string at the position where "VCN" starts, excluding "VCN"
+  const beforeVCN = inputString.slice(0, vcnIndex);
+  const afterVCN = inputString.slice(vcnIndex + 3); // Skip over "VCN" by adding 3 to the index
+
+  return [beforeVCN, afterVCN];
+}
+
 function VoucherPrintingPage({ params }: any) {
   const company = params.company;
+  const [beforeVCN, setBeforeVCN] = useState("");
+  const [afterVCN, setAfterVCN] = useState("");
   const id = params.id;
   const voucherId = params.voucherId;
   const companyName = company.split("-").join(" ");
@@ -410,6 +442,12 @@ function VoucherPrintingPage({ params }: any) {
 
         if (response.data.status === 200 && response.status === 200) {
           toast.success(response.data.message);
+          const [beforeVCN, afterVCN] = splitStringFromVCN(
+            response.data.voucher.onAccountOf
+          );
+
+          setBeforeVCN(beforeVCN);
+          setAfterVCN(afterVCN);
           setEntry(response.data.voucher);
         } else {
           toast.error(response.data.error);
@@ -423,8 +461,17 @@ function VoucherPrintingPage({ params }: any) {
 
   return (
     <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
+      <div className="">
+        {beforeVCN}
+        {afterVCN}
+      </div>
       <PDFViewer className="min-h-[165vh] flex justify-center items-center">
-        <MyDocument {...entry} image={imageUrl} />
+        <MyDocument
+          {...entry}
+          image={imageUrl}
+          afterVCN={afterVCN}
+          beforeVCN={beforeVCN}
+        />
       </PDFViewer>
     </main>
   );
