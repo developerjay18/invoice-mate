@@ -35,121 +35,47 @@ export async function POST(request: NextRequest) {
     const start = new Date(convertDateFormat(startDate));
     const end = new Date(convertDateFormat(endDate));
 
-    let companyId;
+    const companyIds = {
+      "the-rising-freight-carriers": "663770b3b752100159dc12db",
+      "maa-saraswati-road-carriers": "66376f17b752100159dc12d9",
+      "sharma-transport": "663771e7b752100159dc12dd",
+    };
 
-    switch (company) {
-      case "the-rising-freight-carriers":
-        companyId = "663770b3b752100159dc12db";
-        break;
-
-      case "maa-saraswati-road-carriers":
-        companyId = "66376f17b752100159dc12d9";
-        break;
-
-      case "sharma-transport":
-        companyId = "663771e7b752100159dc12dd";
-        break;
-
-      default:
-        "Invalid-company";
-        return NextResponse.json({
-          message: "INVALID COMPANY NAME.",
-          status: 401,
-        });
+    const companyId = companyIds[company];
+    if (!companyId) {
+      return NextResponse.json({
+        message: "INVALID COMPANY NAME.",
+        status: 401,
+      });
     }
 
-    if (invoiceType === "loading-slips") {
-      const loadingSlips = await LoadingSlip.find({ company: companyId });
+    const models = {
+      "loading-slips": LoadingSlip,
+      challans: Challan,
+      bills: Bill,
+      vouchers: Voucher,
+      lrs: LR,
+    };
 
-      const transactions = await loadingSlips.filter((slip) => {
-        const sDate = convertDateFormat(slip.date || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "LOADING SLIPS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "challans") {
-      const challans = await Challan.find({ company: companyId });
-
-      const transactions = await challans.filter((slip) => {
-        const sDate = convertDateFormat(slip.mainBillDate || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "CHALLANS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "bills") {
-      const bills = await Bill.find({ company: companyId });
-
-      const transactions = await bills.filter((slip) => {
-        const sDate = convertDateFormat(slip.mainBillDate || "");
-
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "BILLS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "vouchers") {
-      const vouchers = await Voucher.find({ company: companyId });
-
-      const transactions = await vouchers.filter((slip) => {
-        const sDate = convertDateFormat(slip.date || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "VOUCHERS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "lrs") {
-      const lrs = await LR.find({ company: companyId });
-
-      const transactions = await lrs.filter((slip) => {
-        const sDate = convertDateFormat(slip.date || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "LRS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else {
+    const Model = models[invoiceType];
+    if (!Model) {
       return NextResponse.json({
         message: "INVALID INVOICE TYPE.",
         status: 401,
       });
     }
+
+    // Optimized query with date range
+    const transactions = await Model.find({
+      company: companyId,
+      date: { $gte: start, $lte: end },
+    });
+
+    return NextResponse.json({
+      message: `${invoiceType.toUpperCase()} EXTRACTED SUCCESSFULLY.`,
+      status: 201,
+      transactions,
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 501 });
   }
