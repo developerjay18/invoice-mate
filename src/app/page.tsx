@@ -19,13 +19,14 @@ import formatDate from "@/helpers/formatDate";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
+import { PDFViewer } from "@react-pdf/renderer";
 
-// Dynamically import PDFViewer to ensure client-side rendering
-const PDFViewer = dynamic(
-  async () => (await import("@react-pdf/renderer")).PDFViewer,
-  { ssr: false } // Disable SSR
-);
+// // Dynamically import PDFViewer to ensure client-side rendering
+// const PDFViewer = dynamic(
+//   async () => (await import("@react-pdf/renderer")).PDFViewer,
+//   { ssr: false } // Disable SSR
+// );
 
 export default function Home() {
   const [fromDate, setFromDate] = useState<Date>();
