@@ -75,7 +75,8 @@ export async function POST(request: NextRequest) {
         status: 201,
         transactions,
       });
-    } else if (invoiceType === "challans") {
+    }
+    if (invoiceType === "challans") {
       const challans = await Challan.find({ company: companyId });
 
       const transactions = await challans.filter((slip) => {
@@ -92,7 +93,8 @@ export async function POST(request: NextRequest) {
         status: 201,
         transactions,
       });
-    } else if (invoiceType === "bills") {
+    }
+    if (invoiceType === "bills") {
       const bills = await Bill.find({ company: companyId });
 
       const transactions = await bills.filter((slip) => {
@@ -110,7 +112,8 @@ export async function POST(request: NextRequest) {
         status: 201,
         transactions,
       });
-    } else if (invoiceType === "vouchers") {
+    }
+    if (invoiceType === "vouchers") {
       const vouchers = await Voucher.find({ company: companyId });
 
       const transactions = await vouchers.filter((slip) => {
@@ -127,7 +130,8 @@ export async function POST(request: NextRequest) {
         status: 201,
         transactions,
       });
-    } else if (invoiceType === "lrs") {
+    }
+    if (invoiceType === "lrs") {
       const lrs = await LR.find({ company: companyId });
 
       const transactions = await lrs.filter((slip) => {
@@ -143,11 +147,6 @@ export async function POST(request: NextRequest) {
         message: "LRS EXTRACTED SUCCESSFULLY.",
         status: 201,
         transactions,
-      });
-    } else {
-      return NextResponse.json({
-        message: "INVALID INVOICE TYPE.",
-        status: 401,
       });
     }
   } catch (error: any) {
