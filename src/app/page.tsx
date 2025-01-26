@@ -1,5 +1,5 @@
 "use client";
-export const dynamic = "client-only";
+export const dynamic = "force-dynamic";
 
 import React, { useState } from "react";
 import Link from "next/link";
