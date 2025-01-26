@@ -1,23 +1,23 @@
-// creating database connection
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-export async function connectDB() {
+type ConnectionObject = {
+  isConnected?: number;
+};
+
+const connection: ConnectionObject = {};
+
+export async function connectDB(): Promise<void> {
+  if (connection.isConnected) {
+    console.log("Already connected to the database");
+    return;
+  }
+
   try {
-    mongoose.connect(String(process.env.MONGO_URI!));
-    const connection = mongoose.connection;
-
-    connection.on('connected', () => {
-      console.log('MONGODB CONNECTED SUCCESSFULLY');
-    });
-
-    connection.on('error', (error: any) => {
-      console.log(
-        'MONGODB CONNECTION FAILED IT"S A SERVER PROBLEM',
-        error.message
-      );
-      process.exit(1);
-    });
-  } catch (error: any) {
-    throw new Error('ERROR WHILE CONNECTING DATABASE', error.message);
+    const db = await mongoose.connect(process.env.MONGO_URI || "", {});
+    connection.isConnected = db.connections[0].readyState;
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1);
   }
 }
