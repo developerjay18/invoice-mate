@@ -2,7 +2,6 @@
     "version": 2,
     "functions": {
       "api/extract": {
-        "runtime": "nodejs18.x",
         "maxDuration": 15,  
         "memory": 512      
       }
