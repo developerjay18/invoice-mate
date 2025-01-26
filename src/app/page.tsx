@@ -242,104 +242,109 @@ export default function Home() {
       </div>
 
       <div className={`${pdfState === "loading-slips" ? "block" : "hidden"}`}>
-        <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-          <Document>
-            <Page
-              size={"A2"}
-              orientation="landscape"
-              style={{
-                flexDirection: "column",
-                padding: "15px",
-                fontSize: "15px",
-              }}
-            >
-              <View
+        {exData && (
+          <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
+            <Document>
+              <Page
+                size={"A2"}
+                orientation="landscape"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  fontSize: "13px",
-                  marginTop: "20px",
-                  border: "2px",
-                  padding: "2px 0",
-                  textTransform: "capitalize",
-                  fontWeight: "bold",
+                  flexDirection: "column",
+                  padding: "15px",
+                  fontSize: "15px",
                 }}
               >
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  loading slip no.
-                </Text>
-                <Text style={{ width: "5%", borderRight: "1px" }}>date</Text>
-                <Text style={{ width: "11%", borderRight: "1px" }}>
-                  main to
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  truck number
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>from</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>to</Text>
-                <Text style={{ width: "5%", borderRight: "1px" }}>rate</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>
-                  gaurantee by
-                </Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>name</Text>
-                <Text style={{ width: "7%", borderRight: "1px" }}>advance</Text>
-                <Text style={{ width: "7%" }}>balance</Text>
-              </View>
-
-              {exData?.map((item: any, index) => (
                 <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     fontSize: "13px",
+                    marginTop: "20px",
                     border: "2px",
-                    borderTop: "0px",
                     padding: "2px 0",
                     textTransform: "capitalize",
+                    fontWeight: "bold",
                   }}
-                  key={index}
                 >
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.loadingSlipNum}
+                    loading slip no.
                   </Text>
-                  <Text style={{ width: "5%", borderRight: "1px" }}>
-                    {item?.date}
-                  </Text>
+                  <Text style={{ width: "5%", borderRight: "1px" }}>date</Text>
                   <Text style={{ width: "11%", borderRight: "1px" }}>
-                    {item?.primaryTo}
+                    main to
                   </Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.truckNum}
+                    truck number
                   </Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>from</Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>to</Text>
+                  <Text style={{ width: "5%", borderRight: "1px" }}>rate</Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.from}
+                    gaurantee by
                   </Text>
+                  <Text style={{ width: "7%", borderRight: "1px" }}>name</Text>
                   <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.to}
+                    advance
                   </Text>
-                  <Text style={{ width: "5%", borderRight: "1px" }}>
-                    {item?.rate}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.gauranteeBy}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.name}
-                  </Text>
-                  <Text style={{ width: "7%", borderRight: "1px" }}>
-                    {item?.advance}
-                  </Text>
-                  <Text style={{ width: "7%" }}>{item?.balance}</Text>
+                  <Text style={{ width: "7%" }}>balance</Text>
                 </View>
-              ))}
-            </Page>
-          </Document>
-        </PDFViewer>
+
+                {exData?.map((item: any, index) => (
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      fontSize: "13px",
+                      border: "2px",
+                      borderTop: "0px",
+                      padding: "2px 0",
+                      textTransform: "capitalize",
+                    }}
+                    key={index}
+                  >
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.loadingSlipNum}
+                    </Text>
+                    <Text style={{ width: "5%", borderRight: "1px" }}>
+                      {item?.date}
+                    </Text>
+                    <Text style={{ width: "11%", borderRight: "1px" }}>
+                      {item?.primaryTo}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.truckNum}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.from}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.to}
+                    </Text>
+                    <Text style={{ width: "5%", borderRight: "1px" }}>
+                      {item?.rate}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.gauranteeBy}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.name}
+                    </Text>
+                    <Text style={{ width: "7%", borderRight: "1px" }}>
+                      {item?.advance}
+                    </Text>
+                    <Text style={{ width: "7%" }}>{item?.balance}</Text>
+                  </View>
+                ))}
+              </Page>
+            </Document>
+          </PDFViewer>
+        )}
       </div>
 
       <div className={`${pdfState === "bills" ? "block" : "hidden"}`}>
+         {exData && (
         <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
           <Document>
             <Page
@@ -767,9 +772,11 @@ export default function Home() {
             </Page>
           </Document>
         </PDFViewer>
+        )}
       </div>
 
       <div className={`${pdfState === "vouchers" ? "block" : "hidden"}`}>
+         {exData && (
         <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
           <Document>
             <Page
@@ -1161,9 +1168,11 @@ export default function Home() {
             </Page>
           </Document>
         </PDFViewer>
+        )}
       </div>
 
       <div className={`${pdfState === "challans" ? "block" : "hidden"}`}>
+         {exData && (
         <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
           <Document>
             <Page
@@ -1684,9 +1693,11 @@ export default function Home() {
             </Page>
           </Document>
         </PDFViewer>
+        )}
       </div>
 
       <div className={`${pdfState === "lrs" ? "block" : "hidden"}`}>
+         {exData && (
         <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
           <Document>
             <Page
@@ -2404,6 +2415,7 @@ export default function Home() {
             </Page>
           </Document>
         </PDFViewer>
+        )}
       </div>
     </main>
   );
