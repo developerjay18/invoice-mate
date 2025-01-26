@@ -299,6 +299,7 @@ export default function Home() {
                     padding: "2px 0",
                     textTransform: "capitalize",
                   }}
+                  key={index}
                 >
                   <Text style={{ width: "7%", borderRight: "1px" }}>
                     {item?.loadingSlipNum}
