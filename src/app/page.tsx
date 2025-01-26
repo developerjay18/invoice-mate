@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "client-only";
 
 import React, { useState } from "react";
 import Link from "next/link";
