@@ -2,15 +2,15 @@
 
 import React from "react";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
+// import { PDFViewer } from "@react-pdf/renderer";
 
-// import dynamic from "next/dynamic";
-// const PDFViewer = dynamic(
-//   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-//   {
-//     ssr: false,
-//   }
-// );
+import dynamic from "next/dynamic";
+const PDFViewer = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
+  {
+    ssr: false,
+  }
+);
 
 const DLrs = ({ exData }: any) => {
   return (

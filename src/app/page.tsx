@@ -160,6 +160,7 @@ export default function Home() {
                     selected={fromDate}
                     onSelect={setFromDate}
                     initialFocus
+                    required
                   />
                 </PopoverContent>
               </Popover>
@@ -190,6 +191,7 @@ export default function Home() {
                     selected={toDate}
                     onSelect={setToDate}
                     initialFocus
+                    required
                   />
                 </PopoverContent>
               </Popover>
@@ -208,6 +210,7 @@ export default function Home() {
                     onClick={() => {
                       setInvoiceType(invoice.value);
                     }}
+                    required
                   />
                   <Label htmlFor={invoice.value}>{invoice.name}</Label>
                 </div>
@@ -227,6 +230,7 @@ export default function Home() {
                   <RadioGroupItem
                     value={company.value}
                     id={company.value}
+                    required
                     onClick={() => setCompany(company.value)}
                   />
                   <Label htmlFor={company.value}>{company.title}</Label>
