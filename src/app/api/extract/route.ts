@@ -39,81 +39,86 @@ export async function POST(request: NextRequest) {
         status: 201,
         transactions,
       });
-    } else if (invoiceType === "challans") {
-      const challans = await Challan.find({ company: companyId });
-
-      const transactions = await challans.filter((slip) => {
-        const sDate = convertDateFormat(slip.mainBillDate || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "CHALLANS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "bills") {
-      const bills = await Bill.find({ company: companyId });
-
-      const transactions = await bills.filter((slip) => {
-        const sDate = convertDateFormat(slip.mainBillDate || "");
-
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "BILLS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "vouchers") {
-      const vouchers = await Voucher.find({ company: companyId });
-
-      const transactions = await vouchers.filter((slip) => {
-        const sDate = convertDateFormat(slip.date || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "VOUCHERS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else if (invoiceType === "lrs") {
-      const lrs = await LR.find({ company: companyId });
-
-      const transactions = await lrs.filter((slip) => {
-        const sDate = convertDateFormat(slip.date || "");
-        const slipDate = new Date(sDate);
-
-        if (slipDate >= start && slipDate <= end) {
-          return slip;
-        }
-      });
-
-      return NextResponse.json({
-        message: "LRS EXTRACTED SUCCESSFULLY.",
-        status: 201,
-        transactions,
-      });
-    } else {
-      return NextResponse.json(
-        { error: "Failure to extract data." },
-        { status: 501 }
-      );
     }
+    // else if (invoiceType === "challans") {
+    //   const challans = await Challan.find({ company: companyId });
+
+    //   const transactions = await challans.filter((slip) => {
+    //     const sDate = convertDateFormat(slip.mainBillDate || "");
+    //     const slipDate = new Date(sDate);
+
+    //     if (slipDate >= start && slipDate <= end) {
+    //       return slip;
+    //     }
+    //   });
+
+    //   return NextResponse.json({
+    //     message: "CHALLANS EXTRACTED SUCCESSFULLY.",
+    //     status: 201,
+    //     transactions,
+    //   });
+    // }
+    // else if (invoiceType === "bills") {
+    //   const bills = await Bill.find({ company: companyId });
+
+    //   const transactions = await bills.filter((slip) => {
+    //     const sDate = convertDateFormat(slip.mainBillDate || "");
+
+    //     const slipDate = new Date(sDate);
+
+    //     if (slipDate >= start && slipDate <= end) {
+    //       return slip;
+    //     }
+    //   });
+
+    //   return NextResponse.json({
+    //     message: "BILLS EXTRACTED SUCCESSFULLY.",
+    //     status: 201,
+    //     transactions,
+    //   });
+    // }
+    // else if (invoiceType === "vouchers") {
+    //   const vouchers = await Voucher.find({ company: companyId });
+
+    //   const transactions = await vouchers.filter((slip) => {
+    //     const sDate = convertDateFormat(slip.date || "");
+    //     const slipDate = new Date(sDate);
+
+    //     if (slipDate >= start && slipDate <= end) {
+    //       return slip;
+    //     }
+    //   });
+
+    //   return NextResponse.json({
+    //     message: "VOUCHERS EXTRACTED SUCCESSFULLY.",
+    //     status: 201,
+    //     transactions,
+    //   });
+    // }
+    // else if (invoiceType === "lrs") {
+    //   const lrs = await LR.find({ company: companyId });
+
+    //   const transactions = await lrs.filter((slip) => {
+    //     const sDate = convertDateFormat(slip.date || "");
+    //     const slipDate = new Date(sDate);
+
+    //     if (slipDate >= start && slipDate <= end) {
+    //       return slip;
+    //     }
+    //   });
+
+    //   return NextResponse.json({
+    //     message: "LRS EXTRACTED SUCCESSFULLY.",
+    //     status: 201,
+    //     transactions,
+    //   });
+    // }
+    // else {
+    //   return NextResponse.json(
+    //     { error: "Failure to extract data." },
+    //     { status: 501 }
+    //   );
+    // }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 501 });
   }
