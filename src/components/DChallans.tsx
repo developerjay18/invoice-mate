@@ -15,8 +15,8 @@ const DChallans = ({ exData }: any) => {
                 <th className="border">From</th>
                 <th className="border">To</th>
                 <th className="border">Vehicle No.</th>
-                <th className="border">Owner's Name</th>
-                <th className="border">Driver's Name</th>
+                <th className="border">Owner&apos;s Name</th>
+                <th className="border">Driver&apos;s Name</th>
                 <th className="border">PAN No.</th>
                 <th className="border">Commission</th>
                 <th className="border">Refund</th>
