@@ -10,6 +10,7 @@ export async function POST(request: NextRequest) {
   try {
     const { startDate, endDate, invoiceType, company } = await request.json();
 
+    console.log("Data comed successfully")
     let companyId;
     const start = new Date(convertDateFormat(startDate));
     const end = new Date(convertDateFormat(endDate));
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
       companyId = "663771e7b752100159dc12dd";
     }
 
+    console.log("company id selected and date also converted")
     if (invoiceType === "loading-slips") {
       const loadingSlips = await LoadingSlip.find({ company: companyId });
 
