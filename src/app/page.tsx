@@ -26,7 +26,6 @@ import DVouchers from "@/components/DVouchers";
 import DChallans from "@/components/DChallans";
 import DLrs from "@/components/DLrs";
 
-
 export default function Home() {
   const [fromDate, setFromDate] = useState<Date>();
   const [toDate, setToDate] = useState<Date>();
@@ -77,10 +76,10 @@ export default function Home() {
   ];
 
   const handleExport = async () => {
-    const fromD = formatDate(fromDate);
-    const toD = formatDate(toDate);
-
     try {
+      const fromD = formatDate(fromDate);
+      const toD = formatDate(toDate);
+
       const response = await axios.post("/api/extract", {
         startDate: fromD,
         endDate: toD,
@@ -95,6 +94,7 @@ export default function Home() {
         setPdfState(invoiceType);
       }
     } catch (error) {
+      console.log(`ERROR FROM FRONTEND CATCH BLOCK ${error}.`);
       toast.error("ERROR WHILE EXPORTING DATA FROM FRONTEND");
     }
   };
