@@ -2,16 +2,16 @@
 
 import React from "react";
 import { Page, Text, View, Document } from "@react-pdf/renderer";
-// import { PDFViewer } from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
 
-import dynamic from "next/dynamic";
-const PDFViewer = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-);
+// import dynamic from "next/dynamic";
+// const PDFViewer = dynamic(
+//   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
+//   {
+//     ssr: false,
+//     loading: () => <p>Loading...</p>,
+//   }
+// );
 
 
 const DChallans = ({ exData }: any) => {
