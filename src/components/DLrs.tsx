@@ -1,737 +1,155 @@
 "use client";
-
 import React from "react";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
-
-// import dynamic from "next/dynamic";
-// const PDFViewer = dynamic(
-//   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-//   {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>,
-//   }
-// );
 
 const DLrs = ({ exData }: any) => {
   return (
-    <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-      <Document>
-        <Page
-          size={"A2"}
-          orientation="landscape"
-          style={{
-            flexDirection: "column",
-            padding: "15px",
-            fontSize: "15px",
-          }}
-        >
-          {/* main looper */}
-          {exData?.map((item: any, index: number) => (
-            <View style={{ margin: "4px 0" }} key={index}>
-              {/* outsider looper */}
-              <View>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    marginTop: "20px",
-                    border: "2px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    delivery at
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    polic no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    i date
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    amount
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    risk
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    LR no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    date
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    truck no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignors name
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignors GST no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignees name
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignees GST no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "8%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    from
-                  </Text>
-                  <Text
-                    style={{
-                      width: "8%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    to
-                  </Text>
-                </View>
-
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    border: "2px",
-                    borderTop: "0px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.deliveryAt}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.policeNo}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.iDate}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.amount}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.risk}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.lrNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.date}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.truckNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.consignorsName}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.consignorsGstNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.consigneesName}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.consigneesGstNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "8%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.from}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "8%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.to}
-                  </Text>
-                </View>
-              </View>
-
-              {/* insider looper */}
-              <View>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    border: "2px",
-                    borderTop: "0px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    package
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    content
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    actual Weight
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    charge Weight
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    value
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    first Freight Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    first Freight To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    service Tax
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    TDS Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    TDS to be paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    hemali Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    hemali To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    advance Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    advance To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    statarical Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    statarical To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    odCharge Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    odCharge To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    gr Total Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "4.7%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    gr Total To Be Paid
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    remarks
-                  </Text>
-                </View>
-
-                {item?.list?.map((innerItem: any, innerIndex: number) => (
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      fontSize: "12px",
-                      border: "2px",
-                      borderTop: "0px",
-                      padding: "2px 0",
-                      textTransform: "capitalize",
-                      fontWeight: "bold",
-                    }}
-                    key={innerIndex}
-                  >
-                    <Text
+    <div>
+      <table
+        style={{
+          width: "100%",
+          margin: "20px 0",
+          fontSize: "12px",
+        }}
+        border={1}
+        className="border"
+      >
+        {exData?.map((item: any, index: number) => (
+          <React.Fragment key={index}>
+            <thead className="border bg-gray-700 mt-4">
+              <tr>
+                <th className="border">Delivery At</th>
+                <th className="border">Police No.</th>
+                <th className="border">I Date</th>
+                <th className="border">Amount</th>
+                <th className="border">Risk</th>
+                <th className="border">LR No.</th>
+                <th className="border">Date</th>
+                <th className="border">Truck No.</th>
+                <th className="border">Consignors Name</th>
+                <th className="border">Consignors GST No.</th>
+                <th className="border">Consignees Name</th>
+                <th className="border">Consignees GST No.</th>
+                <th className="border">From</th>
+                <th className="border">To</th>
+              </tr>
+            </thead>
+            <tbody className="mb-4">
+              <React.Fragment key={index}>
+                <tr className="border">
+                  <td className="border">{item.deliveryAt}</td>
+                  <td className="border">{item.policeNo}</td>
+                  <td className="border">{item.iDate}</td>
+                  <td className="border">{item.amount}</td>
+                  <td className="border">{item.risk}</td>
+                  <td className="border">{item.lrNum}</td>
+                  <td className="border">{item.date}</td>
+                  <td className="border">{item.truckNum}</td>
+                  <td className="border">{item.consignorsName}</td>
+                  <td className="border">{item.consignorsGstNum}</td>
+                  <td className="border">{item.consigneesName}</td>
+                  <td className="border">{item.consigneesGstNum}</td>
+                  <td className="border">{item.from}</td>
+                  <td className="border">{item.to}</td>
+                </tr>
+                <tr className="border">
+                  <td colSpan={14}>
+                    <table
                       style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
+                        width: "100%",
                       }}
+                      className="border"
                     >
-                      {innerItem?.package}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.content}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.actualWeight}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.chargeWeight}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.value}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.firstFreightPaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.firstFreightToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.serviceTax}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.tdsPaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.tdsToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.hemaliPaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.hemaliToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.advancePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.advanceToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.stataricalPaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.stataricalToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.odChargePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.odChargeToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.grTotalPaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "4.7%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.grTotalToBePaid}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "6%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.remarks}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          ))}
-        </Page>
-      </Document>
-    </PDFViewer>
+                      <thead>
+                        <tr>
+                          <th className="border">Package</th>
+                          <th className="border">Content</th>
+                          <th className="border">Actual Weight</th>
+                          <th className="border">Charge Weight</th>
+                          <th className="border">Value</th>
+                          <th className="border">First Freight Paid</th>
+                          <th className="border">First Freight To Be Paid</th>
+                          <th className="border">Service Tax</th>
+                          <th className="border">TDS Paid</th>
+                          <th className="border">TDS To Be Paid</th>
+                          <th className="border">Hemali Paid</th>
+                          <th className="border">Hemali To Be Paid</th>
+                          <th className="border">Advance Paid</th>
+                          <th className="border">Advance To Be Paid</th>
+                          <th className="border">Statarical Paid</th>
+                          <th className="border">Statarical To Be Paid</th>
+                          <th className="border">OdCharge Paid</th>
+                          <th className="border">OdCharge To Be Paid</th>
+                          <th className="border">GR Total Paid</th>
+                          <th className="border">GR Total To Be Paid</th>
+                          <th className="border">Remarks</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {item?.list?.map(
+                          (innerItem: any, innerIndex: number) => (
+                            <tr key={innerIndex}>
+                              <td className="border">{innerItem.package}</td>
+                              <td className="border">{innerItem.content}</td>
+                              <td className="border">
+                                {innerItem.actualWeight}
+                              </td>
+                              <td className="border">
+                                {innerItem.chargeWeight}
+                              </td>
+                              <td className="border">{innerItem.value}</td>
+                              <td className="border">
+                                {innerItem.firstFreightPaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.firstFreightToBePaid}
+                              </td>
+                              <td className="border">{innerItem.serviceTax}</td>
+                              <td className="border">{innerItem.tdsPaid}</td>
+                              <td className="border">
+                                {innerItem.tdsToBePaid}
+                              </td>
+                              <td className="border">{innerItem.hemaliPaid}</td>
+                              <td className="border">
+                                {innerItem.hemaliToBePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.advancePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.advanceToBePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.stataricalPaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.stataricalToBePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.odChargePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.odChargeToBePaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.grTotalPaid}
+                              </td>
+                              <td className="border">
+                                {innerItem.grTotalToBePaid}
+                              </td>
+                              <td className="border">{innerItem.remarks}</td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </React.Fragment>
+            </tbody>
+          </React.Fragment>
+        ))}
+      </table>
+    </div>
   );
 };
 

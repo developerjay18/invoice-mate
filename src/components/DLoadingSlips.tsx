@@ -1,114 +1,47 @@
 "use client";
 
 import React from "react";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
-
-// import dynamic from "next/dynamic";
-// const PDFViewer = dynamic(
-//   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-//   {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>,
-//   }
-// );
-
 
 const DLoadingSlips = ({ exData }: any) => {
   return (
-    <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-      <Document>
-        <Page
-          size={"A2"}
-          orientation="landscape"
-          style={{
-            flexDirection: "column",
-            padding: "15px",
-            fontSize: "15px",
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              fontSize: "13px",
-              marginTop: "20px",
-              border: "2px",
-              padding: "2px 0",
-              textTransform: "capitalize",
-              fontWeight: "bold",
-            }}
-          >
-            <Text style={{ width: "7%", borderRight: "1px" }}>
-              loading slip no.
-            </Text>
-            <Text style={{ width: "5%", borderRight: "1px" }}>date</Text>
-            <Text style={{ width: "11%", borderRight: "1px" }}>main to</Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>
-              truck number
-            </Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>from</Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>to</Text>
-            <Text style={{ width: "5%", borderRight: "1px" }}>rate</Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>
-              gaurantee by
-            </Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>name</Text>
-            <Text style={{ width: "7%", borderRight: "1px" }}>advance</Text>
-            <Text style={{ width: "7%" }}>balance</Text>
-          </View>
-
-          {exData?.map((item: any, index: any) => (
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                fontSize: "13px",
-                border: "2px",
-                borderTop: "0px",
-                padding: "2px 0",
-                textTransform: "capitalize",
-              }}
-              key={index}
-            >
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.loadingSlipNum}
-              </Text>
-              <Text style={{ width: "5%", borderRight: "1px" }}>
-                {item?.date}
-              </Text>
-              <Text style={{ width: "11%", borderRight: "1px" }}>
-                {item?.primaryTo}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.truckNum}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.from}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.to}
-              </Text>
-              <Text style={{ width: "5%", borderRight: "1px" }}>
-                {item?.rate}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.gauranteeBy}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.name}
-              </Text>
-              <Text style={{ width: "7%", borderRight: "1px" }}>
-                {item?.advance}
-              </Text>
-              <Text style={{ width: "7%" }}>{item?.balance}</Text>
-            </View>
-          ))}
-        </Page>
-      </Document>
-    </PDFViewer>
+    <div>
+      <table style={{ width: "100%", margin: "20px 0", fontSize: "13px" }}>
+        {exData?.map((item: any, index: number) => (
+          <React.Fragment key={index}>
+            <thead className="border bg-gray-700">
+              <tr>
+                <th className="border">Loading Slip No.</th>
+                <th className="border">Date</th>
+                <th className="border">Main To</th>
+                <th className="border">Truck Number</th>
+                <th className="border">From</th>
+                <th className="border">To</th>
+                <th className="border">Rate</th>
+                <th className="border">Guarantee By</th>
+                <th className="border">Name</th>
+                <th className="border">Advance</th>
+                <th className="border">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr key={index}>
+                <td className="border">{item.loadingSlipNum}</td>
+                <td className="border">{item.date}</td>
+                <td className="border">{item.primaryTo}</td>
+                <td className="border">{item.truckNum}</td>
+                <td className="border">{item.from}</td>
+                <td className="border">{item.to}</td>
+                <td className="border">{item.rate}</td>
+                <td className="border">{item.guaranteeBy}</td>
+                <td className="border">{item.name}</td>
+                <td className="border">{item.advance}</td>
+                <td className="border">{item.balance}</td>
+              </tr>
+            </tbody>
+          </React.Fragment>
+        ))}
+      </table>
+    </div>
   );
 };
 

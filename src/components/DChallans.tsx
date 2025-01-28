@@ -1,541 +1,81 @@
 "use client";
 
 import React from "react";
-import { Page, Text, View, Document } from "@react-pdf/renderer";
-import { PDFViewer } from "@react-pdf/renderer";
-
-// import dynamic from "next/dynamic";
-// const PDFViewer = dynamic(
-//   () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-//   {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>,
-//   }
-// );
-
 
 const DChallans = ({ exData }: any) => {
   return (
-    <PDFViewer className="min-h-[120vh] w-full flex justify-center items-center">
-      <Document>
-        <Page
-          size={"A2"}
-          orientation="landscape"
-          style={{
-            flexDirection: "column",
-            padding: "15px",
-            fontSize: "15px",
-          }}
-        >
-          {/* main looper */}
-
-          {exData?.map((item: any, index: number) => (
-            <View style={{ margin: "4px 0" }} key={index}>
-              {/* sub top looper */}
-              <View>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    marginTop: "20px",
-                    border: "2px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    challan no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    main date
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    from
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    to
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    vehicle no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    owners name
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    drivers name
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    pan no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    commission
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    refund
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    hamali
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    other
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    munsyana and payment
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    total
-                  </Text>
-                  <Text
-                    style={{
-                      width: "16%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    text area calculation
-                  </Text>
-                </View>
-
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    border: "2px",
-                    borderTop: "0px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.challanNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.mainBillDate}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.from}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.to}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.vehicleNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.ownersName}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.driversName}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.panNum}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.commission}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.refund}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.hamali}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.other}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.munsyanaAndPayment}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "6%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.total}
-                  </Text>
-                  <Text
-                    style={{
-                      width: "16%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    {item?.textAreaCalc}
-                  </Text>
-                </View>
-              </View>
-
-              {/* sub bottom looper */}
-              <View>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    fontSize: "12px",
-                    border: "2px",
-                    borderTop: "0px",
-                    padding: "2px 0",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    date
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    GC note no.
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    pkgs
-                  </Text>
-                  <Text
-                    style={{
-                      width: "12%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    description
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignor
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    consignee
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    weight
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    rate
-                  </Text>
-                  <Text
-                    style={{
-                      width: "11%",
-                      borderRight: "1px",
-                      paddingLeft: "2px",
-                    }}
-                  >
-                    ccollection
-                  </Text>
-                </View>
-
+    <div>
+      <table style={{ width: "100%", margin: "20px 0", fontSize: "12px" }}>
+        {exData?.map((item: any, index: number) => (
+          <React.Fragment key={index}>
+            <thead className="border bg-gray-700">
+              <tr>
+                <th className="border">Challan No.</th>
+                <th className="border">Main Date</th>
+                <th className="border">From</th>
+                <th className="border">To</th>
+                <th className="border">Vehicle No.</th>
+                <th className="border">Owner's Name</th>
+                <th className="border">Driver's Name</th>
+                <th className="border">PAN No.</th>
+                <th className="border">Commission</th>
+                <th className="border">Refund</th>
+                <th className="border">Hamali</th>
+                <th className="border">Other</th>
+                <th className="border">Munsyana and Payment</th>
+                <th className="border">Total</th>
+                <th className="border">Text Area Calculation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <React.Fragment key={index}>
+                <tr>
+                  <td className="border">{item.challanNum}</td>
+                  <td className="border">{item.mainBillDate}</td>
+                  <td className="border">{item.from}</td>
+                  <td className="border">{item.to}</td>
+                  <td className="border">{item.vehicleNum}</td>
+                  <td className="border">{item.ownersName}</td>
+                  <td className="border">{item.driversName}</td>
+                  <td className="border">{item.panNum}</td>
+                  <td className="border">{item.commission}</td>
+                  <td className="border">{item.refund}</td>
+                  <td className="border">{item.hamali}</td>
+                  <td className="border">{item.other}</td>
+                  <td className="border">{item.munsyanaAndPayment}</td>
+                  <td className="border">{item.total}</td>
+                  <td className="border">{item.textAreaCalc}</td>
+                </tr>
+                <tr>
+                  <th className="border">Date</th>
+                  <th className="border">GC Note No.</th>
+                  <th className="border">PKGS</th>
+                  <th className="border">Description</th>
+                  <th className="border">Consignor</th>
+                  <th className="border">Consignee</th>
+                  <th className="border">Weight</th>
+                  <th className="border">Rate</th>
+                  <th className="border">Ccollection</th>
+                </tr>
                 {item?.item?.map((innerItem: any, innerIndex: number) => (
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      fontSize: "12px",
-                      border: "2px",
-                      borderTop: "0px",
-                      padding: "2px 0",
-                      textTransform: "capitalize",
-                      fontWeight: "bold",
-                    }}
-                    key={innerIndex}
-                  >
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.date}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.gcNoteNum}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.pkgs}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "12%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.description}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.consignor}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.consignee}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.weight}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.rate}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "11%",
-                        borderRight: "1px",
-                        paddingLeft: "2px",
-                      }}
-                    >
-                      {innerItem?.ccollection}
-                    </Text>
-                  </View>
+                  <tr key={innerIndex}>
+                    <td className="border">{innerItem.date}</td>
+                    <td className="border">{innerItem.gcNoteNum}</td>
+                    <td className="border">{innerItem.pkgs}</td>
+                    <td className="border">{innerItem.description}</td>
+                    <td className="border">{innerItem.consignor}</td>
+                    <td className="border">{innerItem.consignee}</td>
+                    <td className="border">{innerItem.weight}</td>
+                    <td className="border">{innerItem.rate}</td>
+                    <td className="border">{innerItem.ccollection}</td>
+                  </tr>
                 ))}
-              </View>
-            </View>
-          ))}
-        </Page>
-      </Document>
-    </PDFViewer>
+              </React.Fragment>
+            </tbody>
+          </React.Fragment>
+        ))}
+      </table>
+    </div>
   );
 };
 

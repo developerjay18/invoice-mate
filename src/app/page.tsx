@@ -76,10 +76,14 @@ export default function Home() {
   ];
 
   const handleExport = async () => {
-    try {
-      const fromD = formatDate(fromDate);
-      const toD = formatDate(toDate);
+    const fromD = formatDate(fromDate);
+    const toD = formatDate(toDate);
 
+    console.log(fromD);
+    console.log(toD);
+    console.log(invoiceType);
+    console.log(company);
+    try {
       const response = await axios.post("/api/extract", {
         startDate: fromD,
         endDate: toD,
