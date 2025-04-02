@@ -193,7 +193,7 @@ function Challan({ ...props }: any) {
         <div className="grid grid-cols-2 gap-x-6">
           <div className="">
             <Label className="uppercase">challan NO</Label>
-            <Input type="text" value={challanNum} readOnly />
+            <Input type="text" value={challanNum}  />
           </div>
           <div className="">
             <Label>DATE</Label>

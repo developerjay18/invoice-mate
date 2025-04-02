@@ -160,7 +160,7 @@ function LrUpdatePage({ params }: any) {
           <div className="grid grid-cols-2 gap-x-6">
             <div className="">
               <Label className="uppercase">c/n/ NO</Label>
-              <Input type="text" value={entry?.lrNum} readOnly />
+              <Input type="text" value={entry?.lrNum}  />
             </div>
 
             <div className="">

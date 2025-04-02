@@ -135,7 +135,7 @@ function LoadingSlipUpdatePage({ params }: any) {
 
             <div className="">
               <Label>NO</Label>
-              <Input type="text" value={entry?.loadingSlipNum} readOnly />
+              <Input type="text" value={entry?.loadingSlipNum}  />
             </div>
 
             <div className="">

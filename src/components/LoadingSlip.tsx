@@ -117,7 +117,7 @@ function LoadingSlip({ ...props }) {
 
           <div className="">
             <Label>NO</Label>
-            <Input type="text" value={loadingSlipNum} readOnly />
+            <Input type="text" value={loadingSlipNum}  />
           </div>
 
           <div className="">

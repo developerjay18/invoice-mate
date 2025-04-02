@@ -155,7 +155,7 @@ function Bill({ ...props }) {
           </div>
           <div className="">
             <Label>BILL NO</Label>
-            <Input type="text" value={billNum} readOnly />
+            <Input type="text" value={billNum}  />
           </div>
           <div className="">
             <Label>DATE</Label>

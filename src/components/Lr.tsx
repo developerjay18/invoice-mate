@@ -178,7 +178,7 @@ function Lr({ ...props }) {
         <div className="grid grid-cols-2 gap-x-6">
           <div className="">
             <Label className="uppercase">c/n/ NO</Label>
-            <Input type="text" value={lrNum} readOnly />
+            <Input type="text" value={lrNum}  />
           </div>
 
           <div className="">
