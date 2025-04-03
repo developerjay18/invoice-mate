@@ -30,11 +30,11 @@ function Bill({ ...props }) {
           setBillNum(String(Number(response.data.lastBill.billNum) + 1));
         } else {
           if (company === "maa-saraswati-road-carriers") {
-            setBillNum("601");
+            setBillNum("001"); // changes for new year
           } else if (company === "the-rising-freight-carriers") {
-            setBillNum("21");
+            setBillNum("001"); // changes for new year
           } else if (company === "sharma-transport") {
-            setBillNum("51");
+            setBillNum("001"); // changes for new year
           } else {
             setBillNum("Invalid company");
           }
