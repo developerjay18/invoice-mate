@@ -15,7 +15,7 @@ const DLrs = ({ exData }: any) => {
       >
         {exData?.map((item: any, index: number) => (
           <React.Fragment key={index}>
-            <thead className="border bg-gray-700 mt-4">
+            <thead className="border  bg-gray-700 mt-4">
               <tr>
                 <th className="border">Delivery At</th>
                 <th className="border">Police No.</th>

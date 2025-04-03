@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -66,6 +67,7 @@
   }
 }
 
+
 @layer base {
   * {
     @apply border-border;
@@ -75,8 +77,97 @@
   }
 }
 
+/* fonts */
+
+
+@layer base {
+  @font-face {
+    font-family: "Poppins-Medium"; /* Name of your custom font */
+    font-weight: 400; /* Font weight (normal) */
+    src: url("../fonts/Poppins/Poppins-Medium.ttf")
+      format('woff'); /* Font source and format */
+  }
+  @font-face
+  {
+    font-family: "Poppins-SemiBold"; /* Name of your custom font */
+    font-weight: 600; /* Font weight (semi-bold) */
+    src: url("../fonts/Poppins/Poppins-SemiBold.ttf")
+    format('woff'); /* Font source and format */
+    }
+    @font-face
+  {
+    font-family: "Poppins-Black"; /* Name of your custom font */
+    font-weight: 600; /* Font weight (Black) */
+    src: url("../fonts/Poppins/Poppins-Black.ttf")
+    format('woff'); /* Font source and format */
+    }
+    @font-face
+    {
+      font-family: "Poppins-Thin"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (Thin) */
+      src: url("../fonts/Poppins/Poppins-Thin.ttf")
+      format('woff'); /* Font source and format */
+      }
+      @font-face
+    {
+      font-family: "Poppins-Regular"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (Regular) */
+      src: url("../fonts/Poppins/Poppins-Regular.ttf")
+      format('woff'); /* Font source and format */
+      }
+
+      @font-face
+    {
+      font-family: "Poppins-Light"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (Light) */
+      src: url("../fonts/Poppins/Poppins-Light.ttf")
+      format('woff'); /* Font source and format */
+      }
+      @font-face
+    {
+      font-family: "Poppins-ExtraLight"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (ExtraLight) */
+      src: url("../fonts/Poppins/Poppins-ExtraLight.ttf")
+      format('woff'); /* Font source and format */
+      }
+      @font-face
+    {
+      font-family: "Poppins-Bold"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (Bold) */
+      src: url("../fonts/Poppins/Poppins-Bold.ttf")
+      format('woff'); /* Font source and format */
+      }
+      @font-face
+    {
+      font-family: "Poppins-ExtraBold"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (ExtraBold) */
+      src: url("../fonts/Poppins/Poppins-ExtraBold.ttf")
+      format('woff'); /* Font source and format */
+      }
+      @font-face
+    {
+      font-family: "Poppins-Light"; /* Name of your custom font */
+      font-weight: 600; /* Font weight (Light) */
+      src: url("../fonts/Poppins/Poppins-Light.ttf")
+      format('woff'); /* Font source and format */
+      }
+
+
+        @font-face {
+          font-family: ClashGrotesk-Medium;
+          font-style: normal;
+          font-weight: 200 700;
+          font-display: swap;
+          src: url("../fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Medium.woff2") format("woff2");
+        }
+}
+
+
+
+
+
 .card-bg {
-  background-image: url('../../public/background.jpg');
+  background-image: url('../../public/BG 01.jpg');
   background-size: cover;
   background-position: center;
 }

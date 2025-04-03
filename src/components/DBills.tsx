@@ -8,7 +8,7 @@ const DBills = ({ exData }: any) => {
       <table style={{ width: "100%", margin: "20px 0", fontSize: "12px" }}>
         {exData?.map((item: any, index: number) => (
           <React.Fragment key={index}>
-            <thead className="border bg-gray-700">
+            <thead className="border  bg-gray-700">
               <tr>
                 <th className="border">Bill No.</th>
                 <th className="border">Bill Date</th>

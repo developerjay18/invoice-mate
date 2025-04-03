@@ -116,9 +116,13 @@ function LoadingSlip({ ...props }) {
           </div>
 
           <div className="">
-            <Label>NO</Label>
-            <Input type="text" value={loadingSlipNum} readOnly />
-          </div>
+          <Label>NO</Label>
+          <Input type="text"
+          value={loadingSlipNum}
+          placeholder={`${loadingSlipNum}`}
+          onChange={(e) => setLoadingSlipNum(e.target.value)} />
+        </div>
+
 
           <div className="">
             <Label>DATE</Label>

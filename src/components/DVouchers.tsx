@@ -14,7 +14,7 @@ const DVouchers = ({ exData }: any) => {
       >
         {exData?.map((item: any, index: number) => (
           <React.Fragment key={index}>
-            <thead className="bg-gray-700 border">
+            <thead className="bg-gray-700  border">
               <tr>
                 <th className="border">Paid To</th>
                 <th className="border">Voucher No.</th>

@@ -6,8 +6,11 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/Toggler";
 import { Toaster } from "react-hot-toast";
+import localFont from 'next/font/local'
 
 const inter = Inter({ subsets: ["latin"] });
+// Font files can be colocated inside of `pages`
+const PoppinsRegular = localFont({ src: '../fonts/Poppins/Poppins-Regular.ttf' })
 
 export const metadata: Metadata = {
   title: "Invoice Mate",
@@ -22,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={PoppinsRegular.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -17,6 +17,21 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      sans: ["var(--font-inter)", "sans-serif"],
+      serif: ["var(--font-merriweather)", "serif"],
+      ClashGroteskMedium: ["ClashGrotesk-Medium"],
+      PoppinsMedium :["Poppins-Medium"],
+      PoppinsBold :["Poppins-Bold"],
+      PoppinsExtraBold :["Poppins-ExtraBold"],
+      PoppinsSemiBold :["Poppins-SemiBold"],
+      PoppinsBlack :["Poppins-Black"],
+      PoppinsThin :["Poppins-Thin"],
+      PoppinsLight :["Poppins-Light"],
+      PoppinsRegular :["Poppins-Regular"],
+      barlowtypodesbois :["barlow-typo-des-bois"],
+      saiddier: ["saiddier","sans-serif"]
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",

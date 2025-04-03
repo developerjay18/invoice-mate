@@ -104,7 +104,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col px-20 py-10 gap-10">
+    <main className="flex min-h-screen font-PoppinsRegular  text-xl flex-col px-20 py-10 gap-10">
       <div className="companies">
         <div className="">
           <h2 className="text-2xl pb-2 font-semibold">Dashboard</h2>

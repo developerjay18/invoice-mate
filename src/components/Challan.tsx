@@ -104,6 +104,8 @@ function Challan({ ...props }: any) {
     });
   };
 
+
+
   const handleChange = (e: any, index: number) => {
     const { name, value } = e.target;
 
@@ -191,10 +193,15 @@ function Challan({ ...props }: any) {
           Add New challan details
         </div>
         <div className="grid grid-cols-2 gap-x-6">
-          <div className="">
-            <Label className="uppercase">challan NO</Label>
-            <Input type="text" value={challanNum} readOnly />
-          </div>
+        <div className="">
+          <Label className="uppercase">challan NO</Label>
+          <Input
+            type="text"
+            value={challanNum}
+            placeholder={`${challanNum}`}
+            onChange={(e) => setChallanNum(e.target.value)}
+          />
+        </div>
           <div className="">
             <Label>DATE</Label>
             <Input
@@ -386,14 +393,14 @@ function Challan({ ...props }: any) {
               </div>
 
               <div className="w-[32%]">
-                <Label className="uppercase">ccollection</Label>
+                <Label className="uppercase text-white ">ccollection</Label>
                 <Input
                   name="ccollection"
                   id="ccollection"
                   type="text"
                   value={data.ccollection}
                   onChange={(e: any) => handleChange(e, index)}
-                  className="border bg-pink-600"
+                  className="border bg-red-500 dark:bg-red/90 dark:text-black text-white"
                   placeholder="set collection"
                 />
               </div>
@@ -404,6 +411,7 @@ function Challan({ ...props }: any) {
                   onClick={addField}
                 />
               </div>
+              
             </div>
           </div>
         ))}
