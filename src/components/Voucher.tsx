@@ -142,7 +142,7 @@ function Voucher({ ...props }) {
           </div>
           <div className="">
             <Label>NO</Label>
-            <Input type="text" value={voucherNum} readOnly />
+            <Input type="text" value={voucherNum}  />
           </div>
           <div className="">
             <Label>DATE</Label>

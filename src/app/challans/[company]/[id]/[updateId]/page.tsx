@@ -149,7 +149,7 @@ function ChallanUpdatePage({ params }: any) {
           <div className="grid grid-cols-2 gap-x-6">
             <div className="">
               <Label className="uppercase">challan NO</Label>
-              <Input type="text" value={entry?.challanNum} readOnly />
+              <Input type="text" value={entry?.challanNum}  />
             </div>
             <div className="">
               <Label>DATE</Label>

@@ -154,7 +154,7 @@ function BillUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>BILL NO</Label>
-              <Input type="text" value={entry?.billNum} readOnly />
+              <Input type="text" value={entry?.billNum}  />
             </div>
             <div className="">
               <Label>DATE</Label>
