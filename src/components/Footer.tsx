@@ -2,14 +2,22 @@
 
 import Link from 'next/link';
 import React from 'react';
-
+const openWebsite = (url: string | URL | undefined) => {
+  window.open(url, "_blank");
+};
 function Footer() {
   return (
-    <footer className="px-20 py-5 flex justify-between">
+    <footer className="px-20 py-5 flex  justify-between">
       <div className="left">
-        &copy; 2024 | INVOICEMATE - All Rights reserved
+         &copy; {new Date().getFullYear()} | INVOICEMATE - All Rights Reserved
       </div>
-      <div className="right">Developed by Akshar Patel</div>
+
+      <div className="right ">Developed by
+        <span
+          onClick={() => openWebsite("https://splitxcom.vercel.app/")}
+          className="hover:text-lime-400 uppercase cursor-pointer "> splitx
+          </span>
+      </div>
     </footer>
   );
 }

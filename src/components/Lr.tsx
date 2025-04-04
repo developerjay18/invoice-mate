@@ -176,10 +176,13 @@ function Lr({ ...props }) {
         </div>
 
         <div className="grid grid-cols-2 gap-x-6">
-          <div className="">
-            <Label className="uppercase">c/n/ NO</Label>
-            <Input type="text" value={lrNum} readOnly />
-          </div>
+        <div className="">
+          <Label className="uppercase">C/N/ NO</Label>
+          <Input type="text"
+          value={lrNum}
+          placeholder={`${lrNum}`}
+          onChange={(e) => setLrNum(e.target.value)} />
+        </div>
 
           <div className="">
             <Label>DATE</Label>

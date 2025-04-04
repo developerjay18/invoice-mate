@@ -148,7 +148,7 @@ function VoucherUpdatePage({ params }: any) {
             </div>
             <div className="">
               <Label>NO</Label>
-              <Input type="text" value={entry?.voucherNum} readOnly />
+              <Input type="text" value={entry?.voucherNum}  />
             </div>
             <div className="">
               <Label>DATE</Label>
